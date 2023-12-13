@@ -1,0 +1,86 @@
+#infoSection {
+    height: 100%;
+
+    .info__wrap {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+
+        .cate {
+            width: 100%;
+            height: 70px;
+            border-radius: 20px;
+            box-shadow: 1px 1px 5px 0px #D9D9D9;
+            background-color: var(--white);
+            display: flex;
+            align-items: center;
+
+            a {
+                padding: 5px 20px;
+                box-shadow: 1px 1px 5px 0px #D9D9D9;
+                border-radius: 20px;
+                margin-left: 10px;
+            }
+        }
+
+        .info {
+            width: 100%;
+
+
+            .info__box {
+                display: flex;
+                margin-top: 20px;
+                width: 100%;
+                height: 200px;
+                border-radius: 20px;
+                background-color: var(--white);
+                box-shadow: 1px 1px 5px 0px #D9D9D9;
+                position: relative;
+
+                .info__img {
+                    width: 230px;
+                    height: 100%;
+                    border-radius: 20px;
+                    background-color: #777;
+                }
+
+                .info__box__cont {
+                    padding: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    // justify-content: center;
+
+                    .info__cate {
+                        color: var(--black400);
+                        font-size: .8rem;
+                    }
+                    .info__title {
+                        margin-top: 15px;
+                        font-size: 1.2rem;
+                    }
+                    .info__cont {
+                        width: 70%;
+                        font-size: 0.9rem;
+                        color: var(--black300);
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 3;
+                        -webkit-box-orient: vertical;
+                    }
+                    .info__author {
+                        margin-top: 20px;
+                        display: flex;
+                        position: absolute;
+                        right: 10px;
+                        bottom: 10px;
+                        .date {}
+                        .author {
+                            margin: 0 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

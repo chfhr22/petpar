@@ -1,0 +1,24 @@
+#navSection {
+    background-color: #F3F4F5;
+
+
+    nav {
+
+        ul {
+
+            li {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 10px;
+
+                a {
+                    display: block;
+                    padding: 0.8rem;
+                    background-color: #fff;
+                    border-radius: 10px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

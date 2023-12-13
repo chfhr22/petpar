@@ -1,0 +1,103 @@
+#loginPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 70px);
+    overflow: hidden;
+    z-index: 1;
+
+
+    .login_box {
+        display: flex;
+        flex-direction: column;
+        width: 480px;
+        height: 510px;
+        border: 2px solid var(--subColor);
+        align-items: center;
+        border-radius: 20px;
+        justify-content: space-between;
+        padding: 40px;
+        background-color: #faf9f9;
+        z-index: 2;
+
+        ul {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            li {
+
+                a {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 18%;
+            font-weight: 800;
+            font-size: 3.3rem;
+            text-transform: uppercase;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .input_style {
+                width: 100%;
+                margin: 5px 0;
+
+
+                p {
+                    color: var(--gray);
+                    line-height: 1;
+                    font-size: 0.95rem;
+                }
+
+                input {
+                    border: 1px solid var(--gray);
+                    padding: 1.1rem;
+                    border-radius: 5px;
+                    width: 100%;
+                    margin: 6px 0;
+
+                    &::placeholder {
+                        color: rgb(187, 187, 187);
+                    }
+                }
+
+            }
+
+            button {
+                display: inline-block;
+                background-color: var(--subColor);
+                color: var(--white);
+                font-weight: 800;
+                border-radius: 5px;
+                font-size: 1.5rem;
+                padding: 1rem;
+                margin: 20px 0;
+            }
+
+        }
+    }
+
+    .login_bg {
+        background-image: url(../../img/loginBg.jpg);
+        background-size: cover;
+        background-position: center center;
+        z-index: 1;
+        width: calc(100% - 60px);
+        height: calc(100% - 60px);
+        position: absolute;
+        left: 30px;
+        bottom: 30px;
+        border-radius: 30px;
+
+    }
+}
