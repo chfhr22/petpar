@@ -7,6 +7,7 @@ import Find from '../pages/Find'
 import Nav from './Nav'
 import Footer from './Footer'
 import Pages from './Pages'
+import InfoDetail from '../pages/InfoDetail'
 
 const Sub = () => {
     return (
@@ -17,6 +18,7 @@ const Sub = () => {
                     <Route path='/' element={<Home />} />
                     <Route path='/community' element={<Community />} />
                     <Route path='/info' element={<Information />} />
+                    <Route path='/info/:postNum' element={<InfoDetail />} />
                     <Route path='/find' element={<Find />} />
                 </Routes>
             </Pages>
