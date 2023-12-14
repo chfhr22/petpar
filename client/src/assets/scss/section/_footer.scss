@@ -1,56 +1,15 @@
 #footerSection {
     background-color: #F3F4F5;
     height: 100%;
+    box-sizing: border-box;
 
-    .create__name {
-        
-        width: 100%;
-        height: 14rem;
-        background-color: var(--white);
-        border-radius: 20px;
-        padding: 10px;
-        box-sizing: border-box;
-
-        h2 {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
-
-        p {
-            width: 100%;
-            height: 7rem;
-            background-color: var(--bgColor);
-            border-radius: 20px;
-        }
-
-        .point {
-            position: relative;
-
-            input {
-                width: 100%;
-                height: 2rem;
-                border: 1px solid var(--gray);
-                border-radius: 20px;
-                padding: 5px;
-                box-sizing: border-box;
-                margin-top: 20px;
-            }
-            button {
-                padding: 8px;
-                border-radius: 20px;
-                background-color: var(--subColor);
-                color: var(--white);
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                font-size: 14px;
-            }
-        }
+    h2 {
+        font-size: 1.2rem;
     }
 
     .chating__wrap {
         width: 100%;
-        height: 46vh;
+        height: calc(100% - 100px);
         margin-top: 20px;
         background-color: var(--white);
         border-radius: 20px;
@@ -59,16 +18,18 @@
         h2 {
             font-size: 1.1rem;
             padding: 10px;
+            box-sizing: border-box;
         }
 
         .chating {
-
+            padding: 20px;
+            box-sizing: border-box;
             .chating__box {
                 .chating__author {
 
                     .name {
                         position: relative;
-                        margin-left: 30px;
+                        margin-left: 20px;
     
                         &::before{
                             content: '';
@@ -93,7 +54,6 @@
                     color: var(--white);
                     margin: 5px auto;
                     border-radius: 0px 10px 10px 10px;
-                    width: 200px;
                     padding: 6px 15px 10px 15px;
                     font-size: .9rem;
                     
@@ -103,7 +63,7 @@
 
                     .chating__author {
                         text-align: right;
-                        margin-right: 15px;
+                        margin-right: 5px;
                     }
 
                     .chating__cont {
@@ -114,10 +74,12 @@
                     }
                 }
             }
-        }
-
-        
+        }   
     }
+    .chating__wrap::-webkit-scrollbar {
+        display: none;
+    }
+
     .chating__submit {
         margin-top: 15px;
             

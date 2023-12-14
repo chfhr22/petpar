@@ -17,31 +17,8 @@ const Information = () => {
                     <Link to="/" className={isActive('/') ? 'active' : ''}>고양이</Link>
                 </div>
                 <div className="info">
-                    <div className='info__box'>
-                        <div className="info__img"></div>
-                        <div className='info__box__cont'>
-                            <div className="info__cate">
-                                강아지
-                            </div>
-                            <div className="info__title">
-                                강아지가 먹으면 안되는 음식
-                            </div>
-                            <div className="info__cont">
-                                반려인이라면 꼭 알아야 하는 정보입니다.
-                                1.포도 : 포도는 강아지에게 해로운 독성 있...
-                            </div>
-                            <div className='info__author'>
-                                <div className="date">
-                                    2023-12-13
-                                </div>
-                                <div className="author">
-                                    초록
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div className='info__box'>
+                    <Link to="/info"className='info__box'>
                         <div className="info__img"></div>
                         <div className='info__box__cont'>
                             <div className="info__cate">
@@ -63,55 +40,7 @@ const Information = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div className='info__box'>
-                        <div className="info__img"></div>
-                        <div className='info__box__cont'>
-                            <div className="info__cate">
-                                강아지
-                            </div>
-                            <div className="info__title">
-                                강아지가 먹으면 안되는 음식
-                            </div>
-                            <div className="info__cont">
-                                반려인이라면 꼭 알아야 하는 정보입니다.
-                                1.포도 : 포도는 강아지에게 해로운 독성 있...
-                            </div>
-                            <div className='info__author'>
-                                <div className="date">
-                                    2023-12-13
-                                </div>
-                                <div className="author">
-                                    초록
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className='info__box'>
-                        <div className="info__img"></div>
-                        <div className='info__box__cont'>
-                            <div className="info__cate">
-                                강아지
-                            </div>
-                            <div className="info__title">
-                                강아지가 먹으면 안되는 음식
-                            </div>
-                            <div className="info__cont">
-                                반려인이라면 꼭 알아야 하는 정보입니다.
-                                1.포도 : 포도는 강아지에게 해로운 독성 있...
-                            </div>
-                            <div className='info__author'>
-                                <div className="date">
-                                    2023-12-13
-                                </div>
-                                <div className="author">
-                                    초록
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </Link>
                     
                 </div>
             </div>

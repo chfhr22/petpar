@@ -9,6 +9,7 @@
     --black400: #9c9c9c;
     --black500: #cbcbcb;
     --black600: #e5e5e5;
+    --black700: #f9f9f9;
 
     --gray: #7a7a7a;
     --subColor: #03AA5A;
@@ -36,8 +37,13 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
 
-    @media (max-width: 800px) {
+    @media (max-width: 1400px) {
         font-size: 14px;
+        line-height: 1.4;
+    }
+
+    @media (max-width: 800px) {
+        font-size: 12px;
         line-height: 1.4;
     }
 }
