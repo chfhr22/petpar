@@ -131,6 +131,9 @@
         width: 100%;
         display: flex;
         flex-direction: column;
+        padding: 20px;
+        border-radius: 20px;
+        background-color: #F3F4F5;
 
         .find__box {
             width: 100%;
@@ -139,6 +142,8 @@
             margin-bottom: 10px;
             border-radius: 10px;
             box-shadow: 2px 1px 1px 2px rgba(128, 128, 128, 0.11);
+            height: 250px;
+            overflow: hidden;
 
             &:hover {
                 background-color: #f5f5f5ab;
@@ -172,7 +177,7 @@
 
                 .boxInfo {
                     display: flex;
-                    margin-top: 18px;
+                    padding-top: 18px;
                 }
 
 
@@ -209,9 +214,13 @@
                 height: inherit;
                 padding: 50px 20px;
 
+
                 .boxInfo {
                     display: flex;
                     margin-top: 18px;
+                    justify-content: center;
+                    align-items: center;
+                    align-content: center;
                 }
 
                 .name {
@@ -229,6 +238,7 @@
                 .anwser {
                     display: flex;
                     width: 100%;
+                    height: 50px;
                     margin-left: 15px;
                     justify-content: center;
                     align-items: center;
@@ -282,6 +292,7 @@
 
     #findSection .find__boxWrap .find__box .box03 .boxInfo {
         display: flex;
+
     }
 
     #findSection .find__boxWrap .find__box {
@@ -289,65 +300,48 @@
         flex-direction: column;
     }
 
-    #findSection .find__boxWrap .find__box .box02 {
-        height: inherit;
-        padding: 0px 0px 0px 20px;
-    }
-
     #findSection .find__boxWrap .find__box .box03 {
         height: inherit;
-        padding: 5px 20px;
+        display: none;
+    }
+
+    #findSection .find__boxWrap .find__box .box02 {
+        height: inherit;
+        padding: 10px 0px 50px 20px;
     }
 }
 
 @media (max-width:600px) {
-    .find__box {
-        width: 100%;
-    }
-
-    .box03 .boxInfo {
+    #findSection .find__boxWrap .find__box .box03 {
+        height: inherit;
         display: none;
     }
 
-    .box02 .name {
-        font-size: 1.8vw;
-        margin-top: 5px;
+    #findSection .find__boxWrap .find__box .box02 {
+        height: inherit;
+        padding: 10px 0px 50px 20px;
     }
-
-    .location__text {
-        display: none;
-    }
-
-    #findSection .find__boxWrap .find__box {
-        display: flex;
-    }
-
-    .find__box .box02 {
-        padding: 0px 0px 0px 20px;
-    }
-
-    .find__box .box03 {
-        padding: 15px 20px;
-    }
-
-
-
 }
 
 
-@media (max-width:500px) {
-    .boximg {
-        display: none;
-    }
+// @media (max-width:500px) {
+//     .boximg {
+//         display: none;
+//     }
 
-    .find__box {
-        height: 20vh;
-    }
+//     .find__box {
+//         height: 20vh;
+//     }
 
-    #findSection .find__boxWrap .find__box {
-        overflow: hidden;
-    }
-}
+//     #findSection .find__boxWrap .find__box {
+//         overflow: hidden;
+//     }
+
+//     .box03 .boxInfo {
+//         display: none;
+//         margin-top: 12px;
+//     }
+// }
 
 @media (max-width:400px) {
     #findSection .find__container .find__cate .location__text {
@@ -369,6 +363,15 @@
 
     #findSection .find__boxWrap .find__box {
         overflow: hidden;
+    }
+
+    .box03 .boxInfo {
+        display: none;
+        margin-top: 12px;
+    }
+
+    .find__box .box03 {
+        display: none;
     }
 
 }
