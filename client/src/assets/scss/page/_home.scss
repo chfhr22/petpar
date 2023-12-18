@@ -222,6 +222,8 @@
             }
 
             .more {
+                cursor: pointer;
+
                 &.hide {
                     display: none;
                 }
