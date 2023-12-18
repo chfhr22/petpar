@@ -9,6 +9,8 @@ import { IoBookmarkOutline, IoHeartOutline, IoShareSocialSharp, IoCallOutline } 
 const Contents = () => {
     const [petItems, setPetItems] = useState([]);
     const [expandedItems, setExpandedItems] = useState({});
+    const [activeCategory, setActiveCategory] = useState('all');
+
 
     const toggleExpand = (index) => {
         setExpandedItems((prevState) => ({
@@ -20,6 +22,8 @@ const Contents = () => {
     const fetchInfo = async (category) => {
         let url = 'https://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic';
         const apiKey = process.env.REACT_APP_PET_API_KEY;
+
+        setActiveCategory(category);
 
         switch (category) {
             case 'all':
@@ -39,7 +43,7 @@ const Contents = () => {
                     serviceKey: apiKey,
                     bgnde: "20230101",
                     endde: "20231218",
-                    pageNo: "10",
+                    pageNo: "1",
                     numOfRows: "10",
                     _type: "json",
                 }
@@ -62,10 +66,10 @@ const Contents = () => {
         <>
             <div className='filter__wrap'>
                 <ul>
-                    <li><Link to="/" className='active'>전체</Link></li>
+                    <li><Link to="/" onClick={() => fetchInfo('all')} className={activeCategory === 'all' ? 'active' : ''}>전체</Link></li>
                     <li><Link to="/">팔로우</Link></li>
-                    <li><Link to="/" onClick={() => fetchInfo('dog')}>강아지</Link></li>
-                    <li><Link to="/" onClick={() => fetchInfo('cat')}>고양이</Link></li>
+                    <li><Link to="/" onClick={() => fetchInfo('dog')} className={activeCategory === 'dog' ? 'active' : ''}>강아지</Link></li>
+                    <li><Link to="/" onClick={() => fetchInfo('cat')} className={activeCategory === 'cat' ? 'active' : ''}>고양이</Link></li>
                 </ul>
             </div>
 
