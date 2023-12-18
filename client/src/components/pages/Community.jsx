@@ -1,5 +1,6 @@
 import React, { useLocation } from 'react'
 import { Link } from 'react-router-dom'
+// import React, { useEffect, useState } from 'react'
 
 const Community = () => {
     const location = useLocation();

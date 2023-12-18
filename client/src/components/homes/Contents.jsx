@@ -26,7 +26,7 @@ const Contents = () => {
                         bgnde: "20230101",
                         endde: "20231218",
                         pageNo: "10",
-                        numOfRows: "10",
+                        numOfRows: "50",
                         _type: "json",
                     }
                 })
