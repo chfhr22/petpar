@@ -9,12 +9,14 @@ const Information = () => {
     return (
         <div id='infoSection' className='pages'>
             <div className="info__wrap">
-                <div className="cate">
-                    <Link to="/" className={isActive('/info') ? 'active' : ''}>전체보기</Link>
-                    <Link to="/" className={isActive('/') ? 'active' : ''}>입양 가이드</Link>
-                    <Link to="/" className={isActive('/') ? 'active' : ''}>질병</Link>
-                    <Link to="/" className={isActive('/') ? 'active' : ''}>강아지</Link>
-                    <Link to="/" className={isActive('/') ? 'active' : ''}>고양이</Link>
+                <div className="filter__wrap">
+                    <ul>
+                        <li><Link to="/" className={isActive('/info') ? 'active' : ''}>전체보기</Link></li>
+                        <li><Link to="/" className={isActive('/') ? 'active' : ''}>입양 가이드</Link></li>
+                        <li><Link to="/" className={isActive('/') ? 'active' : ''}>질병</Link></li>
+                        <li><Link to="/" className={isActive('/') ? 'active' : ''}>강아지</Link></li>
+                        <li><Link to="/" className={isActive('/') ? 'active' : ''}>고양이</Link></li>
+                    </ul>
                 </div>
                 <div className="info">
 
