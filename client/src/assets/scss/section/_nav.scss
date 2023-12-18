@@ -28,4 +28,29 @@
             }
         }
     }
+
+    .statistics {
+        height: 270px;
+        padding: 0.8rem;
+        border-radius: 10px;
+        background-color: var(--white);
+
+        .stat__title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+
+            svg {
+                margin-right: 0.2rem;
+            }
+
+            h2 {
+                font-size: 1rem;
+            }
+        }
+
+        .stat__desc {
+            margin-bottom: 1rem;
+        }
+    }
 }
