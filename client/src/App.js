@@ -5,7 +5,6 @@ import Main from './components/section/Main'
 import Login from './components/pages/Login'
 import Sub from './components/section/Sub'
 
-
 const App = () => {
   return (
     <BrowserRouter>
