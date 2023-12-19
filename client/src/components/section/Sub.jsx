@@ -9,6 +9,7 @@ import Footer from './Footer'
 import Pages from './Pages'
 import InfoDetail from '../pages/InfoDetail'
 import Mypage from '../pages/Mypage'
+import PostWrite from '../post/PostWrite'
 
 const Sub = () => {
     return (
@@ -18,6 +19,7 @@ const Sub = () => {
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/community' element={<Community />} />
+                    <Route path='/community/write' element={<PostWrite />} />
                     <Route path='/mypage' element={<Mypage />} />
                     <Route path='/info' element={<Information />} />
                     <Route path='/info/:postNum' element={<InfoDetail />} />
