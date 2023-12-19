@@ -11,6 +11,7 @@ const Contents = () => {
     const [expandedItems, setExpandedItems] = useState({});
     const [activeCategory, setActiveCategory] = useState('all');
 
+
     const toggleExpand = (index) => {
         setExpandedItems((prevState) => ({
             ...prevState,
@@ -21,26 +22,39 @@ const Contents = () => {
     const fetchInfo = async (category) => {
         let url = 'https://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic';
         const apiKey = process.env.REACT_APP_PET_API_KEY;
-        const fetchShelter = async () => {
-            try {
-                const res = await axios.get("https://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic", {
-                    params: {
-                        serviceKey: apiKey,
-                        bgnde: "20230101",
-                        endde: "20231218",
-                        pageNo: "10",
-                        numOfRows: "10",
-                        _type: "json",
-                    }
-                })
-                console.log(res)
 
-                let items = res.data.response.body.items.item;
+        setActiveCategory(category);
 
-                setPetItems(items);
-            } catch (err) {
-                console.log(err);
-            }
+        switch (category) {
+            case 'all':
+                url = 'https://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic';
+                break;
+            case 'dog':
+                url = 'https://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?upkind=417000';
+                break;
+            case 'cat':
+                url = 'https://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?upkind=422400';
+                break;
+        }
+
+        try {
+            const res = await axios.get(url, {
+                params: {
+                    serviceKey: apiKey,
+                    bgnde: "20230101",
+                    endde: "20231218",
+                    pageNo: "1",
+                    numOfRows: "20",
+                    _type: "json",
+                }
+            })
+            console.log(res)
+
+            let items = res.data.response.body.items.item;
+
+            setPetItems(items);
+        } catch (err) {
+            console.log(err);
         }
     }
 
