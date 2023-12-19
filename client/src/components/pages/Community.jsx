@@ -1,6 +1,5 @@
 import React from 'react'
-import {Link, useLocation} from 'react-router-dom'
-
+import { Link, useLocation } from 'react-router-dom'
 
 const Community = () => {
     const location = useLocation();
@@ -8,6 +7,7 @@ const Community = () => {
     const isActive = (path) => {
         return location.pathname === path;
     };
+
     return (
         <div id='comPage' className='pages'>
             <div className='comHeader'>
