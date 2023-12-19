@@ -8,7 +8,6 @@ import Findid from './components/pages/Findid'
 import Join from './components/pages/Join'
 import Findpass from './components/pages/Findpass'
 
-
 const App = () => {
 
   return (

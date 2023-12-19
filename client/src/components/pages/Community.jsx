@@ -7,6 +7,7 @@ import Image2 from '../../assets/img/default_img.png';
 import Image3 from '../../assets/img/com22.png';
 
 import { IoBookmarkOutline, IoHeartOutline, IoShareSocialSharp } from "react-icons/io5";
+import { Link, useLocation } from 'react-router-dom'
 
 
 const Community = () => {
@@ -14,6 +15,9 @@ const Community = () => {
     const img = <img src={Image} alt="로고"></img>;
     const img2 = <img src={Image2} alt="로고"></img>;
     const img3 = <img src={Image3} alt="로고"></img>;
+    const isActive = (path) => {
+        return location.pathname === path;
+    };
 
     return (
         <section id='comPage' className='pages'>
