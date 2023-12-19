@@ -2,8 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Image from '../../assets/img/PETPAR.png';
 
-
-const Login = () => {
+const Findpass = () => {
     const logo = <img src={Image} alt="로고" height={50}></img>;
 
     return (
@@ -22,9 +21,9 @@ const Login = () => {
                     </div>
 
                     <div className="input_style">
-                        <p>비밀번호</p>
-                        <label htmlFor="password" className='blind'>비밀번호</label>
-                        <input type='password' id='password' name='youPass' placeholder='PASSWORD' autoComplete='off' required></input>
+                        <p>이메일</p>
+                        <label htmlFor="emaill" className='blind'>이메일</label>
+                        <input type='emaill' id='emaill' name='youEmail' placeholder='E-mail' autoComplete='off' required></input>
                     </div>
 
                     <button type='submit'>로그인</button>
@@ -40,4 +39,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Findpass
