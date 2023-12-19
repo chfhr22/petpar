@@ -103,15 +103,16 @@
     }
 
     .login_bg {
-        background-image: url(../../img/loginBg.jpg);
+        background-image: url(http://localhost:3000/static/media/loginBg.4c15c5a….jpg);
         background-size: cover;
         background-position: center center;
         z-index: 1;
         width: 100%;
-        height: 100%;
+        height: calc(100% - 60px);
         position: absolute;
-        left: 0;
-        bottom: 0;
+        left: 30px;
+        bottom: 30px;
         border-radius: 30px;
+        padding: 20px;
     }
 }
