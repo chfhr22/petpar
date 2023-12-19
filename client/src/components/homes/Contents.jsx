@@ -11,7 +11,6 @@ const Contents = () => {
     const [expandedItems, setExpandedItems] = useState({});
     const [activeCategory, setActiveCategory] = useState('all');
 
-
     const toggleExpand = (index) => {
         setExpandedItems((prevState) => ({
             ...prevState,
