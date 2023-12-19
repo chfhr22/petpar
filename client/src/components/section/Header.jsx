@@ -3,6 +3,7 @@ import logoimg from '../../assets/img/logoimg.png'
 import profile from '../../assets/img/profile.png'
 
 import { IoNotifications } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -15,6 +16,9 @@ const Header = () => {
                     <em>pet</em>par
                 </div> */}
             </h1>
+            <Link to='/login'>로그인</Link>
+            <Link to='../'>일단뒤로가기벝튼</Link>
+            <Link to='/mypage'><img src="" alt="마이페이지" /></Link>
             <div className="header__profile">
                 <div className="noti">
                     <IoNotifications />

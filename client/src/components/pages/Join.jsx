@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 import Image from '../../assets/img/PETPAR.png';
 
 
-const Login = () => {
+const Join = () => {
     const logo = <img src={Image} alt="로고" height={50}></img>;
 
     return (
         <div id='loginPage'>
             <div className="login_box">
-                <h1 className="logo">
+                <h1 className="logo joinpage">
                     {logo}
                 </h1>
                 <form name='login' method='post'>
@@ -27,11 +27,29 @@ const Login = () => {
                         <input type='password' id='password' name='youPass' placeholder='PASSWORD' autoComplete='off' required></input>
                     </div>
 
+                    <div className="input_style">
+                        <p>비밀번호 확인</p>
+                        <label htmlFor="passwordC" className='blind'>비밀번호 확인</label>
+                        <input type='password' id='passwordC' name='youPassC' placeholder='PASSWORD' autoComplete='off' required></input>
+                    </div>
+
+                    <div className="input_style">
+                        <p>이름</p>
+                        <label htmlFor="name" className='blind'>이름</label>
+                        <input type='text' id='name' name='youName' placeholder='NAME' autoComplete='off' required></input>
+                    </div>
+
+                    <div className="input_style">
+                        <p>이메일</p>
+                        <label htmlFor="email" className='blind'>이메일</label>
+                        <input type='email' id='email' name='youEmail' placeholder='E-mail' autoComplete='off' required></input>
+                    </div>
+
                     <button type='submit'>로그인</button>
 
                     <ul>
                         <li><Link to='/findid'>아이디 찾기</Link></li>
-                        <li><Link to='/join'>회원가입</Link></li>
+                        <li><Link to='/findpass'>비밀번호 찾기</Link></li>
                     </ul>
                 </form>
             </div>
@@ -40,4 +58,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Join
