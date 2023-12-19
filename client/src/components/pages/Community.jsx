@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import Image from '../../assets/img/comunnity.jpg';
 import Image2 from '../../assets/img/default_img.png';

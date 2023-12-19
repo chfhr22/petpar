@@ -20,7 +20,7 @@ const Information = () => {
                 </div>
                 <div className="info">
 
-                    <Link to="/info"className='info__box'>
+                    <Link to="/info" className='info__box'>
                         <div className="info__img"></div>
                         <div className='info__box__cont'>
                             <div className="info__cate">
@@ -43,7 +43,7 @@ const Information = () => {
                             </div>
                         </div>
                     </Link>
-                    
+
                 </div>
             </div>
         </div>

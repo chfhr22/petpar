@@ -22,7 +22,7 @@ const Find = () => {
                         bgnde: "20230101",
                         endde: "20231218",
                         pageNo: "10",
-                        numOfRows: "10",
+                        numOfRows: "20",
                         _type: "json",
                     }
                 });
@@ -44,8 +44,8 @@ const Find = () => {
                 <div className="find__cate">
                     <ul>
                         <li className='location__text'>
-                            <input type="text" />
-                            <p>🔍</p>
+                            {/* <input type="text" />
+                            <p>🔍</p> */}
                         </li>
                         <li className="location-item" onClick={toggleSubMenu}>
                             <span>도시</span>
