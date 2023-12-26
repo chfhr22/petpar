@@ -36,6 +36,7 @@ const Contents = () => {
                 url = 'https://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?upkind=422400';
                 break;
             default:
+                break;
         }
 
         try {
