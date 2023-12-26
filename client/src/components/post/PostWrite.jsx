@@ -2,12 +2,15 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import PostImage from './PostImage';
 import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 const PostWrite = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [image, setImage] = useState("");
     const [category, setCategory] = useState("입양");
+
+    const user = useSelector((state) => state.user);
     let navigate = useNavigate();
 
     const onSubmit = (e) => {
@@ -22,6 +25,7 @@ const PostWrite = () => {
             title: title,
             content: content,
             image: image,
+            uid: user.uid,
         }
 
         axios

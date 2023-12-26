@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+
 import Image from '../../assets/img/default_img.png';
 
 import { IoBookmarkOutline, IoHeartOutline, IoShareSocialSharp } from "react-icons/io5";
@@ -20,8 +21,6 @@ const PostList = () => {
             })
     }, [])
 
-    const img = <img src={Image} alt="로고"></img>;
-
     return (
         <div className='contents_wrap_wrap'>
             <div className='contents_wrap'>
@@ -31,8 +30,10 @@ const PostList = () => {
                             <div className="img"><img src={post.image ? post.image : Image} alt="" /></div>
                             <div className="board_bar">
                                 <div className='right'>
-                                    <div className="profile">{img}</div>
-                                    <p className='author'>김아무개</p>
+                                    <div className="profile">
+                                        <img src={post.author.photoURL} alt="로고"></img>
+                                    </div>
+                                    <p className='author'>{post.author.displayName}</p>
                                     <span>3일</span>
                                 </div>
                                 <div className='icon'>
