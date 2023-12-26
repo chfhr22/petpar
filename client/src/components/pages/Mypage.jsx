@@ -1,17 +1,75 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from "react-router-dom";
+import axios from 'axios'
+import firebase from "../../firebase.js";
 
 const Mypage = () => {
+    const [currentImage, setCurrentImage] = useState("");
+
+    const user = useSelector((state) => state.user)
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user.isLoading && !user.accessToken) {
+            navigate("/login")
+        } else {
+            setCurrentImage(user.photoURL)
+        }
+    }, [user, navigate])
+
+    const ImageUpload = (e) => {
+        const formData = new FormData();
+        formData.append("file", (e.target.files[0]));
+
+        axios
+            .post("/api/user/profile/img", formData)
+            .then((response) => {
+                console.log(response)
+                setCurrentImage(response.data.filePath)
+            });
+    }
+
+    const SaveProfile = async (e) => {
+        e.preventDefault();
+
+        try {
+            await firebase.auth().currentUser.updateProfile({
+                photoURL: currentImage
+            })
+        } catch (err) {
+            return alert("프로필 저장 실패오류");
+        }
+
+        let body = {
+            photoURL: currentImage,
+            uid: user.uid,
+        }
+        axios
+            .post("/api/user/profile/update", body)
+            .then((response) => {
+                if (response.data.success) {
+                    alert("프로필이 저장되었습니다.")
+                    window.location.reload();
+                } else {
+                    return alert("프로필 저장에 실패하였습니다.");
+                }
+            })
+    }
+
     return (
         <div className='mypage pages'>
             < form name='login' method='post' >
                 <legend className="blind">회원 정보 수정 영역</legend>
 
                 <div className="input_style imgupload">
-                    <div className='img'><img src="" alt="이미지" /></div>
+                    <div className='img'>
+                        <img src={currentImage} alt="이미지" />
+                    </div>
                     <label htmlFor="imageUpload" className='blind'>이미지 업로드:</label>
-                    <input type="file" id="imageUpload" className='imguploadclass' name="image" accept="image/*" />
+                    <input type="file" id="imageUpload" className='imguploadclass' name="image" accept="image/*" onChange={(e) => ImageUpload(e)} />
                     <div className="btn_wrap">
-                        <button type="submit">업로드</button>
+                        <button type="submit" onClick={(e) => { SaveProfile(e) }}>업로드</button>
                         <button type="submit">사진삭제</button>
                     </div>
                 </div>
