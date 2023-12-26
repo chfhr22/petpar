@@ -10,7 +10,6 @@ const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [errorMsg, setErrorMsg] = useState("");
     const navigate = useNavigate();
 
     const LoginFunc = async (e) => {
@@ -25,8 +24,7 @@ const Login = () => {
             navigate("/");
         } catch (err) {
             console.log(err);
-            setErrorMsg("이메일과 비밀번호를 다시 한 번 확인해주세요!");
-            alert(errorMsg);
+            alert("이메일과 비밀번호를 다시 한 번 확인해주세요!");
         }
     }
 
