@@ -31,9 +31,9 @@ const PostList = () => {
                             <div className="board_bar">
                                 <div className='right'>
                                     <div className="profile">
-                                        <img src={post.author.photoURL} alt="로고"></img>
+                                        {/* <img src={post.author.photoURL} alt="로고"></img> */}
                                     </div>
-                                    <p className='author'>{post.author.displayName}</p>
+                                    <p className='author'>ddd</p>
                                     <span>3일</span>
                                 </div>
                                 <div className='icon'>

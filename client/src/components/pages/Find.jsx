@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { fetchFromAPI } from '../../utils/api';
 
 const Find = () => {
     const [isSubMenuVisible, setSubMenuVisible] = useState(false);
@@ -13,19 +14,10 @@ const Find = () => {
 
 
     useEffect(() => {
-        const apiKey = process.env.REACT_APP_PET_API_KEY;
+
         const fetchShelter = async () => {
             try {
-                const res = await axios.get("https://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic", {
-                    params: {
-                        serviceKey: apiKey,
-                        bgnde: "20230101",
-                        endde: "20231218",
-                        pageNo: "10",
-                        numOfRows: "20",
-                        _type: "json",
-                    }
-                });
+                const res = await fetchFromAPI(`1543061/abandonmentPublicSrvc/abandonmentPublic`)
 
                 let items = res.data.response.body.items.item;
                 setPetItems(items);
