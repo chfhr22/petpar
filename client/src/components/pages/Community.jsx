@@ -1,9 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-
 import PostList from '../post/PostList';
-
 
 const Community = () => {
 
@@ -20,8 +18,12 @@ const Community = () => {
                         <li><Link href="/">자유</Link></li>
                         <li><Link href="/">질문</Link></li>
                     </ul>
+                    <Link to='./write' className="writeBtn">글쓰기</Link>
                 </div>
-                <PostList />
+
+                <div className='contents_wrap_wrap'>
+                    <PostList />
+                </div>
             </div>
         </section>
     )
