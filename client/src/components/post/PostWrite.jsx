@@ -58,7 +58,7 @@ const PostWrite = () => {
                 <fieldset>
                     <legend className='blind'>글쓰기 영역</legend>
                     <div>
-                        <label htmlFor="youName" className='required'>제목</label>
+                        <label htmlFor="youName" className='required' blind>제목</label>
                         <input
                             type="text"
                             id='youName'
@@ -68,7 +68,7 @@ const PostWrite = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="youName" className='required'>내용</label>
+                        <label htmlFor="youName" className='required' blind>내용</label>
                         <textarea
                             type="text"
                             id='youName'
