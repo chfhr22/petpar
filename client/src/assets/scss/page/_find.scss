@@ -25,31 +25,13 @@
                 text-align: center;
             }
 
-            .location__text {
-                display: flex;
-                margin: 10px;
-                height: 40px;
-                background-color: #fff;
-                box-shadow: 2px 2px 3px 3px rgba(128, 128, 128, 0.11);
-                border-radius: 50px;
-                padding: 10px;
-                padding-left: 20px;
-
-                input {
-                    color: #666666;
-                    display: flex;
-                    align-items: center;
-                    width: 15vw;
-                }
-            }
-
             .location-item {
                 position: relative;
                 cursor: pointer;
                 width: 15%;
                 height: 40px;
                 background-color: #fff;
-                margin: 10px;
+                margin: 10px 25px;
                 border-radius: 50px;
                 padding: 10px;
                 box-shadow: 2px 2px 3px 3px rgba(128, 128, 128, 0.11);
@@ -166,6 +148,9 @@
                     height: 160px;
                     border-radius: 10px;
                     background-color: #e4dddd;
+                    background-size: cover;
+                    background-repeat: repeat;
+                    background-position: 0%;
                 }
 
             }
@@ -322,24 +307,6 @@
 }
 
 
-// @media (max-width:500px) {
-//     .boximg {
-//         display: none;
-//     }
-
-//     .find__box {
-//         height: 20vh;
-//     }
-
-//     #findSection .find__boxWrap .find__box {
-//         overflow: hidden;
-//     }
-
-//     .box03 .boxInfo {
-//         display: none;
-//         margin-top: 12px;
-//     }
-// }
 
 @media (max-width:400px) {
     #findSection .find__container .find__cate .location__text {
@@ -349,6 +316,7 @@
         padding: 5px;
         padding-left: 20px;
         justify-content: center;
+        display: none;
     }
 
     #findSection .find__container .find__cate ul {
@@ -357,6 +325,7 @@
         text-align: center;
         flex-wrap: wrap;
         justify-content: center;
+
     }
 
     #findSection .find__boxWrap .find__box {
@@ -371,5 +340,23 @@
     .find__box .box03 {
         display: none;
     }
+
+}
+
+@media (max-width:350px) {
+    #findSection .find__container .find__cate .location-item {
+        position: relative;
+        cursor: pointer;
+        width: 15%;
+        height: 40px;
+        background-color: #fff;
+        margin: 10px 5px;
+        border-radius: 50px;
+        padding: 10px;
+        box-shadow: 2px 2px 3px 3px rgba(128, 128, 128, 0.11);
+        white-space: nowrap;
+    }
+
+
 
 }

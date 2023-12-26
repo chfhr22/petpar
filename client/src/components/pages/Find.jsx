@@ -76,43 +76,8 @@ const Find = () => {
         setSubMenuVisible(!isSubMenuVisible);
     };
 
-    const fetchShelterData = async (selectedSido, selectedGunguValue) => {
-      try {
-          const shelterResponse = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/shelter?upr_cd=${selectedSido}&org_cd=${selectedGunguValue}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
-          const shelterData = await shelterResponse.json();
-  
-          const items = shelterData.response.body.items.item;
-          if (items && items.length > 0) {
-              const promises = items.map(async (item) => {
-                  const careRegNo = item.careRegNo;
-                  const abandonmentResponse = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?care_reg_no=${careRegNo}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
-                  const abandonmentData = await abandonmentResponse.json();
-  
-                  // 조건부 데이터 접근
-                  const itemArray = abandonmentData.response.body.items.item;
-                  if (itemArray && itemArray.length > 0) {
-                      return itemArray[0]; // 첫 번째 항목 반환
-                  }
-                  return null; // itemArray가 비어있거나 존재하지 않는 경우
-              });
-  
-              const results = await Promise.all(promises);
-              const newPetItems = results.filter(item => item).map(item => ({
-                  careNm: item.careNm,
-                  orgNm: item.orgNm,
-                  chargeNm: item.chargeNm,
-                  careTel: item.careTel,
-                  careAddr: item.careAddr,
-              }));
-  
-              setPetItems(newPetItems);
-          } else {
-              console.error('No items or empty items array in the response.');
-          }
-      } catch (error) {
-          console.error('Error fetching shelter data:', error);
-      }
-  };
+
+
 
     return (
         <div id='findSection' className='pages'>
@@ -120,8 +85,8 @@ const Find = () => {
                 <div className="find__cate">
                     <ul>
                         <li className='location__text'>
-                            <input type="text" />
-                            <p>🔍</p>
+                            {/* <input type="text" />
+                            <p>🔍</p> */}
                         </li>
                         <li className="location-item" onClick={toggleSubMenu}>
                             <select onChange={handleSidoChange} value={selectedSido}>
