@@ -4,7 +4,7 @@ module.exports = function (app) {
     app.use(
         "/api",
         createProxyMiddleware({
-            target: "http://api.data.go.kr",
+            target: "http://localhost:5050",
             changeOrigin: true,
         })
     );

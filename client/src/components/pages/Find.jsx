@@ -38,6 +38,7 @@ const Find = () => {
         if (selectedSido) {
           const fetchGunguCategories = async () => {
             try {
+
               const response = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sigungu?upr_cd=${selectedSido}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
               const data = await response.json();
               
@@ -48,6 +49,7 @@ const Find = () => {
               }
             } catch (error) {
               console.error('Error fetching gungu categories:', error);
+
             }
           };
     
@@ -120,8 +122,8 @@ const Find = () => {
                 <div className="find__cate">
                     <ul>
                         <li className='location__text'>
-                            <input type="text" />
-                            <p>🔍</p>
+                            {/* <input type="text" />
+                            <p>🔍</p> */}
                         </li>
                         <li className="location-item" onClick={toggleSubMenu}>
                             <select onChange={handleSidoChange} value={selectedSido}>

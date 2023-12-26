@@ -1,5 +1,5 @@
-import React from 'react'
 import { Link, useLocation } from 'react-router-dom';
+import data from '../data/Info'
 
 const Information = () => {
     const location = useLocation();
@@ -19,31 +19,32 @@ const Information = () => {
                     </ul>
                 </div>
                 <div className="info">
-
-                    <Link to="/info"className='info__box'>
-                        <div className="info__img"></div>
-                        <div className='info__box__cont'>
-                            <div className="info__cate">
-                                강아지
-                            </div>
-                            <div className="info__title">
-                                강아지가 먹으면 안되는 음식
-                            </div>
-                            <div className="info__cont">
-                                반려인이라면 꼭 알아야 하는 정보입니다.
-                                1.포도 : 포도는 강아지에게 해로운 독성 있...
-                            </div>
-                            <div className='info__author'>
-                                <div className="date">
-                                    2023-12-13
+                    {
+                        data.map((item, index) => (
+                            <Link to="/info" key={index} className='info__box'>
+                                <div className="info__img"><img src={item.img} alt={item.title} /></div>
+                                <div className='info__box__cont'>
+                                    <div className="info__cate">
+                                        {item.category}
+                                    </div>
+                                    <div className="info__title">
+                                        {item.title}
+                                    </div>
+                                    <div className="info__cont">
+                                        {item.desc}
+                                    </div>
+                                    <div className='info__author'>
+                                        <div className="date">
+                                            {item.date}
+                                        </div>
+                                        <div className="author">
+                                            {item.author}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="author">
-                                    초록
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-                    
+                            </Link>
+                        ))
+                    }
                 </div>
             </div>
         </div>
