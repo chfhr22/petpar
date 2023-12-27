@@ -4,7 +4,6 @@ const router = express.Router();
 const { User } = require("../model/User.js");
 const { Counter } = require("../model/Counter.js");
 
-// 이미지 업로드
 const setUpload = require("../util/upload.js");
 
 router.post("/join", (req, res) => {
@@ -23,11 +22,13 @@ router.post("/join", (req, res) => {
         })
         .catch((err) => {
             console.log(err);
+
             res.status(400).json({ success: false })
         })
 })
 
 router.post("/profile/img", setUpload("petpar-rlan/user"), (req, res, next) => {
+
     res.status(200).json({ success: true, filePath: res.req.file.location })
 })
 
