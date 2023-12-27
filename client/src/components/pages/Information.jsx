@@ -21,7 +21,7 @@ const Information = () => {
                 <div className="info">
                     {
                         data.map((item, index) => (
-                            <Link to="/info" key={index} className='info__box'>
+                            <Link to={`/info/${index}`} key={index} className='info__box'>
                                 <div className="info__img"><img src={item.img} alt={item.title} /></div>
                                 <div className='info__box__cont'>
                                     <div className="info__cate">
