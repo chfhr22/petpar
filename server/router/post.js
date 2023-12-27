@@ -16,6 +16,7 @@ router.post("/write", (req, res) => {
         title: req.body.title,
         content: req.body.content,
         image: req.body.image,
+
     };
 
     Counter.findOne({ name: "counter" })
@@ -46,6 +47,7 @@ router.post("/write", (req, res) => {
 })
 
 // 이미지 업로드
+
 router.post("/image/upload", setUpload("petpar-rlan/post"), (req, res, next) => {
     // console.log(res.req);
     res.status(200).json({ success: true, filePath: res.req.file.location })
@@ -61,9 +63,57 @@ router.post("/list", (req, res) => {
             res.status(200).json({ success: true, postList: result })
         })
         .catch((err) => {
-            console.log(err);
+            console.log(err)
+            res.status(400).json({ success: false });
+        })
+})
+
+
+// 글 상세페이지
+router.post("/detail", (req, res) => {
+    Post
+        .findOne({ postNum: req.body.postNum })
+        .populate("author")
+        .exec()
+        .then((result) => {
+            res.status(200).json({ success: true, post: result });
+        })
+        .catch((err) => {
+            console.log(err)
+            res.status(400).json({ success: false });
+        })
+})
+
+// 글 수정하기
+router.post("/modify", (req, res) => {
+    let temp = {
+        title: req.body.title,
+        content: req.body.content
+    }
+    Post.updateOne({ postNum: Number(req.body.postNum) }, { $set: temp })
+        .exec()
+        .then(() => {
+            res.status(200).json({ success: true });
+        })
+        .catch((err) => {
+            console.log(err)
+            res.status(400).json({ success: false });
+        })
+})
+
+// 글 삭제하기
+router.post("/delete", (req, res) => {
+    Post
+        .deleteOne({ postNum: Number(req.body.postNum) })
+        .exec()
+        .then(() => {
+            res.status(200).json({ success: true })
+        })
+        .catch((err) => {
+            console.log(err)
             res.status(400).json({ success: false })
         })
 })
+
 
 module.exports = router;

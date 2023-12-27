@@ -3,7 +3,7 @@
     height: 100%;
     border-radius: 20px;
     background-color: #F3F4F5;
-
+    padding: 20px;
 
     .info__detail__page {
         width: 100%;
@@ -12,9 +12,7 @@
         background-color: var(--white);
         padding: 20px;
 
-        .info__detail__title {
-
-        }
+        .info__detail__title {}
 
         .info__detail__author {
             display: flex;
@@ -62,9 +60,10 @@
                 white-space: pre-line;
             }
         }
-        
+
         .info__detail__cont::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera*/
+            display: none;
+            /* Chrome, Safari, Opera*/
         }
     }
 
@@ -81,5 +80,5 @@
             font-size: .8rem;
             margin-top: 2%;
         }
-    } 
+    }
 }

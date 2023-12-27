@@ -7,7 +7,7 @@ const Information = () => {
         return location.pathname === path;
     };
     return (
-        <div id='infoSection' className='pages'>
+        <div id='infoPage' className='pages'>
             <div className="info__wrap">
                 <div className="filter__wrap">
                     <ul>

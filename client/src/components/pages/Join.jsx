@@ -1,15 +1,10 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import firebase from '../../firebase.js'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 
-import Image from '../../assets/img/PETPAR.png';
-
+import firebase from '../../firebase.js'
 
 const Join = () => {
-    const logo = <img src={Image} alt="로고" height={50}></img>;
-
     const [youEmail, setYouEmail] = useState("");
     const [youPass, setYouPass] = useState("");
     const [youPassC, setYouPassC] = useState("");
@@ -45,7 +40,9 @@ const Join = () => {
             email: createdUser.user.multiFactor.user.email,
             displayName: createdUser.user.multiFactor.user.displayName,
             uid: createdUser.user.multiFactor.user.uid, // firebase에서 만든 아이디
+
             photoURL: "https://kr.object.ncloudstorage.com/petpar-rlan/user/profile.png",
+
         }
 
         axios.post("/api/user/join", body)
@@ -59,11 +56,32 @@ const Join = () => {
             })
     }
 
+
+    // const NameCheckFunc = (e) => {
+    //     e.preventDefault();
+    //     if (!youName) {
+    //         return alert("닉네임을 입력해주세요!");
+    //     }
+    //     let body = {
+    //         displayName: youName,
+    //     }
+
+    //     axios.post("/api/user/namecheck", body).then((response) => {
+    //         if (response.data.success) {
+    //             if (response.data.check) {
+    //                 setNameCheck(true);
+    //                 setNameInfo("사용 가능한 닉네임입니다.");
+    //             } else {
+    //                 setNameInfo("사용할 수 없는 닉네임입니다.");
+    //             }
+    //         }
+    //     })
+    // }
+
     return (
         <div id='loginPage'>
             <div className="login_box">
                 <h1 className="logo joinpage">
-                    {logo}
                 </h1>
                 <form name='login' method='post'>
                     <legend className="blind">로그인 영역</legend>
@@ -82,10 +100,10 @@ const Join = () => {
                             onChange={(e) => setYouEmail(e.currentTarget.value)}
                         ></input>
                     </div>
-
                     <div className="input_style">
                         <p>비밀번호</p>
                         <label htmlFor="password" className='blind'>비밀번호</label>
+
                         <input
                             type='password'
                             id='password'
@@ -96,6 +114,7 @@ const Join = () => {
                             value={youPass}
                             onChange={(e) => setYouPass(e.currentTarget.value)}
                         ></input>
+
                     </div>
 
                     <div className="input_style">
@@ -127,7 +146,6 @@ const Join = () => {
                             onChange={(e) => setYouName(e.currentTarget.value)}
                         ></input>
                     </div>
-
 
 
                     <button disabled={flag} type='submit' onClick={(e) => { JoinFunc(e) }}>회원가입</button>

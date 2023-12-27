@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './assets/scss/style.scss';
 
+
 import store from './reducer/store'
 import { Provider } from 'react-redux';
 
@@ -14,5 +15,6 @@ root.render(
       <App />
     </Provider>
   </React.StrictMode>
+
 );
 

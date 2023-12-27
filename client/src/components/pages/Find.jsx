@@ -25,54 +25,54 @@ const Find = () => {
               }
           );
 
-          setSidoCategories(filteredSidoCategories);
-          } catch (error) {
-            console.error('Error fetching sido categories:', error);
-          }
-        };
-    
-        fetchSidoCategories();
-      }, []);
-    
-      useEffect(() => {
-        if (selectedSido) {
-          const fetchGunguCategories = async () => {
-            try {
-
-              const response = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sigungu?upr_cd=${selectedSido}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
-              const data = await response.json();
-              
-              if (data.response.body.items && data.response.body.items.item) {
-                  setGunguCategories(data.response.body.items.item);
-              } else {
-                  setGunguCategories([]); // 데이터가 없으면 빈 배열로 설정
-              }
+                setSidoCategories(filteredSidoCategories);
             } catch (error) {
-              console.error('Error fetching gungu categories:', error);
-
+                console.error('Error fetching sido categories:', error);
             }
-          };
-    
-          fetchGunguCategories();
+        };
+
+        fetchSidoCategories();
+    }, [categoryData]);
+
+    useEffect(() => {
+        if (selectedSido) {
+            const fetchGunguCategories = async () => {
+                try {
+
+                    const response = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sigungu?upr_cd=${selectedSido}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
+                    const data = await response.json();
+
+                    if (data.response.body.items && data.response.body.items.item) {
+                        setGunguCategories(data.response.body.items.item);
+                    } else {
+                        setGunguCategories([]); // 데이터가 없으면 빈 배열로 설정
+                    }
+                } catch (error) {
+                    console.error('Error fetching gungu categories:', error);
+
+                }
+            };
+
+            fetchGunguCategories();
         }
-      }, [selectedSido]);
-    
-      const handleSidoChange = (event) => {
+    }, [selectedSido]);
+
+    const handleSidoChange = (event) => {
         const selectedSidoValue = event.target.value;
         console.log(selectedSidoValue)
         setSelectedSido(selectedSidoValue);
-      };
-    
-      const handleGunguChange = (event) => {
+    };
+
+    const handleGunguChange = (event) => {
         const selectedGunguValue = event.target.value;
         console.log(selectedGunguValue)
         setSelectedGungu(selectedGunguValue);
-    
+
         // 군구
         if (selectedSido && selectedGunguValue) {
-          fetchShelterData(selectedSido, selectedGunguValue);
+            fetchShelterData(selectedSido, selectedGunguValue);
         }
-      };
+    };
 
     const toggleSubMenu = () => {
         setSubMenuVisible(!isSubMenuVisible);
@@ -116,7 +116,6 @@ const Find = () => {
       }
   };
 
-
     return (
         <div id='findSection' className='pages'>
             <div className="find__container">
@@ -130,24 +129,24 @@ const Find = () => {
                             <select onChange={handleSidoChange} value={selectedSido}>
                                 <option value="">시도 선택</option>
                                 {sidoCategories.map((sido) => (
-                                <option key={sido.orgCd} value={sido.orgCd}>
-                                    {sido.orgdownNm}
-                                </option>
+                                    <option key={sido.orgCd} value={sido.orgCd}>
+                                        {sido.orgdownNm}
+                                    </option>
                                 ))}
                             </select>
                         </li>
 
                         <li className="location-item" onClick={toggleSubMenu}>
-                        {selectedSido && (
-                            <select onChange={handleGunguChange} value={selectedGungu}>
-                                <option value="">군구 선택</option>
-                                {gunguCategories.map((gungu) => (
-                                <option key={gungu.orgCd} value={gungu.orgCd}>
-                                    {gungu.orgdownNm}
-                                </option>
-                                ))}
-                            </select>
-                        )}
+                            {selectedSido && (
+                                <select onChange={handleGunguChange} value={selectedGungu}>
+                                    <option value="">군구 선택</option>
+                                    {gunguCategories.map((gungu) => (
+                                        <option key={gungu.orgCd} value={gungu.orgCd}>
+                                            {gungu.orgdownNm}
+                                        </option>
+                                    ))}
+                                </select>
+                            )}
                         </li>
                     </ul>
                 </div>
@@ -184,7 +183,7 @@ const Find = () => {
                                 </div>
                             </div>
                             <div className="box03">
-                                
+
                                 {/* <div className='boxInfo'>
                                     <div className='name'>특이사항</div>
                                     <div className='anwser'>

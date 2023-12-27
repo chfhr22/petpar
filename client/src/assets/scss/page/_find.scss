@@ -25,13 +25,32 @@
                 text-align: center;
             }
 
+            .location__text {
+                display: flex;
+                margin: 10px;
+                height: 40px;
+                background-color: #fff;
+                box-shadow: 2px 2px 3px 3px rgba(128, 128, 128, 0.11);
+                border-radius: 50px;
+                padding: 10px;
+                padding-left: 20px;
+
+                input {
+                    color: #666666;
+                    display: flex;
+                    align-items: center;
+                    width: 15vw;
+                }
+            }
+
+
             .location-item {
                 position: relative;
                 cursor: pointer;
                 width: 15%;
                 height: 40px;
                 background-color: #fff;
-                margin: 10px 25px;
+                margin: 10px;
                 border-radius: 50px;
                 padding: 10px;
                 box-shadow: 2px 2px 3px 3px rgba(128, 128, 128, 0.11);
@@ -148,9 +167,6 @@
                     height: 160px;
                     border-radius: 10px;
                     background-color: #e4dddd;
-                    background-size: cover;
-                    background-repeat: repeat;
-                    background-position: 0%;
                 }
 
             }

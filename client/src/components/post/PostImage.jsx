@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React from 'react'
+import axios from 'axios'
 
 const PostImage = (props) => {
 
@@ -18,7 +18,7 @@ const PostImage = (props) => {
     return (
         <div>
             <input
-                type='file'
+                type="file"
                 accept='image/*'
                 onChange={(e) => FileUpload(e)}
             />

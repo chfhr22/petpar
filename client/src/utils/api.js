@@ -3,8 +3,11 @@ import axios from 'axios';
 export const BASE_URL = 'http://apis.data.go.kr';
 
 const options = {
-    headers: {
-        'serviceKey': process.env.REACT_APP_RAPID_API_KEY,
+    params: {
+        serviceKey: process.env.REACT_APP_PET_API_KEY,
+        upr_cd: "6260000",
+        org_cd: "3360000",
+        _type: "json"
     },
 };
 
