@@ -47,15 +47,19 @@
             overflow: auto;
 
             .info__detail__img {
-                width: 80%;
-                height: 300px;
-                margin: 0 auto;
-                background-color: #888;
+                display: flex;
+                justify-content: center;
+                img {
+                    width: 50%;
+                    margin: 0 auto;
+                }
             }
 
             .info__detail__text {
                 width: 80%;
                 margin: 20px auto 0 auto;
+                font-size: 1rem;
+                white-space: pre-line;
             }
         }
         
