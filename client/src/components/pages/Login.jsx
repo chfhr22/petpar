@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
-import firebase from "../../firebase.js";
+
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import firebase from '../../firebase.js'
+
+import Image from '../../assets/img/PETPAR.png';
+
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -30,6 +34,26 @@ const Login = () => {
         }, 5000)
     }, [errorMsg]);
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+
+    const LoginFunc = async (e) => {
+        e.preventDefault();
+
+        if (!(email && password)) {
+            return alert("이메일 또는 비밀번호를 입력해주세요.")
+        }
+        try {
+            await firebase.auth().signInWithEmailAndPassword(email, password);
+            alert("로그인을 했습니다.");
+            navigate("/");
+        } catch (err) {
+            console.log(err);
+            alert("이메일과 비밀번호를 다시 한 번 확인해주세요!");
+        }
+    }
+
     return (
         <div id='loginPage'>
             <div className="login_box">
@@ -39,14 +63,14 @@ const Login = () => {
                     <legend className="blind">로그인 영역</legend>
 
                     <div className="input_style">
-                        <p>이메일</p>
-                        <label htmlFor="youEmail" className='required blind'>이메일</label>
+                        <p>아이디</p>
+                        <label htmlFor="id" className='blind'>아이디</label>
                         <input
-                            type="email"
-                            id="youEmail"
-                            name="youEmail"
-                            placeholder="이메일"
-                            className="input__style"
+                            type='text'
+                            id='id'
+                            name='youId'
+                            placeholder='ID'
+
                             autoComplete='off'
                             required
                             value={email}
@@ -58,21 +82,20 @@ const Login = () => {
                         <p>비밀번호</p>
                         <label htmlFor="password" className='blind'>비밀번호</label>
                         <input
-                            type="password"
-                            id="youPass"
-                            name="youPass"
-                            placeholder="비밀번호"
-                            className="input__style"
-                            autoComplete="off"
+
+                            type='password'
+                            id='password'
+                            name='youPass'
+                            placeholder='PASSWORD'
+                            autoComplete='off'
                             required
                             value={password}
                             onChange={(e) => setPassword(e.currentTarget.value)}
-                        />
+                        ></input>
                     </div>
-                    <div>
-                        {errorMsg !== "" && <p>{errorMsg}</p>}
-                    </div>
-                    <button type="submit" onClick={(e) => LoginFunc(e)} className="btn__style2 mt30">로그인</button>
+
+                    <button type='submit' onClick={(e) => { LoginFunc(e) }}>로그인</button>
+
 
                     <ul>
                         <li><Link to='/findid'>아이디 찾기</Link></li>

@@ -22,27 +22,13 @@ router.post("/join", (req, res) => {
         })
         .catch((err) => {
             console.log(err);
-            res.status(400).json({ success: false });
-        })
-});
 
-router.post("/namecheck", (req, res) => {
-    User.findOne({ displayName: req.body.displayName })
-        .exec()
-        .then((result) => {
-            let check = true;
-            if (result) {
-                check = false;
-            }
-            res.status(200).json({ success: true, check })
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(400).json({ success: false });
+            res.status(400).json({ success: false })
         })
 })
 
-router.post("/profile/img", setUpload("react-blog1/user"), (req, res, next) => {
+router.post("/profile/img", setUpload("petpar-rlan/user"), (req, res, next) => {
+
     res.status(200).json({ success: true, filePath: res.req.file.location })
 })
 

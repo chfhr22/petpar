@@ -43,6 +43,7 @@
                 }
             }
 
+
             .location-item {
                 position: relative;
                 cursor: pointer;
@@ -322,24 +323,6 @@
 }
 
 
-// @media (max-width:500px) {
-//     .boximg {
-//         display: none;
-//     }
-
-//     .find__box {
-//         height: 20vh;
-//     }
-
-//     #findSection .find__boxWrap .find__box {
-//         overflow: hidden;
-//     }
-
-//     .box03 .boxInfo {
-//         display: none;
-//         margin-top: 12px;
-//     }
-// }
 
 @media (max-width:400px) {
     #findSection .find__container .find__cate .location__text {
@@ -349,6 +332,7 @@
         padding: 5px;
         padding-left: 20px;
         justify-content: center;
+        display: none;
     }
 
     #findSection .find__container .find__cate ul {
@@ -357,6 +341,7 @@
         text-align: center;
         flex-wrap: wrap;
         justify-content: center;
+
     }
 
     #findSection .find__boxWrap .find__box {
@@ -371,5 +356,23 @@
     .find__box .box03 {
         display: none;
     }
+
+}
+
+@media (max-width:350px) {
+    #findSection .find__container .find__cate .location-item {
+        position: relative;
+        cursor: pointer;
+        width: 15%;
+        height: 40px;
+        background-color: #fff;
+        margin: 10px 5px;
+        border-radius: 50px;
+        padding: 10px;
+        box-shadow: 2px 2px 3px 3px rgba(128, 128, 128, 0.11);
+        white-space: nowrap;
+    }
+
+
 
 }

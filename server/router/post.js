@@ -3,6 +3,7 @@ const router = express.Router();
 
 // 스키마
 const { Post } = require("../model/Post.js");
+const { User } = require("../model/User.js");
 const { Counter } = require("../model/Counter.js");
 const { User } = require("../model/User.js");
 
@@ -12,9 +13,11 @@ const setUpload = require("../util/upload.js");
 // 글쓰기
 router.post("/write", (req, res) => {
     let temp = {
+        category: req.body.category,
         title: req.body.title,
         content: req.body.content,
-        image: req.body.image
+        image: req.body.image,
+
     };
 
     Counter.findOne({ name: "counter" })
@@ -25,15 +28,16 @@ router.post("/write", (req, res) => {
             User.findOne({ uid: req.body.uid })
                 .exec()
                 .then((userInfo) => {
-                    temp.author = userInfo._id; // 작가 추가
+                    temp.author = userInfo._id;
 
-                    const BlogWrite = new Post(temp);
-                    BlogWrite
+                    const postWrite = new Post(temp);
+                    postWrite
                         .save()
                         .then(() => {
-                            Counter.updateOne({ name: "counter" }, { $inc: { postNum: 1 } }).then(() => {
-                                res.status(200).json({ success: true });
-                            })
+                            Counter.updateOne({ name: "counter" }, { $inc: { postNum: 1 } })
+                                .then(() => {
+                                    res.status(200).json({ success: true })
+                                })
                         })
                 })
         })
@@ -44,7 +48,10 @@ router.post("/write", (req, res) => {
 })
 
 // 이미지 업로드
+
 router.post("/image/upload", setUpload("petpar/post"), (req, res, next) => {
+
+
     // console.log(res.req);
     res.status(200).json({ success: true, filePath: res.req.file.location })
 })

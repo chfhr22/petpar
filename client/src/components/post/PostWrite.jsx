@@ -2,16 +2,17 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PostImage from './PostImage';
+import { useNavigate } from "react-router-dom";
+
 import { useSelector } from 'react-redux';
 
 const PostWrite = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [category, setCategory] = useState("입양");
-    const [image, setImage] = useState("");
 
-    let navigate = useNavigate()
     const user = useSelector((state) => state.user);
+    let navigate = useNavigate();
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -59,33 +60,37 @@ const PostWrite = () => {
                 </select>
             </div>
             <form className="write__form">
-                <legend className='blind'>글쓰기 영역</legend>
-                <div>
-                    <label htmlFor="youName" className='required'>제목</label>
-                    <input
-                        type="text"
-                        id='youName'
-                        placeholder='제목을 작성하세요.'
-                        value={title}
-                        onChange={(e) => setTitle(e.currentTarget.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="youName" className='required'>내용</label>
-                    <textarea
-                        type="text"
-                        id='youName'
-                        placeholder='내용을 작성하세요.'
-                        value={content}
-                        onChange={(e) => setContent(e.currentTarget.value)}
-                    />
-                </div>
-                <PostImage setImage={setImage} />
-                <button
-                    type='submit'
-                    className='btn__style'
-                    onClick={(e) => onSubmit(e)
-                    }>작성하기</button>
+                <fieldset>
+                    <legend className='blind'>글쓰기 영역</legend>
+                    <div>
+                        <label htmlFor="youName" className='required' blind>제목</label>
+                        <input
+                            type="text"
+                            id='youName'
+                            placeholder='제목을 작성하세요.'
+                            value={title}
+                            onChange={(e) => setTitle(e.currentTarget.value)}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="youName" className='required' blind>내용</label>
+                        <textarea
+                            type="text"
+                            id='youName'
+                            placeholder='내용을 작성하세요.'
+                            value={content}
+                            onChange={(e) => setContent(e.currentTarget.value)}
+                        />
+                    </div>
+
+                    <PostImage setImage={setImage} />
+
+                    <button
+                        type='submit'
+                        className='btn__style'
+                        onClick={(e) => onSubmit(e)
+                        }>작성하기</button>
+                </fieldset>
             </form>
         </div>
     )

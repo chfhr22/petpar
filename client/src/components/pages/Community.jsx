@@ -7,7 +7,6 @@ const Community = () => {
 
     return (
         <section id='comPage' className='pages'>
-
             <div className="com_wrap">
                 <div className="searchBar">
                     <input type="text" className="search-input" placeholder="Search..." />

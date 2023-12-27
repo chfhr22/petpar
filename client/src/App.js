@@ -1,5 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import firebase from './firebase.js'
+import { useDispatch } from 'react-redux'
+import { loginUser, clearUser } from './reducer/userSlice.js'
+
 import Header from './components/section/Header'
 import Main from './components/section/Main'
 import Login from './components/pages/Login'
@@ -9,6 +13,18 @@ import Join from './components/pages/Join'
 import Findpass from './components/pages/Findpass'
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((userInfo) => {
+      console.log("userInfo :", userInfo)
+      if (userInfo !== null) {
+        dispatch(loginUser(userInfo.multiFactor.user));
+      } else {
+        dispatch(clearUser()) //로그아웃
+      }
+    })
+  }, [dispatch]);
 
   return (
     <BrowserRouter>

@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
-import firebase from '../../firebase';
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
+
+import firebase from '../../firebase.js'
+import { useNavigate } from 'react-router-dom'
+
+import Image from '../../assets/img/PETPAR.png';
+
 
 const Join = () => {
     const [youName, setYouName] = useState("");
@@ -36,6 +41,35 @@ const Join = () => {
             photoURL: "https://kr.object.ncloudstorage.com/react-blog1/user/websfonts.png"
         });
 
+
+    const [youEmail, setYouEmail] = useState("");
+    const [youPass, setYouPass] = useState("");
+    const [youPassC, setYouPassC] = useState("");
+    const [youName, setYouName] = useState("");
+    const [flag, setFlag] = useState(false);
+
+    let navigate = useNavigate();
+
+    const JoinFunc = async (e) => {
+        setFlag(true);
+        e.preventDefault();
+
+        if (!(youEmail && youPass && youPassC && youName)) {
+            return alert("모든 항목을 입력해주세요.");
+        }
+
+        if (youPass !== youPassC) {
+            return alert("비밀번호가 일치하지 않습니다.")
+        }
+
+        // firebase 회원가입
+        let createdUser = await firebase.auth().createUserWithEmailAndPassword(youEmail, youPass);
+
+        await createdUser.user.updateProfile({
+            displayName: youName,
+            photoURL: "https://kr.object.ncloudstorage.com/petpar-rlan/user/profile.png"
+        });
+
         console.log(createdUser.user);
 
         // mongoDB 회원가입
@@ -43,7 +77,9 @@ const Join = () => {
             email: createdUser.user.multiFactor.user.email,
             displayName: createdUser.user.multiFactor.user.displayName,
             uid: createdUser.user.multiFactor.user.uid, // firebase에서 만든 아이디
-            photoURL: "https://kr.object.ncloudstorage.com/petpar/user/websfonts.png",
+
+            photoURL: "https://kr.object.ncloudstorage.com/petpar-rlan/user/profile.png",
+
         }
 
         axios.post("/api/user/join", body)
@@ -56,6 +92,7 @@ const Join = () => {
                 }
             })
     }
+
 
     const NameCheckFunc = (e) => {
         e.preventDefault();
@@ -77,6 +114,7 @@ const Join = () => {
             }
         })
     }
+
     return (
         <div id='loginPage'>
             <div className="login_box">
@@ -86,80 +124,68 @@ const Join = () => {
                     <legend className="blind">로그인 영역</legend>
 
                     <div className="input_style">
-                        <p>아이디</p>
-                        <label htmlFor="id" className='blind'>아이디</label>
-                        <input type="text"
-                            id="youName"
-                            name="youName"
-                            placeholder="닉네임"
-                            className="input__style"
+                        <p>이메일</p>
+                        <label htmlFor="email" className='blind'>이메일</label>
+                        <input
+                            type='email'
+                            id='email'
+                            name='youEmail'
+                            placeholder='E-mail'
                             autoComplete='off'
                             required
-                            minLength={8}
-                            value={youName}
-                            onChange={(e) => setYouName(e.currentTarget.value)}
-                        />
-                    </div>
-                    <div style={{ marginBottom: "10px" }}>
-                        {nameInfo}
-                        <button onClick={(e) => NameCheckFunc(e)}>닉네임 중복검사</button>
+                            value={youEmail}
+                            onChange={(e) => setYouEmail(e.currentTarget.value)}
+                        ></input>
                     </div>
                     <div className="input_style">
                         <p>비밀번호</p>
                         <label htmlFor="password" className='blind'>비밀번호</label>
-                        <input type="text"
-                            id="youPass"
-                            name="youPass"
-                            placeholder="비밀번호"
-                            className="input__style"
-                            autoComplete="off"
+
+                        <input
+                            type='password'
+                            id='password'
+                            name='youPass'
+                            placeholder='PASSWORD'
+                            autoComplete='off'
                             required
-                            minLength={8}
                             value={youPass}
                             onChange={(e) => setYouPass(e.currentTarget.value)}
-                        />
+                        ></input>
+
                     </div>
 
                     <div className="input_style">
                         <p>비밀번호 확인</p>
                         <label htmlFor="passwordC" className='blind'>비밀번호 확인</label>
                         <input
-                            type="text"
-                            id="youPassC"
-                            name="youPassC"
-                            placeholder="확인 비밀번호"
-                            className="input__style"
-                            autoComplete="off"
+                            type='password'
+                            id='passwordC'
+                            name='youPassC'
+                            placeholder='PASSWORD'
+                            autoComplete='off'
                             required
-                            minLength={8}
                             value={youPassC}
                             onChange={(e) => setYouPassC(e.currentTarget.value)}
-                        />
+                        ></input>
                     </div>
 
                     <div className="input_style">
                         <p>이름</p>
                         <label htmlFor="name" className='blind'>이름</label>
-                        <input type='text' id='name' name='youName' placeholder='NAME' autoComplete='off' required></input>
-                    </div>
-
-                    <div className="input_style">
-                        <p>이메일</p>
-                        <label htmlFor="email" className='blind'>이메일</label>
-                        <input type="email"
-                            id="youEmail"
-                            name="youEmail"
-                            placeholder="이메일"
-                            className="input__style"
+                        <input
+                            type='text'
+                            id='name'
+                            name='youName'
+                            placeholder='NAME'
                             autoComplete='off'
                             required
-                            minLength={8}
-                            value={youEmail}
-                            onChange={(e) => setYouEmail(e.currentTarget.value)}
-                        />
+                            value={youName}
+                            onChange={(e) => setYouName(e.currentTarget.value)}
+                        ></input>
                     </div>
 
-                    <button disabled={flag} type="submit" className="btn__style2 mt30" onClick={(e) => JoinFunc(e)}>회원가입</button>
+
+                    <button disabled={flag} type='submit' onClick={(e) => { JoinFunc(e) }}>회원가입</button>
 
                     <ul>
                         <li><Link to='/findid'>아이디 찾기</Link></li>
