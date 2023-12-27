@@ -32,7 +32,7 @@ const PostArea = () => {
             {flag ? (
                 <>
                     <PostDetail postInfo={postInfo} />
-                    <RepleArea postId={postInfo._id} />
+                    {/* <RepleArea postId={postInfo._id} /> */}
                 </>
             ) : (
                 <div>
