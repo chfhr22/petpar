@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import firebase from '../../firebase.js'
 
+import Image from '../../assets/img/PETPAR.png';
+
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -35,6 +37,7 @@ const Login = () => {
         <div id='loginPage'>
             <div className="login_box">
                 <h1 className="logo">
+                    <img src={Image} alt="로고이미지" />
                 </h1>
                 <form name='login' method='post'>
                     <legend className="blind">로그인 영역</legend>
