@@ -40,7 +40,7 @@ const Find = () => {
         };
 
         fetchSidoCategories();
-    }, []);
+    }, [categoryData]);
 
     useEffect(() => {
         if (selectedSido) {
