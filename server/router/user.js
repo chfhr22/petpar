@@ -27,7 +27,7 @@ router.post("/join", (req, res) => {
         })
 })
 
-router.post("/profile/img", setUpload("petpar-rlan/user"), (req, res, next) => {
+router.post("/profile/img", setUpload("petpar/user"), (req, res, next) => {
 
     res.status(200).json({ success: true, filePath: res.req.file.location })
 })
