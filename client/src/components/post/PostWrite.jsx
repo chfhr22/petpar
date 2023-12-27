@@ -1,13 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import PostImage from './PostImage';
 import { useNavigate } from "react-router-dom";
+
 import { useSelector } from 'react-redux';
 
 const PostWrite = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [image, setImage] = useState("");
     const [category, setCategory] = useState("입양");
 
     const user = useSelector((state) => state.user);
@@ -33,7 +34,7 @@ const PostWrite = () => {
             .then((response) => {
                 if (response.data.success) {
                     alert("글 작성이 완료되었습니다.");
-                    navigate("/community");
+                    navigate('/community')
                 } else {
                     alert("글 작성이 실패하였습니다.")
                 }

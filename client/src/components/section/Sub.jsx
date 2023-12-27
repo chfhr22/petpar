@@ -10,6 +10,8 @@ import Pages from './Pages'
 import InfoDetail from '../pages/InfoDetail'
 import Mypage from '../pages/Mypage'
 import PostWrite from '../post/PostWrite'
+import PostArea from '../post/PostArea'
+import PostModify from '../post/PostModify'
 
 const Sub = () => {
     return (
@@ -20,6 +22,8 @@ const Sub = () => {
                     <Route path='/' element={<Home />} />
                     <Route path='/community' element={<Community />} />
                     <Route path='/community/write' element={<PostWrite />} />
+                    <Route path='/detail/:postNum' element={<PostArea />} />
+                    <Route path='/modify/:postNum' element={<PostModify />} />
                     <Route path='/mypage' element={<Mypage />} />
                     <Route path='/info' element={<Information />} />
                     <Route path='/info/:postNum' element={<InfoDetail />} />
