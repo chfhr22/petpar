@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import firebase from '../../firebase.js'
 
@@ -33,26 +33,6 @@ const Login = () => {
             setErrorMsg("")
         }, 5000)
     }, [errorMsg]);
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
-
-    const LoginFunc = async (e) => {
-        e.preventDefault();
-
-        if (!(email && password)) {
-            return alert("이메일 또는 비밀번호를 입력해주세요.")
-        }
-        try {
-            await firebase.auth().signInWithEmailAndPassword(email, password);
-            alert("로그인을 했습니다.");
-            navigate("/");
-        } catch (err) {
-            console.log(err);
-            alert("이메일과 비밀번호를 다시 한 번 확인해주세요!");
-        }
-    }
 
     return (
         <div id='loginPage'>

@@ -3,45 +3,8 @@ import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
 
 import firebase from '../../firebase.js'
-import { useNavigate } from 'react-router-dom'
-
-import Image from '../../assets/img/PETPAR.png';
-
 
 const Join = () => {
-    const [youName, setYouName] = useState("");
-    const [youEmail, setYouEmail] = useState("");
-    const [youPass, setYouPass] = useState("");
-    const [youPassC, setYouPassC] = useState("");
-    const [flag, setFlag] = useState(false);
-    const [nameCheck, setNameCheck] = useState(false);
-    const [nameInfo, setNameInfo] = useState("")
-
-    let navigate = useNavigate();
-
-    const JoinFunc = async (e) => {
-        setFlag(true);
-        e.preventDefault();
-
-        if (!(youName && youEmail && youPass && youPassC)) {
-            return alert("모든 항목을 입력하셔야 회원가입이 가능합니다.");
-        }
-        if (youPass !== youPassC) {
-            return alert("비밀번호가 일치하지 않습니다.")
-        }
-        if (!nameCheck) {
-            return alert("닉네임 중복 검사를 해주세요!");
-        }
-
-        // firebase 회원가입
-        let createdUser = await firebase.auth().createUserWithEmailAndPassword(youEmail, youPass);
-
-        await createdUser.user.updateProfile({
-            displayName: youName,
-            photoURL: "https://kr.object.ncloudstorage.com/react-blog1/user/websfonts.png"
-        });
-
-
     const [youEmail, setYouEmail] = useState("");
     const [youPass, setYouPass] = useState("");
     const [youPassC, setYouPassC] = useState("");
@@ -94,26 +57,26 @@ const Join = () => {
     }
 
 
-    const NameCheckFunc = (e) => {
-        e.preventDefault();
-        if (!youName) {
-            return alert("닉네임을 입력해주세요!");
-        }
-        let body = {
-            displayName: youName,
-        }
+    // const NameCheckFunc = (e) => {
+    //     e.preventDefault();
+    //     if (!youName) {
+    //         return alert("닉네임을 입력해주세요!");
+    //     }
+    //     let body = {
+    //         displayName: youName,
+    //     }
 
-        axios.post("/api/user/namecheck", body).then((response) => {
-            if (response.data.success) {
-                if (response.data.check) {
-                    setNameCheck(true);
-                    setNameInfo("사용 가능한 닉네임입니다.");
-                } else {
-                    setNameInfo("사용할 수 없는 닉네임입니다.");
-                }
-            }
-        })
-    }
+    //     axios.post("/api/user/namecheck", body).then((response) => {
+    //         if (response.data.success) {
+    //             if (response.data.check) {
+    //                 setNameCheck(true);
+    //                 setNameInfo("사용 가능한 닉네임입니다.");
+    //             } else {
+    //                 setNameInfo("사용할 수 없는 닉네임입니다.");
+    //             }
+    //         }
+    //     })
+    // }
 
     return (
         <div id='loginPage'>

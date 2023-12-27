@@ -26,20 +26,18 @@ const PostList = () => {
                 {postList.map((post, key) => {
                     return (
                         <div className='board_wrap' key={key}>
-
-                            <div className="img"><img src={post.image ? post.image : Image} alt="" /></div>
-                            <div className="board_bar">
-                                <div className='right'>
-                                    <div className="profile">
-                                        <img src={post.author.photoURL} alt="로고"></img>
+                            <Link to={`/detail/${post.postNum}`}>
+                                <div className="img"><img src={post.image ? post.image : Image} alt="" /></div>
+                                <div className="board_bar">
+                                    <div className='right'>
+                                        <div className="profile"></div>
+                                        <span>3일</span>
                                     </div>
-                                    <p className='author'>{post.author.displayName}</p>
-                                    <span>3일</span>
-                                </div>
-                                <div className='icon'>
-                                    <IoHeartOutline size={20} />
-                                    <IoShareSocialSharp size={20} />
-                                    <IoBookmarkOutline size={20} />
+                                    <div className='icon'>
+                                        <IoHeartOutline size={20} />
+                                        <IoShareSocialSharp size={20} />
+                                        <IoBookmarkOutline size={20} />
+                                    </div>
                                 </div>
                                 <div className="cont_wrap">
                                     <div className="contents">
