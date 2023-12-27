@@ -3,6 +3,7 @@ import PostDetail from './PostDetail'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import RepleArea from '../reple/RepleArea';
+import PostModify from './PostModify';
 
 const PostArea = () => {
     const [postInfo, setPostInfo] = useState({});
@@ -28,18 +29,18 @@ const PostArea = () => {
     }, [params.postNum]);
 
     return (
-        <div>
+        <>
             {flag ? (
-                <>
+                <div className='postarea__wrap'>
                     <PostDetail postInfo={postInfo} />
                     {/* <RepleArea postId={postInfo._id} /> */}
-                </>
+                </div>
             ) : (
                 <div>
                     로딩중
                 </div>
             )}
-        </div>
+        </>
     )
 }
 

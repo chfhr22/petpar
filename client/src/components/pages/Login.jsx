@@ -3,9 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import firebase from '../../firebase.js'
 
-import Image from '../../assets/img/PETPAR.png';
-
-
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
