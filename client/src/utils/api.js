@@ -1,20 +1,14 @@
-import axios from "axios";
+import axios from 'axios';
 
-export const BASE_URL = 'https://apis.data.go.kr'
-export const apiKey = process.env.REACT_APP_PET_API_KEY;
+export const BASE_URL = 'http://apis.data.go.kr';
 
 const options = {
-    params: {
-        serviceKey: apiKey,
-        bgnde: "20230101",
-        endde: "20231218",
-        pageNo: "10",
-        numOfRows: "20",
-        _type: "json",
+    headers: {
+        'serviceKey': process.env.REACT_APP_RAPID_API_KEY,
     },
 };
 
 export const fetchFromAPI = async (url) => {
     const { data } = await axios.get(`${BASE_URL}/${url}`, options);
     return data;
-}
+};
