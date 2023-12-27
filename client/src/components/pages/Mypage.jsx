@@ -57,6 +57,12 @@ const Mypage = () => {
             })
     }
 
+    const DeleteProfile = (e) => {
+        e.preventDefault();
+
+        setCurrentImage("https://kr.object.ncloudstorage.com/petpar-rlan/user/profile.png");
+    }
+
     return (
         <div className='mypage pages'>
             < form name='login' method='post' >
@@ -70,7 +76,7 @@ const Mypage = () => {
                     <input type="file" id="imageUpload" className='imguploadclass' name="image" accept="image/*" onChange={(e) => ImageUpload(e)} />
                     <div className="btn_wrap">
                         <button type="submit" onClick={(e) => { SaveProfile(e) }}>업로드</button>
-                        <button type="submit">사진삭제</button>
+                        <button type="submit" onClick={(e) => { DeleteProfile(e) }}>사진삭제</button>
                     </div>
                 </div>
 
