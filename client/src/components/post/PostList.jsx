@@ -27,10 +27,13 @@ const PostList = () => {
                     return (
                         <div className='board_wrap' key={key}>
                             <Link to={`/detail/${post.postNum}`}>
-                                <div className="img"><img src={post.image ? post.image : Image} alt="" /></div>
+                                <div className="img"><img src={post.image ? post.image : Image} alt="게시글이미지" /></div>
                                 <div className="board_bar">
                                     <div className='right'>
-                                        <div className="profile"></div>
+                                        <div className="profile">
+                                            <img src={post.author.photoURL} alt="프로필사진" />
+                                        </div>
+                                        <div className="author">{post.author.displayName}</div>
                                         <span>3일</span>
                                     </div>
                                     <div className='icon'>
