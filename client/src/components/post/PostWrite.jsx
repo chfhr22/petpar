@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import PostImage from './PostImage';
 
 import { useSelector } from 'react-redux';
@@ -60,37 +60,39 @@ const PostWrite = () => {
                 </select>
             </div>
             <form className="write__form">
-                <fieldset>
-                    <legend className='blind'>글쓰기 영역</legend>
-                    <div>
-                        <label htmlFor="youName" className='required'>제목</label>
-                        <input
-                            type="text"
-                            id='youName'
-                            placeholder='제목을 작성하세요.'
-                            value={title}
-                            onChange={(e) => setTitle(e.currentTarget.value)}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="youName" className='required'>내용</label>
-                        <textarea
-                            type="text"
-                            id='youName'
-                            placeholder='내용을 작성하세요.'
-                            value={content}
-                            onChange={(e) => setContent(e.currentTarget.value)}
-                        />
-                    </div>
+                <legend className='blind'>글쓰기 영역</legend>
+                <div>
+                    <label htmlFor="youName" className='required'>제목</label>
+                    <input
+                        type="text"
+                        id='youName'
+                        placeholder='제목을 작성하세요.'
+                        value={title}
+                        onChange={(e) => setTitle(e.currentTarget.value)}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="youName" className='required'>내용</label>
+                    <textarea
+                        type="text"
+                        id='youName'
+                        placeholder='내용을 작성하세요.'
+                        value={content}
+                        onChange={(e) => setContent(e.currentTarget.value)}
+                    />
+                </div>
 
-                    <PostImage setImage={setImage} />
+                <PostImage setImage={setImage} />
 
+                <div className='detail__btn'>
                     <button
                         type='submit'
                         className='btn__style'
                         onClick={(e) => onSubmit(e)
-                        }>작성하기</button>
-                </fieldset>
+                        }>작성하기
+                    </button>
+                    <Link className='btn__style' to='/community'>취소하기</Link>
+                </div>
             </form>
         </div>
     )

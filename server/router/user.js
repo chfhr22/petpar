@@ -27,6 +27,7 @@ router.post("/join", (req, res) => {
         })
 })
 
+
 router.post("/namecheck", (req, res) => {
     User.findOne({ displayName: req.body.displayName })
         .exec()
@@ -53,6 +54,7 @@ router.post("/find", (req, res) => {
             res.status(200).json({ success: true, userInfo })
         })
 })
+
 
 router.post("/profile/img", setUpload("petpar-rlan/user"), (req, res, next) => {
     res.status(200).json({ success: true, filePath: res.req.file.location })
