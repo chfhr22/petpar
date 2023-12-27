@@ -15,10 +15,18 @@ const Find = () => {
         const fetchSidoCategories = async () => {
 
             try {
-                const response = await fetchFromAPI(`1543061/abandonmentPublicSrvc/sido?_type=json&serviceKey=`);
-                const data = await response.json();
+                const data = await fetchFromAPI(`1543061/abandonmentPublicSrvc/sido`);
+                setCategoryData(data.response.body.items.item);
+                // const data = await response.json();
 
-                const filteredSidoCategories = data.response.body.items.item.filter(
+                // const filteredSidoCategories = data.response.body.items.item.filter(
+                //     (sido) => {
+                //         // 세종 클릭시 api에 정보가 없어서 오류뜨니 안보이게 처리함
+                //         return sido.orgCd !== '5690000';
+                //     }
+                // );
+
+                const filteredSidoCategories = categoryData.filter(
                     (sido) => {
                         // 세종 클릭시 api에 정보가 없어서 오류뜨니 안보이게 처리함
                         return sido.orgCd !== '5690000';
