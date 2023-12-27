@@ -1,7 +1,8 @@
-#infoSection {
+#infoPage {
     height: 100%;
     border-radius: 20px;
     background-color: #F3F4F5;
+    padding: 30px;
 
     .info__wrap {
         width: 100%;
@@ -12,15 +13,14 @@
 
             ul {
                 display: flex;
-                margin: 1rem 0;
                 gap: 0.3rem;
-    
+
                 @media(max-width:480px) {
                     justify-content: center;
                 }
-    
+
                 li {
-    
+
                     a {
                         display: block;
                         padding: 0.4rem 1rem;
@@ -29,15 +29,16 @@
                         font-weight: 600;
                         background-color: var(--white200);
                         color: #fff;
-    
+
                         @media (max-width:400px) {
                             font-size: 0.8rem;
                             padding: 0.2rem 0.8rem;
                         }
+
                         @media(max-width:350px) {
                             padding: 0.2rem 0.5rem;
                         }
-    
+
                     }
                 }
             }
@@ -63,6 +64,7 @@
                     flex-direction: column;
                     height: 330px;
                 }
+
                 @media(max-width:450px) {
                     flex-direction: row;
                     height: 80px;
@@ -80,6 +82,7 @@
                     @media(max-width:550px) {
                         margin: 0 auto;
                     }
+
                     @media(max-width:450px) {
                         display: none;
                     }
@@ -100,6 +103,7 @@
                         color: var(--black400);
                         font-size: .8rem;
                     }
+
                     .info__title {
                         margin-top: 15px;
                         font-size: 1.2rem;
@@ -107,10 +111,12 @@
                         @media(max-width:550px) {
                             margin: 10px auto;
                         }
+
                         @media(max-width:450px) {
                             font-size: 1rem;
                         }
                     }
+
                     .info__cont {
                         width: 70%;
                         font-size: 0.9rem;
@@ -124,10 +130,12 @@
                         @media(max-width:550px) {
                             margin: 0 auto;
                         }
+
                         @media(max-width:450px) {
                             display: none;
                         }
                     }
+
                     .info__author {
                         margin-top: 20px;
                         display: flex;
@@ -151,7 +159,9 @@
             }
         }
     }
+
     .info__wrap::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera*/
+        display: none;
+        /* Chrome, Safari, Opera*/
     }
 }
