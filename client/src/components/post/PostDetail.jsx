@@ -2,8 +2,9 @@ import React from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
-const PostDetail = (props) => {
+import img from '../../assets/img/default_img.png';
 
+const PostDetail = (props) => {
     let params = useParams();
     let navigate = useNavigate();
 
@@ -33,8 +34,12 @@ const PostDetail = (props) => {
                 <h3>{props.postInfo.title}</h3>
             </div>
             <div className='detail__content'>
-                {props.postInfo.image ? <img src={props.postInfo.image} alt={props.postInfo.title} /> : null}
-                {props.postInfo.content}
+                <div className="detail__content__img">
+                    {props.postInfo.image ? <img src={props.postInfo.image} alt={props.postInfo.title} /> : <img src={img} alt='' />}
+                </div>
+                <div className="detail__content__text">
+                    {props.postInfo.content}
+                </div>
             </div>
             <div className='detail__btn'>
                 <Link to={`/modify/${props.postInfo.postNum}`}>
@@ -43,7 +48,7 @@ const PostDetail = (props) => {
                 <button onClick={() => DeleteHandler()}>삭제</button>
                 <Link to='/community'>목록</Link>
             </div>
-        </div>
+        </div >
     )
 }
 

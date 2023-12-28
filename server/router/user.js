@@ -16,7 +16,7 @@ router.post("/join", (req, res) => {
             const userData = new User(temp);
             userData.save().then(() => {
                 Counter.updateOne({ name: "counter" }, { $inc: { userNum: 1 } }).then(() => {
-                    res.status(200).json({ success: true })
+                    res.status(200).json({ success: true });
                 })
             })
         })
@@ -27,8 +27,36 @@ router.post("/join", (req, res) => {
         })
 })
 
-router.post("/profile/img", setUpload("petpar-rlan/user"), (req, res, next) => {
 
+router.post("/namecheck", (req, res) => {
+    User.findOne({ displayName: req.body.displayName })
+        .exec()
+        .then((result) => {
+            let check = true;
+            if (result) {
+                check = false;
+            }
+            res.status(200).json({ success: true, check })
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(400).json({ success: false })
+        })
+})
+
+router.post("/find", (req, res) => {
+    let temp = req.body
+
+    User.findOne({ displayName: temp.youName, email: temp.youEmail })
+        .exec()
+        .then((result) => {
+            const userInfo = result;
+            res.status(200).json({ success: true, userInfo })
+        })
+})
+
+
+router.post("/profile/img", setUpload("petpar-rlan/user"), (req, res, next) => {
     res.status(200).json({ success: true, filePath: res.req.file.location })
 })
 

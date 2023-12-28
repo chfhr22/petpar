@@ -30,16 +30,9 @@ const RepleWrite = (props) => {
     }
 
     return (
-        <div>
-            <form>
-                <input
-                    style={{ border: "1px solid #000", padding: "10px" }}
-                    text="text"
-                    value={reple}
-                    onChange={(e) => { setReple(e.currentTarget.value) }}
-                />
-                <button onClick={(e) => { SubmitHandler(e) }}>댓글 쓰기</button>
-            </form>
+        <div className='chating__submit'>
+            <label htmlFor="live__chat" className='blind' />
+            <input type="text" id='live__chat' name='live__chat' placeholder={props.postId} />
         </div>
     )
 }

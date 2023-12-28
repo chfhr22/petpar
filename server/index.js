@@ -3,7 +3,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 
 const app = express();
-const port = 5050;
+const port = 5051;
 const config = require("./config/key.js");
 
 app.use(express.static(path.join(__dirname, "../client/build")));
@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/post", require("./router/post.js"))
 app.use("/api/user", require("./router/user.js"))
+app.use("/api/reple", require("./router/reple.js"))
 
 app.listen(port, () => {
     mongoose
