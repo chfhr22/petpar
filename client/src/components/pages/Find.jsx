@@ -123,10 +123,6 @@ const Find = () => {
             <div className="find__container">
                 <div className="find__cate">
                     <ul>
-                        <li className='location__text'>
-                            {/* <input type="text" />
-                            <p>🔍</p> */}
-                        </li>
                         <li className="location-item" onClick={toggleSubMenu}>
                             <select onChange={handleSidoChange} value={selectedSido}>
                                 <option value="">시도 선택</option>
@@ -155,16 +151,13 @@ const Find = () => {
 
                 <div className="find__title">
                     <h2>📍 이지역의 보호소</h2>
-                    <p>가까운순</p>
+                    {/* <p>가까운순</p> */}
                 </div>
                 <div className="find__boxWrap">
                     {petItems.map((item, index) => (
                         <div className="find__box" key={index}>
                             <div className="box01">
-                                <h2>{item.careNm}</h2>
-                                {/* <div className='boximg'>
-                                    <img src="/" alt="/" />
-                                </div> */}
+                                <h2>🏪 {item.careNm}</h2>
                             </div>
                             <div className="box02">
                                 <div className='boxInfo'>
@@ -175,24 +168,13 @@ const Find = () => {
                                     <div className='name'>상세주소</div>
                                     <div className='anwser'>{item.careAddr}</div>
                                 </div>
-                                {/* <div className='boxInfo'>
-                                    <div className='name'>담당자</div>
-                                    <div className='anwser'>{item.chargeNm}</div>
-                                </div> */}
+
                                 <div className='boxInfo'>
                                     <div className='name'>전화번호</div>
                                     <div className='anwser'>{item.careTel}</div>
                                 </div>
                             </div>
-                            <div className="box03">
 
-                                {/* <div className='boxInfo'>
-                                    <div className='name'>특이사항</div>
-                                    <div className='anwser'>
-                                        700마리의 동물을 보호하고 있습니다.
-                                    </div>
-                                </div> */}
-                            </div>
                         </div>
                     ))}
                 </div>
