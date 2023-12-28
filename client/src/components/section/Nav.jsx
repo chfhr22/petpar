@@ -8,6 +8,9 @@ const Nav = () => {
     const location = useLocation();
 
     const isActive = (path) => {
+        if (path === '/info') {
+            return location.pathname.startsWith(path);
+        }
         return location.pathname === path;
     };
 
