@@ -75,4 +75,28 @@ router.post("/profile/update", (req, res) => {
         })
 })
 
+router.post("/update", (req, res) => {
+    let temp = req.body;
+    let updateFields = {};
+
+    if (temp.displayName) {
+        updateFields.displayName = temp.displayName;
+    }
+
+    if (temp.email) {
+        updateFields.email = temp.email;
+    }
+
+    User.updateMany({ uid: req.body.uid }, { $set: updateFields })
+        .exec()
+        .then((result) => {
+            console.log(result)
+            res.status(200).json({ success: true });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({ error: "Update failed" });
+        });
+})
+
 module.exports = router;
