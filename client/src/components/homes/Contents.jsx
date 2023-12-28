@@ -1,16 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import heartFilled from '../../assets/img/다운로드.png';
 
 import heart from '../../assets/img/heart.png';
 import profile from '../../assets/img/profile.png';
 import { IoBookmarkOutline, IoHeartOutline, IoShareSocialSharp, IoCallOutline } from "react-icons/io5";
 
+
 const Contents = () => {
     const [petItems, setPetItems] = useState([]);
     const [expandedItems, setExpandedItems] = useState({});
     const [activeCategory, setActiveCategory] = useState('all');
+    const [likes, setLikes] = useState({});
+    const [liked, setLiked] = useState({});
 
+    const handleLikeClick = (key) => {
+        setLikes(prevLikes => ({
+            ...prevLikes,
+            [key]: prevLikes[key] ? prevLikes[key] + 1 : 1, // 좋아요 수 증가
+        }));
+        setLiked(prevLiked => ({
+            ...prevLiked,
+            [key]: !prevLiked[key], // 좋아요 상태 토글
+        }));
+    };
 
     const toggleExpand = (index) => {
         setExpandedItems((prevState) => ({
@@ -81,8 +95,11 @@ const Contents = () => {
                         <div className="contents__top">
                             <div className="shelter">{item.careNm}</div>
                             <div className="total__like">
-                                <img src={heart} alt="하트이미지" />
-                                <p>945</p>
+                                <img
+                                    src={liked[key] ? heartFilled : heart}
+                                    alt="하트이미지"
+                                />
+                                <p>{likes[key] || 0}</p>
                             </div>
                             <div className="image">
                                 <img src={item.popfile} alt="게시글이미지" />
@@ -99,7 +116,7 @@ const Contents = () => {
                                     <div className="call"><IoCallOutline /></div>
                                 </div>
                                 <div className="right">
-                                    <div className="like"><IoHeartOutline /></div>
+                                    <div className="like" onClick={() => handleLikeClick(key)}><IoHeartOutline /></div>
                                     <div className="share"><IoShareSocialSharp /></div>
                                     <div className="bookmark"><IoBookmarkOutline /></div>
                                 </div>

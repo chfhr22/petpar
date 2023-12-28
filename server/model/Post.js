@@ -10,6 +10,10 @@ const postSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
         },
+        likes: {
+            type: Number,
+            default: 0 // 좋아요 수의 초기값은 0
+        }
     },
     { collection: "posts", timestamps: true }
 );
