@@ -231,6 +231,9 @@
 
                             p {
                                 color: var(--gray);
+                                word-break: break-all;
+
+                                @include line(5);
                             }
 
                         }
