@@ -4,24 +4,29 @@ import { Link } from 'react-router-dom'
 import { Info } from '../data/Info'
 
 const InfoDetail = () => {
-  const { infoId } = useParams();
-  const infoNum = Info[infoId]
+  const { num } = useParams();
+  const item = Info.find(infoItem => infoItem.num === parseInt(num, 10));
 
-  console.log("infoId : " ,infoId)
+  if (!item) {
+    return <div>해당 정보를 찾을 수 없습니다.</div>;
+  }
+
+  console.log(num)
+
   return (
     <div id='InfoDetailPage' className='pages'>
         <div className='info__detail__page'>
           <h2 className='info__detail__title'>
-            {infoNum.title}
+            {item.title}
           </h2>
           <div className="info__detail__author">
-            <div className="author">{infoNum.author}</div>
-            <div className="date">{infoNum.date}</div>
+            <div className="author">{item.author}</div>
+            <div className="date">{item.date}</div>
           </div>
           <div className="info__detail__cont">
-            <div className="info__detail__img"><img src={`${infoNum.img}`} alt="" /></div>
+            <div className="info__detail__img"><img src={item.img} alt="" /></div>
             <div className="info__detail__text">
-              {infoNum.desc}
+              {item.desc}
             </div>
           </div>
         </div>

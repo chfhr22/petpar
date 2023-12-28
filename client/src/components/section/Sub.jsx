@@ -26,7 +26,8 @@ const Sub = () => {
                     <Route path='/modify/:postNum' element={<PostModify />} />
                     <Route path='/mypage' element={<Mypage />} />
                     <Route path='/info' element={<Information />} />
-                    <Route path='/info/:infoId' element={<InfoDetail />} />
+                    <Route path='/info/category/:category' element={<Information />} />
+                    <Route path='/info/detail/:num' element={<InfoDetail />} />
                     <Route path='/find' element={<Find />} />
                 </Routes>
             </Pages>
