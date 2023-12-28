@@ -30,9 +30,19 @@ const RepleWrite = (props) => {
     }
 
     return (
-        <div className='chating__submit'>
-            <label htmlFor="live__chat" className='blind' />
-            <input type="text" id='live__chat' name='live__chat' placeholder={props.postId} />
+        <div className='reple__submit'>
+            <form>
+                <label htmlFor="reple__chat" className='blind' />
+                <input
+                    type="text"
+                    id='reple__chat'
+                    name='reple__chat'
+                    placeholder="자유롭게 댓글을 달아주세요."
+                    value={reple}
+                    onChange={(e) => setReple(e.currentTarget.value)}
+                />
+                <button type='submit' onClick={(e) => { SubmitHandler(e) }}>작성</button>
+            </form>
         </div>
     )
 }

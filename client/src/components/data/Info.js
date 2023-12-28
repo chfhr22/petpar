@@ -10,6 +10,7 @@ import InfoImg08 from '../../assets/img/info08.png';
 import InfoImg09 from '../../assets/img/info09.png';
 
 export const Info = [{
+    num: 1,
     img: InfoImg06,
     pet: "강아지",
     title: "강아지 췌장염 원인과 증상",
@@ -18,6 +19,7 @@ export const Info = [{
     author: "권초록",
 },
 {
+    num: 2,
     img: InfoImg07,
     pet: "강아지",
     title: "강아지는 닭고기를 먹어도 될까요?",
@@ -27,6 +29,7 @@ export const Info = [{
 
 },
 {
+    num: 3,
     img: InfoImg03,
     pet: "고양이",
     title: "고양이 자주 걸리는 질병은 ?",
@@ -36,6 +39,7 @@ export const Info = [{
 
 },
 {
+    num: 4,
     img: InfoImg08,
     pet: "고양이",
     title: "고양이가 있으면 바퀴벌레가 없나요?",
@@ -45,6 +49,7 @@ export const Info = [{
 
 },
 {
+    num: 5,
     img: InfoImg09,
     pet: "강아지",
     title: "강아지 황달 : 원인, 증상",
@@ -55,6 +60,7 @@ export const Info = [{
 
 },
 {
+    num: 6,
     img: InfoImg06,
     pet: "고양이",
     title: "고양이 양치질 언제부터 하는게 좋을까?",
@@ -65,6 +71,7 @@ export const Info = [{
 
 },
 {
+    num: 7,
     img: InfoImg05,
     pet: "강아지",
     title: "강아지 얼굴 비비기 왜 그런걸까?",
@@ -75,6 +82,7 @@ export const Info = [{
 
 },
 {
+    num: 8,
     img: InfoImg04,
     pet: "강아지",
     title: "강아지 얼굴 비비기 왜 그런걸까?",
@@ -84,6 +92,7 @@ export const Info = [{
 
 },
 {
+    num: 9,
     img: InfoImg02,
     pet: "고양이",
     title: "고양이가 귀찮을 때 하는 행동 6",
@@ -94,14 +103,13 @@ export const Info = [{
 
 },
 {
+    num: 10,
     img: InfoImg01,
     pet: "고양이",
     title: "강아지 vs 고양이 누가 더 똑똑?",
     desc: "최근 연구를 보면 유전적으로는 강아지들이 고양이보다 훨씬 더 똑똑하다고 합니다. \n미국 밴더빌트 대학에서 진행한 연구 'Dogs have the most neurons, though not the largest brain: Trade-off between body mass and number of neurons in the cerebral cortex of large carnivoran species' 결과입니다. \n이 연구는 저널에 실렸죠.밴더빌트 대학 연구팀은 동물들을 대상으로 '대뇌 피질 세포 수'를 조사했습니다. \n연구를 이끈 허클라노 하우젤(Herculano-Houzel) 박사는 대뇌 피질의 신경 세포가 생각이나 계획 및 복잡한 행동을 결정한다고 말했는데요. \n대뇌 피질의 신경 세포 수가 지능을 측정하는 기준이라고 설명했죠.\n하우젤 박사는 고양이와 강아지의 대뇌 피질 세포의 수를 측정해 비교했는데요. 고양이의 평균 대뇌 피질 신경세포 수는 2억 5천만개였고, 강아지는 평균 5억 3천만개였다고 합니다. \n참고로 우리 인간은 평균 160억개라고 해요.",
     date: "2023-12-21",
     author: "김우주",
-
-
 },
 ];
 

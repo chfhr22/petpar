@@ -11,8 +11,13 @@ const Footer = () => {
 
     if (location.pathname.startsWith("/detail")) {
         contentToRender = <RepleArea />;
+<<<<<<< HEAD
     } else if (location.pathname == "/find") {
         contentToRender = <PostMap />
+=======
+    } else if (location.pathname === "/find") {
+        contentToRender = <></>
+>>>>>>> fdaaebed48cd97620388c05d4ff5cf5d8d02cf57
     } else {
         contentToRender = <Chat />
     }
