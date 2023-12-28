@@ -5,7 +5,6 @@ import axios from 'axios';
 import img from '../../assets/img/default_img.png';
 
 const PostDetail = (props) => {
-
     let params = useParams();
     let navigate = useNavigate();
 
