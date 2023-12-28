@@ -33,7 +33,6 @@ const PostArea = () => {
             {flag ? (
                 <div className='postarea__wrap'>
                     <PostDetail postInfo={postInfo} />
-                    <RepleArea postId={postInfo._id} />
                 </div>
             ) : (
                 <div>
