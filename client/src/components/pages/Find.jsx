@@ -8,7 +8,7 @@ const Find = () => {
     const [selectedSido, setSelectedSido] = useState('');
     const [gunguCategories, setGunguCategories] = useState([]);
     const [selectedGungu, setSelectedGungu] = useState('');
-    // const [categoryData, setCategoryData] = useState([]);
+    const [categoryData, setCategoryData] = useState([]);
     const [petItems, setPetItems] = useState([]);
 
     useEffect(() => {
