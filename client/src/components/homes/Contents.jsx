@@ -60,6 +60,13 @@ const Contents = () => {
         }
     }
 
+    const formatDate = (dateStr) => {
+        if (dateStr.length === 8) {
+            return `${dateStr.substring(2, 4)}-${dateStr.substring(4, 6)}-${dateStr.substring(6)}`;
+        }
+        return dateStr;
+    };
+
     useEffect(() => {
         fetchInfo('all');
     }, [])
@@ -95,7 +102,7 @@ const Contents = () => {
                                         <img src={profile} alt="프로필이미지" />
                                     </div>
                                     <div className="name">{item.chargeNm}</div>
-                                    <div className="date">3일</div>
+                                    <div className="date">{formatDate(item.noticeSdt)}</div>
                                     <div className="call"><IoCallOutline /></div>
                                 </div>
                                 <div className="right">
