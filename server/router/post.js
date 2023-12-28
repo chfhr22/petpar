@@ -118,28 +118,31 @@ router.post("/delete", (req, res) => {
 
 // 좋아요 수 
 
-router.post("/like/toggle", (req, res) => {
-    const postNum = req.body.postNum;
+router.post("/like", (req, res) => {
+    const { postNum, likeState } = req.body;
 
     Post.findOne({ postNum: postNum })
-        .exec()
-        .then((post) => {
-            let likes = post.likes;
-            if (req.body.like) {
-                // 좋아요 추가
-                likes += 1;
-            } else {
-                // 좋아요 제거
-                likes = likes > 0 ? likes - 1 : 0;
+        .then(post => {
+            if (!post) {
+                return res.status(404).json({ success: false, message: "Post not found" });
             }
 
-            Post.updateOne({ postNum: postNum }, { $set: { likes: likes } })
-                .exec()
-                .then(() => res.status(200).json({ success: true }))
-                .catch(err => res.status(400).json({ success: false, err }));
+            // 좋아요 상태에 따라 likes 수 변경
+            const likesChange = likeState ? 1 : -1;
+
+            Post.updateOne({ postNum: postNum }, { $inc: { likes: likesChange } })
+                .then(() => {
+                    // 업데이트된 likes 수를 응답으로 반환
+                    let newLikes = post.likes + likesChange;
+                    res.status(200).json({ success: true, likes: newLikes });
+                })
+                .catch(err => res.status(500).json({ success: false, message: "Error updating like", error: err }));
         })
-        .catch(err => res.status(400).json({ success: false, err }));
+        .catch(err => res.status(500).json({ success: false, message: "Error finding post", error: err }));
 });
+
+
+
 
 
 module.exports = router;
