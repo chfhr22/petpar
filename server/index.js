@@ -40,7 +40,8 @@ io.on('connection', (socket) => {
         try {
             const newMessage = new Message({
                 username: msg.username,
-                message: msg.message
+                message: msg.message,
+                photoURL: msg.photoURL
             });
             await newMessage.save();
             io.emit('chat message', newMessage);
