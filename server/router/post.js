@@ -47,7 +47,7 @@ router.post("/write", (req, res) => {
 
 // 이미지 업로드
 
-router.post("/image/upload", setUpload("petpar/post"), (req, res, next) => {
+router.post("/image/upload", setUpload("react-blog1000/post"), (req, res, next) => {
     // console.log(res.req);
     res.status(200).json({ success: true, filePath: res.req.file.location })
 })
@@ -126,12 +126,12 @@ router.post("/like", (req, res) => {
                 return res.status(404).json({ success: false, message: "Post not found" });
             }
 
-            // 좋아요 상태에 따라 likes 수 변경
+
             const likesChange = likeState ? 1 : -1;
 
             Post.updateOne({ postNum: postNum }, { $inc: { likes: likesChange } })
                 .then(() => {
-                    // 업데이트된 likes 수를 응답으로 반환
+
                     let newLikes = post.likes + likesChange;
                     res.status(200).json({ success: true, likes: newLikes });
                 })
@@ -139,5 +139,6 @@ router.post("/like", (req, res) => {
         })
         .catch(err => res.status(500).json({ success: false, message: "Error finding post", error: err }));
 });
+
 
 module.exports = router;
