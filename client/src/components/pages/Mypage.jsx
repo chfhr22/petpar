@@ -50,6 +50,8 @@ const Mypage = () => {
             photoURL: currentImage,
             uid: user.uid,
         }
+
+        console.log(body)
         axios
             .post("/api/user/profile/update", body)
             .then((response) => {
