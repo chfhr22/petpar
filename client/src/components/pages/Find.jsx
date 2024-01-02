@@ -13,9 +13,6 @@ const Find = () => {
 
     useEffect(() => {
         const fetchSidoCategories = async () => {
-
-
-
           try {
             const response = await fetch('http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sido?serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json');
             const data = await response.json();

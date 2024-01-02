@@ -1,15 +1,23 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from "react-redux";
 
+import moment from "moment";
+import "moment/locale/ko";
+
 const RepleContent = (props) => {
-    const [modalFlag, setModalFlag] = useState(false);
     const [editFlag, setEditFlag] = useState(false);
     const [reple, setReple] = useState(props.reple.reple)
 
     const user = useSelector((state) => state.user);
-    const ref = useRef();
-    useOnClickOutside(ref, () => setModalFlag(false));
+
+    const SetTime = (a, b) => {
+        if (a !== b) {
+            return moment(b).format("YY.MM.D hh:mm") + "(수정됨)";
+        } else {
+            return moment(a).format("YY.MM.D hh:mm");
+        }
+    }
 
     const SubmitHandler = (e) => {
         e.preventDefault();
@@ -22,7 +30,7 @@ const RepleContent = (props) => {
 
         axios.post("/api/reple/edit", body).then((response) => {
             if (response.data.success) {
-                alert("댓글 수정 성공하엿습니다.");
+                alert("댓글이 수정되었습니다.");
             } else {
                 alert("댓글 수정 실패했습니다.")
             }
@@ -32,14 +40,14 @@ const RepleContent = (props) => {
 
     const DeleteHandler = (e) => {
         e.preventDefault();
-        if (window.confirm("정말로 삭제하기겠습니까?")) {
+        if (window.confirm("정말로 삭제하시겠습니까?")) {
             let body = {
                 repleId: props.reple._id,
                 postId: props.reple.postId
             }
             axios.post("/api/reple/delete", body).then((response) => {
                 if (response.data.success) {
-                    alert("댓글ㄹ이 삭제죔");
+                    alert("댓글이 삭제되었습니다.");
                     window.location.reload();
                 }
             })
@@ -51,67 +59,57 @@ const RepleContent = (props) => {
     }
 
     return (
-        <div>
-            <div className='reple'>
-
-                <p>{props.reple.author.displayName}</p>
-
-                {props.reple.author.uid === user.uid && (
-                    <div className='reple-info'>
-                        <span onClick={() => setModalFlag(true)}>...</span>
-                        {modalFlag && (
-                            <div className='modal' ref={ref}>
-                                <p onClick={(e) => DeleteHandler(e)}>삭제</p>
-                                <p onClick={() => {
-                                    setEditFlag(true);
-                                    setModalFlag(false);
-                                }}>수정</p>
-                            </div>
-                        )}
-                    </div>
-                )}
+        <>
+            <div className="reple__box" key={props.idx}>
+                <div className='reple__author'>
+                    <span className="profile">
+                        <img src={props.reple.author.photoURL} alt="프로필이미지" />
+                    </span>
+                    <span className='name'>{props.reple.author.displayName}</span>
+                    <span className='time'>{SetTime(props.reple.createdAt, props.reple.updatedAt)}</span>
+                </div>
                 {editFlag ? (
-                    <div>
+                    <div className='reple__modify__box'>
                         <form>
+                            <label htmlFor="live__chat" className='blind' />
                             <input
-                                style={{ border: "1px solid #000", padding: "10px" }}
-                                text="text"
+                                type="text"
+                                id='live__chat'
+                                name='live__chat'
+                                placeholder="댓글을 수정해주세요."
                                 value={reple}
-                                onChange={(e) => { setReple(e.currentTarget.value) }}
+                                onChange={(e) => setReple(e.currentTarget.value)}
+                                className='input__style'
                             />
-                            <button onClick={(e) => { SubmitHandler(e) }}>수정하기</button>
-                            / <button
-                                onClick={(e) => {
+                            <div className="reple__edit__box">
+                                <button type='submit' onClick={(e) => { SubmitHandler(e) }} className='edit'>수정</button>
+                                / <button onClick={(e) => {
                                     e.preventDefault();
                                     setEditFlag(false);
-                                }}
-                            >취소하기</button>
+                                }} className='cancel'>취소</button>
+                            </div>
                         </form>
                     </div>
                 ) : (
-                    <p>{props.reple.reple}</p>
+                    <>
+                        <div className='reple__cont'>
+                            {props.reple.reple}
+                        </div>
+                        {props.reple.author.uid === user.uid && (
+                            <div className='reple__edit'>
+                                <p className="modify" onClick={() => {
+                                    setEditFlag(true);
+                                }}>수정</p>
+                                <p className="delete" onClick={(e) => {
+                                    DeleteHandler(e);
+                                }}>삭제</p>
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
-
-        </div>
+        </>
     )
-}
-
-function useOnClickOutside(ref, handler) {
-    useEffect(() => {
-        const listener = (event) => {
-            if (!ref.current || ref.current.contains(event.target)) {
-                return;
-            }
-            handler(event);
-        };
-        document.addEventListener("mousedown", listener);
-        document.addEventListener("touchstart", listener);
-        return () => {
-            document.removeEventListener("mousedown", listener);
-            document.removeEventListener("touchstart", listener);
-        };
-    }, [ref, handler]);
 }
 
 export default RepleContent
