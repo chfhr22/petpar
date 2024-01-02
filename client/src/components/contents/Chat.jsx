@@ -28,7 +28,7 @@ const Chat = () => {
                 console.error("Failed to load messages", error);
             }
         };
-    
+
         loadMessages();
     }, []);
 
@@ -50,6 +50,7 @@ const Chat = () => {
             <h2>실시간 채팅</h2>
             <div className='chating__wrap'>
                 <div className='chating'>
+
                     {chat.map((msg, index) => (
                         <div key={index} className={`chating__box `}>
                             <div className={`chating__author ${msg.username === user.displayName ? 'my-message' : 'other-message'}`}>
