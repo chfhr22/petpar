@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 // import { fetchFromAPI } from '../../utils/api';
+import { useDispatch } from 'react-redux';
+import { setDetailAddress } from '../../reducer/addressSlice';
 
 const Find = () => {
+    const dispatch = useDispatch();
+
+    const handleAddressClick = (address) => {
+        dispatch(setDetailAddress(address));
+    };
     const [isSubMenuVisible, setSubMenuVisible] = useState(false);
 
     const [sidoCategories, setSidoCategories] = useState([]);
@@ -13,16 +20,16 @@ const Find = () => {
 
     useEffect(() => {
         const fetchSidoCategories = async () => {
-          try {
-            const response = await fetch('http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sido?serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json');
-            const data = await response.json();
-    
-            const filteredSidoCategories = data.response.body.items.item.filter(
-              (sido) => {
-                  // 세종 클릭시 api에 정보가 없어서 오류뜨니 안보이게 처리함
-                  return sido.orgCd !== '5690000';
-              }
-          );
+            try {
+                const response = await fetch('http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sido?serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json');
+                const data = await response.json();
+
+                const filteredSidoCategories = data.response.body.items.item.filter(
+                    (sido) => {
+                        // 세종 클릭시 api에 정보가 없어서 오류뜨니 안보이게 처리함
+                        return sido.orgCd !== '5690000';
+                    }
+                );
                 setSidoCategories(filteredSidoCategories);
             } catch (error) {
                 console.error('Error fetching sido categories:', error);
@@ -77,42 +84,42 @@ const Find = () => {
     };
 
     const fetchShelterData = async (selectedSido, selectedGunguValue) => {
-      try {
-          const shelterResponse = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/shelter?upr_cd=${selectedSido}&org_cd=${selectedGunguValue}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
-          const shelterData = await shelterResponse.json();
-  
-          const items = shelterData.response.body.items.item;
-          if (items && items.length > 0) {
-              const promises = items.map(async (item) => {
-                  const careRegNo = item.careRegNo;
-                  const abandonmentResponse = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?care_reg_no=${careRegNo}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
-                  const abandonmentData = await abandonmentResponse.json();
-  
-                  // 조건부 데이터 접근
-                  const itemArray = abandonmentData.response.body.items.item;
-                  if (itemArray && itemArray.length > 0) {
-                      return itemArray[0]; // 첫 번째 항목 반환
-                  }
-                  return null; // itemArray가 비어있거나 존재하지 않는 경우
-              });
-  
-              const results = await Promise.all(promises);
-              const newPetItems = results.filter(item => item).map(item => ({
-                  careNm: item.careNm,
-                  orgNm: item.orgNm,
-                  chargeNm: item.chargeNm,
-                  careTel: item.careTel,
-                  careAddr: item.careAddr,
-              }));
-  
-              setPetItems(newPetItems);
-          } else {
-              console.error('No items or empty items array in the response.');
-          }
-      } catch (error) {
-          console.error('Error fetching shelter data:', error);
-      }
-  };
+        try {
+            const shelterResponse = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/shelter?upr_cd=${selectedSido}&org_cd=${selectedGunguValue}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
+            const shelterData = await shelterResponse.json();
+
+            const items = shelterData.response.body.items.item;
+            if (items && items.length > 0) {
+                const promises = items.map(async (item) => {
+                    const careRegNo = item.careRegNo;
+                    const abandonmentResponse = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?care_reg_no=${careRegNo}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
+                    const abandonmentData = await abandonmentResponse.json();
+
+                    // 조건부 데이터 접근
+                    const itemArray = abandonmentData.response.body.items.item;
+                    if (itemArray && itemArray.length > 0) {
+                        return itemArray[0]; // 첫 번째 항목 반환
+                    }
+                    return null; // itemArray가 비어있거나 존재하지 않는 경우
+                });
+
+                const results = await Promise.all(promises);
+                const newPetItems = results.filter(item => item).map(item => ({
+                    careNm: item.careNm,
+                    orgNm: item.orgNm,
+                    chargeNm: item.chargeNm,
+                    careTel: item.careTel,
+                    careAddr: item.careAddr,
+                }));
+
+                setPetItems(newPetItems);
+            } else {
+                console.error('No items or empty items array in the response.');
+            }
+        } catch (error) {
+            console.error('Error fetching shelter data:', error);
+        }
+    };
 
     return (
         <div id='findSection' className='pages'>
@@ -162,7 +169,7 @@ const Find = () => {
                                 </div>
                                 <div className='boxInfo'>
                                     <div className='name'>상세주소</div>
-                                    <div className='anwser'>{item.careAddr}</div>
+                                    <div className='anwser address' onClick={() => handleAddressClick(item.careAddr)}>{item.careAddr}</div>
                                 </div>
 
                                 <div className='boxInfo'>
@@ -170,7 +177,6 @@ const Find = () => {
                                     <div className='anwser'>{item.careTel}</div>
                                 </div>
                             </div>
-
                         </div>
                     ))}
                 </div>

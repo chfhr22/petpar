@@ -10,6 +10,7 @@
     "axios": "^1.6.2",
     "express": "^4.18.2",
     "firebase": "^10.7.1",
+    "geocoder": "^0.2.3",
     "moment": "^2.30.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -20,7 +21,8 @@
     "react-scripts": "5.0.1",
     "sass": "^1.69.5",
     "socket.io-client": "^4.7.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "proxy": "http://localhost:3001"
   },
   "scripts": {
     "start": "react-scripts start",

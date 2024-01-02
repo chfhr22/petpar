@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-
 // 스키마
 const { Post } = require("../model/Post.js");
 const { User } = require("../model/User.js");
@@ -140,9 +139,5 @@ router.post("/like", (req, res) => {
         })
         .catch(err => res.status(500).json({ success: false, message: "Error finding post", error: err }));
 });
-
-
-
-
 
 module.exports = router;
