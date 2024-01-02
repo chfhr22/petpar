@@ -7,3 +7,6 @@ npm install socket.io-client
 ## server
 
 npm init -y;
+npm install express socket.io
+npm install cors
+

@@ -37,7 +37,6 @@ const PostList = () => {
                 if (response.data.success) {
                     setPostList([...response.data.postList]);
 
-                    // 게시물별 좋아요 수를 likesCount 상태에 저장
                     const initialLikesCount = {};
                     response.data.postList.forEach(post => {
                         initialLikesCount[post.postNum] = post.likes || 0;
