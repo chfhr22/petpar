@@ -57,6 +57,7 @@ router.post("/image/upload", setUpload("react-blog1000/post"), (req, res, next) 
 router.post("/list", (req, res) => {
     Post
         .find()
+        .sort({ _id: -1 })
         .populate("author")
         .exec()
         .then((result) => {
