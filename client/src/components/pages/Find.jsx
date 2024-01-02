@@ -10,22 +10,20 @@ const Find = () => {
     const [selectedGungu, setSelectedGungu] = useState('');
     const [petItems, setPetItems] = useState([]);
 
-    const [sidoData, setSidoData] = useState([]);
-    const [gunguData, setGunguData] = useState([]);
-    const [shelterData, setShelterData] = useState([]);
+    // const [sidoData, setSidoData] = useState([]);
+    // const [gunguData, setGunguData] = useState([]);
 
     useEffect(() => {
         const fetchSidoCategories = async () => {
             try {
                 const response = await fetch('http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sido?serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json');
                 const data = await response.json();
-                console.log(data)
 
                 // const data = await fetchFromAPI(`1543061/abandonmentPublicSrvc/sido`);
-                // console.log(data);
-                // // setSidoData(data.response.body.items.item);
+                // console.log(object)
+                // setSidoData(data.response.body.items.item);
 
-                const filteredSidoCategories = sidoData.filter(
+                const filteredSidoCategories = data.response.body.items.item.filter(
                     (sido) => {
                         // 세종 클릭시 api에 정보가 없어서 오류뜨니 안보이게 처리함
                         return sido.orgCd !== '5690000';
@@ -46,13 +44,13 @@ const Find = () => {
             const fetchGunguCategories = async () => {
                 try {
 
-                    // const response = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sigungu?upr_cd=${selectedSido}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
-                    // const data = await response.json();
+                    const response = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sigungu?upr_cd=${selectedSido}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
+                    const data = await response.json();
 
-                    const data = await fetchFromAPI(`1543061/abandonmentPublicSrvc/sigungu?upr_cd=${selectedSido}`);
+                    // const data = await fetchFromAPI(`1543061/abandonmentPublicSrvc/sigungu?upr_cd=${selectedSido}`);
                     // setGunguData(data.response.body.items);
 
-                    if (gunguData && gunguData.item) {
+                    if (data.response.body.items && data.response.body.items.item) {
                         setGunguCategories(data.response.body.items.item);
                     } else {
                         setGunguCategories([]); // 데이터가 없으면 빈 배열로 설정
@@ -87,25 +85,21 @@ const Find = () => {
         setSubMenuVisible(!isSubMenuVisible);
     };
 
-    useEffect(() => {
-
-    }, [shelterData])
-
     const fetchShelterData = async (selectedSido, selectedGunguValue) => {
         try {
-            const data = await fetchFromAPI(`1543061/abandonmentPublicSrvc/shelter?upr_cd=${selectedSido}&org_cd=${selectedGunguValue}`);
-            setShelterData(data.response.body.items.item);
-            console.log(shelterData)
+
+            const shelterResponse = await fetchFromAPI(`1543061/abandonmentPublicSrvc/shelter?upr_cd=${selectedSido}&org_cd=${selectedGunguValue}`);
+            const shelterData = shelterResponse.response.body.items.item;
 
             // const items = shelterData.response.body.items.item;
             if (shelterData && shelterData.length > 0) {
                 const promises = shelterData.map(async (item) => {
                     const careRegNo = item.careRegNo;
-                    const abandonmentResponse = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?care_reg_no=${careRegNo}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
-                    const abandonmentData = await abandonmentResponse.json();
+                    const abandonmentResponse = await fetchFromAPI(`1543061/abandonmentPublicSrvc/abandonmentPublic?care_reg_no=${careRegNo}`);
+                    console.log(abandonmentResponse)
 
                     // 조건부 데이터 접근
-                    const itemArray = abandonmentData.response.body.items.item;
+                    const itemArray = abandonmentResponse.response.body.items.item;
                     if (itemArray && itemArray.length > 0) {
                         return itemArray[0]; // 첫 번째 항목 반환
                     }
