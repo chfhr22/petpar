@@ -71,6 +71,7 @@ const Chat = () => {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && sendMessage(e)}
+                        autoComplete='off'
                     />
                     <button onClick={sendMessage}>send</button>
                 </div>
