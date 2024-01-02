@@ -10,6 +10,7 @@ const PostList = () => {
     const [likesCount, setLikesCount] = useState({});
 
     const handleLikeClick = (postNum) => {
+
         const updatedLikes = {
             ...likes,
             [postNum]: !likes[postNum]

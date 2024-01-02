@@ -65,6 +65,8 @@ router.post("/profile/update", (req, res) => {
         photoURL: req.body.photoURL,
     }
 
+    console.log(req.body.uid)
+
     User.updateOne({ uid: req.body.uid }, { $set: temp })
         .exec()
         .then(() => {
