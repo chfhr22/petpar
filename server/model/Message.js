@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const MessageSchema = new mongoose.Schema({
     username: String,
     message: String,
+    photoURL: String,
     timestamp: { type: Date, default: Date.now }
 });
 
