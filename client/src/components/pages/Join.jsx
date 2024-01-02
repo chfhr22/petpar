@@ -36,6 +36,7 @@ const Join = () => {
 
         await createdUser.user.updateProfile({
             displayName: youName,
+            email: youEmail,
             photoURL: "https://kr.object.ncloudstorage.com/petpar-rlan/user/profile.png"
         });
 

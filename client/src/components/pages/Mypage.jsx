@@ -6,9 +6,16 @@ import firebase from "../../firebase.js";
 
 const Mypage = () => {
     const [currentImage, setCurrentImage] = useState("");
+    const [youName, setYouName] = useState("");
+    const [youEmail, setYouEmail] = useState("");
+    const [youPass, setYouPass] = useState("");
+    const [newPass, setNewPass] = useState("");
+    const [newPassC, setNewPassC] = useState("");
 
     const user = useSelector((state) => state.user)
     const navigate = useNavigate();
+
+    console.log(user.email)
 
     useEffect(() => {
         if (user.isLoading && !user.accessToken) {
@@ -63,6 +70,56 @@ const Mypage = () => {
         setCurrentImage("https://kr.object.ncloudstorage.com/petpar-rlan/user/profile.png");
     }
 
+    const SubmitHandler = async (e) => {
+        e.preventDefault();
+
+        // if (!(youName && youEmail && youPass && newPass && newPassC)) {
+        //     return alert("모든 항목을 입력해주세요.")
+        // }
+
+        if (newPass !== newPassC) {
+            return alert("비밀번호가 일치하지 않습니다.");
+        }
+
+        try {
+            const currentUser = firebase.auth().currentUser;
+
+            await currentUser.updateProfile({
+                displayName: youName,
+            });
+
+            await currentUser.updateProfile({
+                email: youEmail,
+            });
+
+            if (newPass) {
+                await currentUser.updatePassword(youPass)
+                    .then(() => { console.log("성공") })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            }
+
+
+            // mongoDB
+            let body = {
+                displayName: youName,
+                email: youEmail,
+                uid: user.uid,
+            }
+
+            axios
+                .post("/api/user/update", body)
+                .then((response) => {
+                    if (response.data.success) {
+                        return alert("저장되었습니다.");
+                    }
+                })
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     return (
         <div className='mypage pages'>
             < form name='login' method='post' >
@@ -83,38 +140,77 @@ const Mypage = () => {
                 <div className="input_style">
                     <p>이름</p>
                     <label htmlFor="name" className='blind'>이름</label>
-                    <input type='text' id='name' name='youName' placeholder='NAME' autoComplete='off' required></input>
-                </div>
-
-                <div className="input_style">
-                    <p>아이디</p>
-                    <label htmlFor="id" className='blind'>아이디</label>
-                    <input type='text' id='id' name='youId' placeholder='ID' autoComplete='off' required></input>
+                    <input
+                        type='text'
+                        id='name'
+                        name='youName'
+                        placeholder='NAME'
+                        autoComplete='off'
+                        required
+                        value={youName}
+                        onChange={(e) => { setYouName(e.currentTarget.value) }}
+                    ></input>
                 </div>
 
                 <div className="input_style">
                     <p>이메일</p>
                     <label htmlFor="email" className='blind'>이메일</label>
-                    <input type='email' id='email' name='youEmail' placeholder='E-mail' autoComplete='off' required></input>
+                    <input
+                        type='email'
+                        id='email'
+                        name='youEmail'
+                        placeholder='E-mail'
+                        autoComplete='off'
+                        required
+                        value={youEmail}
+                        onChange={(e) => { setYouEmail(e.currentTarget.value) }}
+                    ></input>
                 </div>
 
                 <div className="input_style">
                     <p>비밀번호</p>
                     <label htmlFor="password" className='blind'>비밀번호</label>
-                    <input type='password' id='password' name='youPass' placeholder='PASSWORD' autoComplete='off' required></input>
+                    <input
+                        type='password'
+                        id='password'
+                        name='youPass'
+                        placeholder='PASSWORD'
+                        autoComplete='off'
+                        required
+                        value={youPass}
+                        onChange={(e) => { setYouPass(e.currentTarget.value) }}
+                    ></input>
                 </div>
                 <div className="input_style">
                     <p>새 비밀번호</p>
                     <label htmlFor="passwordC" className='blind'>새 비밀번호</label>
-                    <input type='password' id='passwordC' name='youPassC' placeholder='PASSWORD' autoComplete='off' required></input>
+                    <input
+                        type='password'
+                        id='passwordC'
+                        name='youPassC'
+                        placeholder='PASSWORD'
+                        autoComplete='off'
+                        required
+                        value={newPass}
+                        onChange={(e) => { setNewPass(e.currentTarget.value) }}
+                    ></input>
                 </div>
 
                 <div className="input_style">
                     <p>새 비밀번호 확인</p>
                     <label htmlFor="passwordCConfirm" className='blind'>새 비밀번호 확인</label>
-                    <input type='password' id='passwordCConfirm' name='youPassCConfirm' placeholder='PASSWORD' autoComplete='off' required></input>
+                    <input
+                        type='password'
+                        id='passwordCConfirm'
+                        name='youPassCConfirm'
+                        placeholder='PASSWORD'
+                        autoComplete='off'
+                        required
+                        value={newPassC}
+                        onChange={(e) => { setNewPassC(e.currentTarget.value) }}
+                    ></input>
                 </div>
-                <button type='submit' className='input_style'>정보 수정</button>
+                <button type='submit' className='input_style' onClick={(e) => { SubmitHandler(e) }}>정보 수정</button>
             </form >
 
         </div >
