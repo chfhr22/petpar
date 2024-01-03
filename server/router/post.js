@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+
 // 스키마
 const { Post } = require("../model/Post.js");
 const { User } = require("../model/User.js");
@@ -117,8 +118,9 @@ router.post("/delete", (req, res) => {
 
 
 // 좋아요 수 
+
 router.post("/like", (req, res) => {
-    const { postNum, likeState, uid } = req.body;
+    const { postNum, likeState } = req.body;
 
     Post.findOne({ postNum: postNum })
         .then(post => {
@@ -126,28 +128,22 @@ router.post("/like", (req, res) => {
                 return res.status(404).json({ success: false, message: "Post not found" });
             }
 
-            let updateQuery = {};
             const likesChange = likeState ? 1 : -1;
 
-            if (likesChange) {
-                updateQuery = { $push: { likeInfo: postNum } };
-            } else {
-                updateQuery = { $pull: { likeInfo: postNum } };
-            }
-
-            User.findOneAndUpdate({ uid: uid }, updateQuery)
+            Post.updateOne({ postNum: postNum }, { $inc: { likes: likesChange } })
                 .then(() => {
-                    Post.updateOne({ postNum: postNum }, { $inc: { likes: likesChange } })
-                        .then(() => {
-                            let newLikes = post.likes + likesChange;
-                            res.status(200).json({ success: true, likes: newLikes });
-                        })
-                        .catch(err => res.status(500).json({ success: false, message: "Error updating like", error: err }));
+
+                    let newLikes = post.likes + likesChange;
+                    res.status(200).json({ success: true, likes: newLikes });
                 })
-                .catch(err => res.status(500).json({ success: false, message: "Error finding user" }))
+                .catch(err => res.status(500).json({ success: false, message: "Error updating like", error: err }));
         })
         .catch(err => res.status(500).json({ success: false, message: "Error finding post", error: err }));
 });
+
+
+
+
 
 
 module.exports = router;
