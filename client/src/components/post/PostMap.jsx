@@ -20,6 +20,7 @@ const PostMap = () => {
                 })
                 .catch((err) => {
                     console.log(err);
+                    console.log(err);
                 });
         }
     }, [address]);
