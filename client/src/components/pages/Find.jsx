@@ -74,13 +74,11 @@ const Find = () => {
 
     const handleSidoChange = (event) => {
         const selectedSidoValue = event.target.value;
-        console.log(selectedSidoValue);
         setSelectedSido(selectedSidoValue);
     };
 
     const handleGunguChange = (event) => {
         const selectedGunguValue = event.target.value;
-        console.log(selectedGunguValue)
         setSelectedGungu(selectedGunguValue);
 
         // 군구
@@ -105,7 +103,6 @@ const Find = () => {
                 const promises = shelterData.map(async (item) => {
                     const careRegNo = item.careRegNo;
                     const abandonmentResponse = await fetchFromAPI(`1543061/abandonmentPublicSrvc/abandonmentPublic?care_reg_no=${careRegNo}`);
-                    console.log(abandonmentResponse)
 
                     // 조건부 데이터 접근
                     const itemArray = abandonmentResponse.response.body.items.item;
