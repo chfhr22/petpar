@@ -4,26 +4,30 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useSelector } from 'react-redux';
 
 const PostMap = () => {
-    const address2 = useSelector((state) => state.address.detailAddress);
+    const address = useSelector((state) => state.address.detailAddress);
     const [position, setPosition] = useState({ lat: 37.5566803113882, lng: 126.904501286522 });
-    const address = address2.replace(/["']/g, '');
 
     useEffect(() => {
-        if (address) {
-            axios.get('/api/geocode/address', { address }) // 'address' 객체를 직접 전달
-                .then((response) => {
-                    if (response.data.status === 'OK') {
-                        console.log(response)
-                        const { x, y } = response.data.addresses[0];
-                        setPosition({ lat: parseFloat(y), lng: parseFloat(x) });
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                    console.log(err);
+        // 비동기 함수 선언
+        const fetchGeocodeData = async () => {
+            try {
+                const response = await axios.get('/api/geocode/address', {
+                    params: { address } // 쿼리 파라미터로 address 전달
                 });
+                if (response.data.status === 'OK') {
+                    const { x, y } = response.data.addresses[0];
+                    setPosition({ lat: parseFloat(y), lng: parseFloat(x) });
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        if (address) {
+            fetchGeocodeData(); // 비동기 함수 호출
         }
     }, [address]);
+
     return (
         <>
             <Map center={position} style={{ width: '100%', height: '600px' }} level={3}>
