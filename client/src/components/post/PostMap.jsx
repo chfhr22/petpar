@@ -1,40 +1,35 @@
-import React, { useState, useRef } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { useSelector } from 'react-redux';
 
 const PostMap = () => {
-    const [coordinates, setCoordinates] = useState(null); // 현재 위치의 좌표값을 저장할 상태
-    const mapRef = useRef();
+    const address2 = useSelector((state) => state.address.detailAddress);
+    const [position, setPosition] = useState({ lat: 37.5566803113882, lng: 126.904501286522 });
+    const address = address2.replace(/["']/g, '');
 
-    const getCoordinates = () => {
-        const map = mapRef.current;
-
-        setCoordinates({
-            center: {
-                lat: map.getCenter().getLat(),
-                lng: map.getCenter().getLng(),
-            },
-        });
-    };
-
+    useEffect(() => {
+        if (address) {
+            axios.get('/api/geocode/address', { address }) // 'address' 객체를 직접 전달
+                .then((response) => {
+                    if (response.data.status === 'OK') {
+                        console.log(response)
+                        const { x, y } = response.data.addresses[0];
+                        setPosition({ lat: parseFloat(y), lng: parseFloat(x) });
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    console.log(err);
+                });
+        }
+    }, [address]);
     return (
         <>
-            <Map
-                center={{ lat: 37.5566803113882, lng: 126.904501286522 }}
-                style={{ width: '100%', height: '600px' }}
-                level={3}
-                ref={mapRef}
-            >
-                <MapMarker position={{ lat: 37.5566803113882, lng: 126.904501286522 }} />
-                <button onClick={getCoordinates}>현재 위치 좌표 얻기</button>
+            <Map center={position} style={{ width: '100%', height: '600px' }} level={3}>
+                <MapMarker position={position} />
             </Map>
-
-            {coordinates && (
-                <div>
-                    현재 위치의 좌표는..
-                    <p>위도 : {coordinates.center.lat}</p>
-                    <p>경도 : {coordinates.center.lng}</p>
-                </div>
-            )}
+            {address}
         </>
     );
 };

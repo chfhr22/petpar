@@ -32,7 +32,7 @@ const Sub = () => {
                 </Routes>
             </Pages>
             <Footer />
-        </div>
+        </div >
     )
 }
 
