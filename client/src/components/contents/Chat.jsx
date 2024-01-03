@@ -39,7 +39,8 @@ const Chat = () => {
         if (message !== '') {
             const messageData = {
                 username: user.displayName,
-                message: message
+                message: message,
+                photoURL: user.photoURL
             };
             socket.emit('chat message', messageData);
             setMessage('');
@@ -54,7 +55,7 @@ const Chat = () => {
                     {chat.map((msg, index) => (
                         <div key={index} className={`chating__box `}>
                             <div className={`chating__author ${msg.username === user.displayName ? 'my-message' : 'other-message'}`}>
-                                <span className="author__photo"><img src={`${user.photoURL}`} alt="" /></span>
+                                <span className="author__photo"><img src={`${msg.photoURL}`} alt="" /></span>
                                 <span className='name'>{msg.username}</span>
                             </div>
                             <div className={`chating__cont ${msg.username === user.displayName ? 'my-message' : 'other-message'}`}>
@@ -72,6 +73,7 @@ const Chat = () => {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && sendMessage(e)}
+                        autoComplete='off'
                     />
                     <button onClick={sendMessage}>send</button>
                 </div>

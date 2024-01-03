@@ -29,10 +29,10 @@ const io = new Server(server, {
 
 // Socket.IO 연결 핸들러
 io.on('connection', (socket) => {
-    console.log('user 접속');
+
 
     socket.on('disconnect', () => {
-        console.log('user 나감');
+
     });
 
     // 메시지 이벤트 핸들러
@@ -40,7 +40,8 @@ io.on('connection', (socket) => {
         try {
             const newMessage = new Message({
                 username: msg.username,
-                message: msg.message
+                message: msg.message,
+                photoURL: msg.photoURL
             });
             await newMessage.save();
             io.emit('chat message', newMessage);

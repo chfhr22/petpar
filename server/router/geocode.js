@@ -13,7 +13,7 @@ router.get('/address', async (req, res) => {
                 'X-NCP-APIGW-API-KEY': config.NAVER_API_KEY
             }
         });
-        const data = response.data;
+        const data = response;
         res.send(data);
     } catch (error) {
         console.error('Geocoding API error:', error);

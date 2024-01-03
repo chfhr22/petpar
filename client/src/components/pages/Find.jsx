@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import { fetchFromAPI } from '../../utils/api';
 import { useDispatch } from 'react-redux';
 import { setDetailAddress } from '../../reducer/addressSlice';
+import { fetchFromAPI } from '../../utils/api';
 
 const Find = () => {
     const dispatch = useDispatch();
@@ -15,14 +16,20 @@ const Find = () => {
     const [selectedSido, setSelectedSido] = useState('');
     const [gunguCategories, setGunguCategories] = useState([]);
     const [selectedGungu, setSelectedGungu] = useState('');
-    const [categoryData, setCategoryData] = useState([]);
     const [petItems, setPetItems] = useState([]);
+
+    // const [sidoData, setSidoData] = useState([]);
+    // const [gunguData, setGunguData] = useState([]);
 
     useEffect(() => {
         const fetchSidoCategories = async () => {
             try {
                 const response = await fetch('http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sido?serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json');
                 const data = await response.json();
+
+                // const data = await fetchFromAPI(`1543061/abandonmentPublicSrvc/sido`);
+                // console.log(object)
+                // setSidoData(data.response.body.items.item);
 
                 const filteredSidoCategories = data.response.body.items.item.filter(
                     (sido) => {
@@ -31,13 +38,14 @@ const Find = () => {
                     }
                 );
                 setSidoCategories(filteredSidoCategories);
+
             } catch (error) {
                 console.error('Error fetching sido categories:', error);
             }
         };
 
         fetchSidoCategories();
-    }, [categoryData]);
+    }, []);
 
     useEffect(() => {
         if (selectedSido) {
@@ -47,6 +55,9 @@ const Find = () => {
                     const response = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sigungu?upr_cd=${selectedSido}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
                     const data = await response.json();
 
+                    // const data = await fetchFromAPI(`1543061/abandonmentPublicSrvc/sigungu?upr_cd=${selectedSido}`);
+                    // setGunguData(data.response.body.items);
+
                     if (data.response.body.items && data.response.body.items.item) {
                         setGunguCategories(data.response.body.items.item);
                     } else {
@@ -54,7 +65,6 @@ const Find = () => {
                     }
                 } catch (error) {
                     console.error('Error fetching gungu categories:', error);
-
                 }
             };
 
@@ -64,7 +74,7 @@ const Find = () => {
 
     const handleSidoChange = (event) => {
         const selectedSidoValue = event.target.value;
-        console.log(selectedSidoValue)
+        console.log(selectedSidoValue);
         setSelectedSido(selectedSidoValue);
     };
 
@@ -85,18 +95,20 @@ const Find = () => {
 
     const fetchShelterData = async (selectedSido, selectedGunguValue) => {
         try {
-            const shelterResponse = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/shelter?upr_cd=${selectedSido}&org_cd=${selectedGunguValue}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
-            const shelterData = await shelterResponse.json();
 
-            const items = shelterData.response.body.items.item;
-            if (items && items.length > 0) {
-                const promises = items.map(async (item) => {
+
+            const shelterResponse = await fetchFromAPI(`1543061/abandonmentPublicSrvc/shelter?upr_cd=${selectedSido}&org_cd=${selectedGunguValue}`);
+            const shelterData = shelterResponse.response.body.items.item;
+
+            // const items = shelterData.response.body.items.item;
+            if (shelterData && shelterData.length > 0) {
+                const promises = shelterData.map(async (item) => {
                     const careRegNo = item.careRegNo;
-                    const abandonmentResponse = await fetch(`http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?care_reg_no=${careRegNo}&serviceKey=vVLyFAo8K6jmbjIH0aA787B2DWHjQZ0UP2%2BK73Pga%2BeZ2jLsN1YoyZi0sIPYQSBt6H%2FIOspXRxGvTrPK3zXIkQ%3D%3D&_type=json`);
-                    const abandonmentData = await abandonmentResponse.json();
+                    const abandonmentResponse = await fetchFromAPI(`1543061/abandonmentPublicSrvc/abandonmentPublic?care_reg_no=${careRegNo}`);
+                    console.log(abandonmentResponse)
 
                     // 조건부 데이터 접근
-                    const itemArray = abandonmentData.response.body.items.item;
+                    const itemArray = abandonmentResponse.response.body.items.item;
                     if (itemArray && itemArray.length > 0) {
                         return itemArray[0]; // 첫 번째 항목 반환
                     }
