@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
+import Image from '../../assets/img/PETPAR.png';
 
 import firebase from '../../firebase.js'
 
@@ -10,6 +11,7 @@ const Join = () => {
     const [youPassC, setYouPassC] = useState("");
     const [youName, setYouName] = useState("");
     const [flag, setFlag] = useState(false);
+    const [nameCheck, setNameCheck] = useState(false);
 
     let navigate = useNavigate();
 
@@ -25,11 +27,16 @@ const Join = () => {
             return alert("비밀번호가 일치하지 않습니다.")
         }
 
+        if (!nameCheck) {
+            return alert("닉네임 중복 검사를 해주세요.");
+        }
+
         // firebase 회원가입
         let createdUser = await firebase.auth().createUserWithEmailAndPassword(youEmail, youPass);
 
         await createdUser.user.updateProfile({
             displayName: youName,
+            email: youEmail,
             photoURL: "https://kr.object.ncloudstorage.com/petpar-rlan/user/profile.png"
         });
 
@@ -57,31 +64,33 @@ const Join = () => {
     }
 
 
-    // const NameCheckFunc = (e) => {
-    //     e.preventDefault();
-    //     if (!youName) {
-    //         return alert("닉네임을 입력해주세요!");
-    //     }
-    //     let body = {
-    //         displayName: youName,
-    //     }
+    const NameCheckFunc = (e) => {
+        e.preventDefault();
+        if (!youName) {
+            return alert("닉네임을 입력해주세요!");
+        }
+        let body = {
+            displayName: youName,
+        }
 
-    //     axios.post("/api/user/namecheck", body).then((response) => {
-    //         if (response.data.success) {
-    //             if (response.data.check) {
-    //                 setNameCheck(true);
-    //                 setNameInfo("사용 가능한 닉네임입니다.");
-    //             } else {
-    //                 setNameInfo("사용할 수 없는 닉네임입니다.");
-    //             }
-    //         }
-    //     })
-    // }
+        axios.post("/api/user/namecheck", body).then((response) => {
+            if (response.data.success) {
+                if (response.data.check) {
+                    setNameCheck(true);
+                    alert("사용 가능한 닉네임입니다.");
+                } else {
+                    alert("사용할 수 없는 닉네임입니다.");
+                    setNameCheck(false);
+                }
+            }
+        })
+    }
 
     return (
         <div id='loginPage'>
             <div className="login_box">
                 <h1 className="logo joinpage">
+                    <img src={Image} alt="로고이미지" />
                 </h1>
                 <form name='login' method='post'>
                     <legend className="blind">로그인 영역</legend>
@@ -145,6 +154,10 @@ const Join = () => {
                             value={youName}
                             onChange={(e) => setYouName(e.currentTarget.value)}
                         ></input>
+                    </div>
+
+                    <div>
+                        <button onClick={(e) => NameCheckFunc(e)}></button>
                     </div>
 
 

@@ -17,7 +17,7 @@ const RepleList = (props) => {
     }, [props.postId])
 
     return (
-        <div>
+        <div className='reple'>
             {repleList.map((reple, idx) => {
                 return (
                     <RepleContent reple={reple} key={idx} />

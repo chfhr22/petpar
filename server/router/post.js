@@ -48,7 +48,7 @@ router.post("/write", (req, res) => {
 
 // 이미지 업로드
 
-router.post("/image/upload", setUpload("petpar/post"), (req, res, next) => {
+router.post("/image/upload", setUpload("react-blog1000/post"), (req, res, next) => {
     // console.log(res.req);
     res.status(200).json({ success: true, filePath: res.req.file.location })
 })
@@ -57,6 +57,7 @@ router.post("/image/upload", setUpload("petpar/post"), (req, res, next) => {
 router.post("/list", (req, res) => {
     Post
         .find()
+        .sort({ _id: -1 })
         .populate("author")
         .exec()
         .then((result) => {
@@ -114,6 +115,36 @@ router.post("/delete", (req, res) => {
             res.status(400).json({ success: false })
         })
 })
+
+
+// 좋아요 수 
+
+router.post("/like", (req, res) => {
+    const { postNum, likeState } = req.body;
+
+    Post.findOne({ postNum: postNum })
+        .then(post => {
+            if (!post) {
+                return res.status(404).json({ success: false, message: "Post not found" });
+            }
+
+
+            const likesChange = likeState ? 1 : -1;
+
+            Post.updateOne({ postNum: postNum }, { $inc: { likes: likesChange } })
+                .then(() => {
+
+                    let newLikes = post.likes + likesChange;
+                    res.status(200).json({ success: true, likes: newLikes });
+                })
+                .catch(err => res.status(500).json({ success: false, message: "Error updating like", error: err }));
+        })
+        .catch(err => res.status(500).json({ success: false, message: "Error finding post", error: err }));
+});
+
+
+
+
 
 
 module.exports = router;

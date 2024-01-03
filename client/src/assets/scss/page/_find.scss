@@ -6,6 +6,8 @@
         height: 78vh;
         padding: 10px;
         overflow: scroll;
+        background: #F3F4F5;
+        border-radius: 20px;
 
         &::-webkit-scrollbar {
             display: none;
@@ -13,9 +15,10 @@
 
         .find__cate {
             width: 100%;
-            background-color: #fff;
-            box-shadow: 2px 3px 2px 2px rgba(128, 128, 128, 0.11);
             border-radius: 50px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
 
             ul {
                 display: flex;
@@ -25,36 +28,23 @@
                 text-align: center;
             }
 
-            .location__text {
-                display: flex;
-                margin: 10px;
-                height: 40px;
-                background-color: #fff;
-                box-shadow: 2px 2px 3px 3px rgba(128, 128, 128, 0.11);
-                border-radius: 50px;
-                padding: 10px;
-                padding-left: 20px;
-
-                input {
-                    color: #666666;
-                    display: flex;
-                    align-items: center;
-                    width: 15vw;
-                }
-            }
 
 
             .location-item {
+                display: flex;
+                text-align: center;
                 position: relative;
                 cursor: pointer;
-                width: 15%;
-                height: 40px;
                 background-color: #fff;
                 margin: 10px;
                 border-radius: 50px;
-                padding: 10px;
+                padding: 10px 50px;
                 box-shadow: 2px 2px 3px 3px rgba(128, 128, 128, 0.11);
                 white-space: nowrap;
+
+                select {
+                    text-align: center;
+                }
 
                 span {
                     display: flex;
@@ -118,7 +108,7 @@
         margin-top: 25px;
 
         h2 {
-
+            padding: 0px 20px;
             font-size: 1.2rem;
         }
 
@@ -131,125 +121,64 @@
     .find__boxWrap {
         width: 100%;
         display: flex;
-        flex-direction: column;
-        padding: 20px;
+        padding: 15px;
         border-radius: 20px;
+        flex-wrap: wrap;
         background-color: #F3F4F5;
+    }
 
-        .find__box {
-            width: 100%;
-            background-color: #ffffff;
+    .find__box {
+        width: 47%;
+        background-color: #ffffff;
+        display: flex;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        box-shadow: 2px 1px 1px 2px rgba(128, 128, 128, 0.11);
+        height: 250px;
+        overflow: hidden;
+        flex-direction: column;
+        padding: 10px;
+        margin: 10px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #f8f4f4e0;
+        }
+    }
+
+
+    .box01 {
+        padding: 5px;
+
+        h2 {
+            padding-left: 10px;
+            font-size: 1.2rem;
+            white-space: nowrap;
+        }
+
+    }
+
+    .box02 {
+        display: flex;
+        flex-direction: column;
+
+        .boxInfo {
+            padding: 10px 20px;
             display: flex;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            box-shadow: 2px 1px 1px 2px rgba(128, 128, 128, 0.11);
-            height: 250px;
-            overflow: hidden;
 
-            &:hover {
-                background-color: #f5f5f5ab;
+            .name {
+                padding: 2px 5px;
+                border-radius: 5px;
+                background-color: #f1e4e4;
+                margin-right: 5px;
             }
 
-            .box01 {
-                padding: 10px;
-                height: inherit;
-
-                h2 {
-                    width: 100%;
-                    padding-left: 10px;
-                    font-size: 1.2rem;
-                    white-space: nowrap;
-                }
-
-                .boximg {
-                    margin: 5px auto;
-                    width: 90%;
-                    height: 160px;
-                    border-radius: 10px;
-                    background-color: #e4dddd;
-                }
-
-            }
-
-            .box02 {
-
-                height: inherit;
-                padding: 50px 0px 50px 20px;
-
-                .boxInfo {
-                    display: flex;
-                    padding-top: 18px;
-                }
-
-
-                .name {
-                    font-size: 0.9rem;
-                    padding: 5px 10px;
-                    height: 30px;
-                    border-radius: 15px;
-                    text-align: center;
-                    padding-top: 3px;
-                    background-color: #EFE2D5;
-                    justify-content: flex-start;
-                    white-space: nowrap;
-                }
-
-                .anwser {
-                    display: flex;
-                    width: 100%;
-                    height: 30px;
-                    margin-left: 5px;
-                    justify-content: center;
-                    align-items: center;
-                    justify-content: flex-start;
-                    margin-left: 15px;
-                    white-space: nowrap;
-
-                }
-
-            }
-
-
-
-            .box03 {
-                height: inherit;
-                padding: 50px 20px;
-
-
-                .boxInfo {
-                    display: flex;
-                    margin-top: 18px;
-                    justify-content: center;
-                    align-items: center;
-                    align-content: center;
-                }
-
-                .name {
-                    font-size: 0.9rem;
-                    padding: 5px 10px;
-                    height: 30px;
-                    border-radius: 15px;
-                    text-align: center;
-                    padding-top: 3px;
-                    background-color: #EFE2D5;
-                    white-space: nowrap;
-
-                }
-
-                .anwser {
-                    display: flex;
-                    width: 100%;
-                    height: 50px;
-                    margin-left: 15px;
-                    justify-content: center;
-                    align-items: center;
-                    justify-content: flex-start;
-                    white-space: normal;
-                }
-            }
+            .anwser {}
         }
     }
 }
+
+
 
 @media(max-width:1000) {
     .box01 h2 {
@@ -278,6 +207,10 @@
         height: 75%;
         margin-top: 30px;
     }
+
+    #findSection .find__box {
+        width: 95%;
+    }
 }
 
 @media (max-width:700px) {
@@ -299,30 +232,23 @@
         flex-direction: column;
     }
 
-    #findSection .find__boxWrap .find__box .box03 {
-        height: inherit;
-        display: none;
+    #findSection .box02 .boxInfo {
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: column;
     }
 
-    #findSection .find__boxWrap .find__box .box02 {
-        height: inherit;
-        padding: 10px 0px 50px 20px;
-    }
-}
-
-@media (max-width:600px) {
-    #findSection .find__boxWrap .find__box .box03 {
-        height: inherit;
-        display: none;
-    }
-
-    #findSection .find__boxWrap .find__box .box02 {
-        height: inherit;
-        padding: 10px 0px 50px 20px;
+    #findSection .box02 .boxInfo .name {
+        width: 57px;
     }
 }
 
+@media (max-width:550px) {
+    #findSection .find__container .find__cate .location-item {
+        padding: 10px 15px;
 
+    }
+}
 
 @media (max-width:400px) {
     #findSection .find__container .find__cate .location__text {
@@ -363,12 +289,11 @@
     #findSection .find__container .find__cate .location-item {
         position: relative;
         cursor: pointer;
-        width: 15%;
         height: 40px;
         background-color: #fff;
         margin: 10px 5px;
         border-radius: 50px;
-        padding: 10px;
+        padding: 10px 10px;
         box-shadow: 2px 2px 3px 3px rgba(128, 128, 128, 0.11);
         white-space: nowrap;
     }

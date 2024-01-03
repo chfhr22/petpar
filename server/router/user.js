@@ -16,7 +16,7 @@ router.post("/join", (req, res) => {
             const userData = new User(temp);
             userData.save().then(() => {
                 Counter.updateOne({ name: "counter" }, { $inc: { userNum: 1 } }).then(() => {
-                    res.status(200).json({ success: true })
+                    res.status(200).json({ success: true });
                 })
             })
         })
@@ -27,8 +27,36 @@ router.post("/join", (req, res) => {
         })
 })
 
-router.post("/profile/img", setUpload("petpar/user"), (req, res, next) => {
 
+router.post("/namecheck", (req, res) => {
+    User.findOne({ displayName: req.body.displayName })
+        .exec()
+        .then((result) => {
+            let check = true;
+            if (result) {
+                check = false;
+            }
+            res.status(200).json({ success: true, check })
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(400).json({ success: false })
+        })
+})
+
+router.post("/find", (req, res) => {
+    let temp = req.body
+
+    User.findOne({ displayName: temp.youName, email: temp.youEmail })
+        .exec()
+        .then((result) => {
+            const userInfo = result;
+            res.status(200).json({ success: true, userInfo })
+        })
+})
+
+
+router.post("/profile/img", setUpload("patpar.team/user"), (req, res, next) => {
     res.status(200).json({ success: true, filePath: res.req.file.location })
 })
 
@@ -36,6 +64,8 @@ router.post("/profile/update", (req, res) => {
     let temp = {
         photoURL: req.body.photoURL,
     }
+
+    console.log(req.body.uid)
 
     User.updateOne({ uid: req.body.uid }, { $set: temp })
         .exec()
@@ -45,6 +75,30 @@ router.post("/profile/update", (req, res) => {
         .catch((err) => {
             res.status(400).json({ success: false });
         })
+})
+
+router.post("/update", (req, res) => {
+    let temp = req.body;
+    let updateFields = {};
+
+    if (temp.displayName) {
+        updateFields.displayName = temp.displayName;
+    }
+
+    if (temp.email) {
+        updateFields.email = temp.email;
+    }
+
+    User.updateMany({ uid: req.body.uid }, { $set: updateFields })
+        .exec()
+        .then((result) => {
+            console.log(result)
+            res.status(200).json({ success: true });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({ error: "Update failed" });
+        });
 })
 
 module.exports = router;
