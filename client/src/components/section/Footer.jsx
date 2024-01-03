@@ -5,8 +5,8 @@ import RepleArea from '../reple/RepleArea';
 import PostMap from '../post/PostMap';
 
 const Footer = () => {
-    const location = useLocation();
 
+    const location = useLocation();
     let contentToRender;
 
     if (location.pathname.startsWith("/detail")) {
