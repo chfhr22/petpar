@@ -78,7 +78,7 @@ const Login = () => {
 
 
                     <ul>
-                        <li><Link to='/findid'>아이디 찾기</Link></li>
+                        <li><Link to='/findemail'>이메일 찾기</Link></li>
                         <li><Link to='/join'>회원가입</Link></li>
                     </ul>
                 </form>

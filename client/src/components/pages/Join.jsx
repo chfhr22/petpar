@@ -164,7 +164,7 @@ const Join = () => {
                     <button disabled={flag} type='submit' onClick={(e) => { JoinFunc(e) }}>회원가입</button>
 
                     <ul>
-                        <li><Link to='/findid'>아이디 찾기</Link></li>
+                        <li><Link to='/findemail'>이메일 찾기</Link></li>
                         <li><Link to='/findpass'>비밀번호 찾기</Link></li>
                     </ul>
                 </form>

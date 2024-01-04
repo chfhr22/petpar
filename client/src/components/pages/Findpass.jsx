@@ -59,11 +59,11 @@ const Findpass = () => {
                         ></input>
                     </div>
 
-                    <button type='submit'>찾기</button>
+                    <button type='submit'>이메일 전송</button>
                     {/* onClick={(e) => { PassFindHandler(e) }} */}
 
                     <ul>
-                        <li><Link to='/findid'>아이디 찾기</Link></li>
+                        <li><Link to='/findemail'>이메일 찾기</Link></li>
                         <li><Link to='/join'>회원가입</Link></li>
                     </ul>
                 </form>

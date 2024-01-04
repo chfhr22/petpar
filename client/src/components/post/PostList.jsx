@@ -60,7 +60,7 @@ const PostList = () => {
     const shareFunction = (postNum) => {
         if (navigator.clipboard) {
             navigator.clipboard
-                .writeText(`/detail/${postNum}`)
+                .writeText(`http://192.168.0.7:3000/detail/${postNum}`)
                 .then(() => alert("링크가 클립보드에 복사되었습니다."));
         } else {
             alert("실패");
