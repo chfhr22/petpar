@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
+// import { fetchFromAPI } from '../../utils/api';
+import { useDispatch } from 'react-redux';
+import { setDetailAddress } from '../../reducer/addressSlice';
 import { fetchFromAPI } from '../../utils/api';
 
 const Find = () => {
+    const dispatch = useDispatch();
+
+    const handleAddressClick = (address) => {
+        dispatch(setDetailAddress(address));
+    };
     const [isSubMenuVisible, setSubMenuVisible] = useState(false);
 
     const [sidoCategories, setSidoCategories] = useState([]);
@@ -67,13 +75,11 @@ const Find = () => {
 
     const handleSidoChange = (event) => {
         const selectedSidoValue = event.target.value;
-        console.log(selectedSidoValue);
         setSelectedSido(selectedSidoValue);
     };
 
     const handleGunguChange = (event) => {
         const selectedGunguValue = event.target.value;
-        console.log(selectedGunguValue)
         setSelectedGungu(selectedGunguValue);
 
         // 군구
@@ -89,6 +95,7 @@ const Find = () => {
     const fetchShelterData = async (selectedSido, selectedGunguValue) => {
         try {
 
+
             const shelterResponse = await fetchFromAPI(`1543061/abandonmentPublicSrvc/shelter?upr_cd=${selectedSido}&org_cd=${selectedGunguValue}`);
             const shelterData = shelterResponse.response.body.items.item;
 
@@ -97,7 +104,6 @@ const Find = () => {
                 const promises = shelterData.map(async (item) => {
                     const careRegNo = item.careRegNo;
                     const abandonmentResponse = await fetchFromAPI(`1543061/abandonmentPublicSrvc/abandonmentPublic?care_reg_no=${careRegNo}`);
-                    console.log(abandonmentResponse)
 
                     // 조건부 데이터 접근
                     const itemArray = abandonmentResponse.response.body.items.item;
@@ -173,7 +179,7 @@ const Find = () => {
                                 </div>
                                 <div className='boxInfo'>
                                     <div className='name'>상세주소</div>
-                                    <div className='anwser'>{item.careAddr}</div>
+                                    <div className='anwser address' onClick={() => handleAddressClick(item.careAddr)}>{item.careAddr}</div>
                                 </div>
 
                                 <div className='boxInfo'>
@@ -181,7 +187,6 @@ const Find = () => {
                                     <div className='anwser'>{item.careTel}</div>
                                 </div>
                             </div>
-
                         </div>
                     ))}
                 </div>

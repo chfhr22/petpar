@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Image from '../../assets/img/default_img.png';
 import { IoBookmarkOutline, IoHeartOutline, IoShareSocialSharp } from "react-icons/io5";
+import { useSelector } from 'react-redux'
 
 const PostList = () => {
+    const user = useSelector((state) => state.user);
+    const navigate = useNavigate();
+
     const [postList, setPostList] = useState([]);
     const [likes, setLikes] = useState({});
     const [likesCount, setLikesCount] = useState({});
 
     const handleLikeClick = (postNum) => {
+        if (user.accessToken === "") {
+            alert("로그인 후 이용 가능합니다.");
+            return navigate("/login");
+        }
 
         const updatedLikes = {
             ...likes,
@@ -17,7 +25,7 @@ const PostList = () => {
         };
         setLikes(updatedLikes);
 
-        axios.post('/api/post/like', { postNum, likeState: updatedLikes[postNum] })
+        axios.post('/api/post/like', { postNum, likeState: updatedLikes[postNum], uid: user.uid })
             .then((response) => {
                 if (response.data.success) {
                     setLikesCount(prevCount => ({

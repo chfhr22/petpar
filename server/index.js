@@ -54,9 +54,10 @@ app.use(express.static(path.join(__dirname, "../client/build")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/post", require("./router/post.js"));
-app.use("/api/user", require("./router/user.js"));
-app.use("/api/reple", require("./router/reple.js"));
+app.use("/api/post", require("./router/post.js"))
+app.use("/api/user", require("./router/user.js"))
+app.use("/api/reple", require("./router/reple.js"))
+app.use("/api/geocode", require("./router/geocode.js"))
 app.use("/api/chat", require("./router/chat.js"));
 
 server.listen(port, () => {

@@ -128,7 +128,6 @@ router.post("/like", (req, res) => {
                 return res.status(404).json({ success: false, message: "Post not found" });
             }
 
-
             const likesChange = likeState ? 1 : -1;
 
             Post.updateOne({ postNum: postNum }, { $inc: { likes: likesChange } })
