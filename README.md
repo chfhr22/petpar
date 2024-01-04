@@ -15,8 +15,9 @@ npm install cors
 ### 개요
 
 Node.js를 서버로 사용하여 Socket.io를 활용한 실시간 채팅 기능을 구현했습니다.  
-Socket.io를 선택한 주된 이유는 이 기능을 구현하기 위해 온라인에서 조사한 결과, Socket.io를 사용한 다양한 예시가 많이 나와있었고,  
-이를 참고하기에 적합했기 때문입니다.
+Socket.io를 선택한 주된 이유는 이 기능을 구현하기 위해 온라인에서 조사한 결과,  
+Socket.io를 사용한 다양한 예시가 많이 나와있어 이를 참고하기에 적합했으며,  
+client와 server 간 연결이 끊어지는 경우 자동 재연결 기능을 제공하여 문제가 발생하는 경우를 없앨 수 있었습니다.
 
 <details>
   <summary>client</summary>
@@ -160,3 +161,26 @@ router.get("/getMessages", async (req, res) => {
 ```
 
 </details>
+
+### 트러블 슈팅
+
+<details>
+<summary>메시지 전송 및 수신 실패</summary>
+
+- 문제  
+  client에서 server로 데이터를 보내거나 반대로 server에서 client로 데이터를 보낼 때,  
+  네트워크 등의 문제로 느리게 보내지거나 안보내질 때가 있었습니다.
+
+- 해결  
+  데이터를 보내거나 받는 부분에서 async / await을 이용한 비동기방식을 사용하여,  
+  비교적 느리게 데이터를 받았을 때도 데이터가 없다는 오류가 뜨지 않도록했습니다.  
+  이로인해 데이터가 늦어서 없다고 뜨는 것인지, 아니면 다른 문제로 데이터가 없는 것인지 구분이 가능하게 되었습니다.
+
+</details>
+
+<details>
+<summary></summary>
+
+</details>
+
+## api를 활용하여 보호소 찾기
