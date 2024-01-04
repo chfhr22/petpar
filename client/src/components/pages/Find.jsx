@@ -12,6 +12,7 @@ const Find = () => {
 
     // const [sidoData, setSidoData] = useState([]);
     // const [gunguData, setGunguData] = useState([]);
+    
 
     useEffect(() => {
         const fetchSidoCategories = async () => {
@@ -53,7 +54,7 @@ const Find = () => {
                     if (data.response.body.items && data.response.body.items.item) {
                         setGunguCategories(data.response.body.items.item);
                     } else {
-                        setGunguCategories([]); // 데이터가 없으면 빈 배열로 설정
+                        setGunguCategories([]); 
                     }
                 } catch (error) {
                     console.error('Error fetching gungu categories:', error);
@@ -101,9 +102,9 @@ const Find = () => {
                     // 조건부 데이터 접근
                     const itemArray = abandonmentResponse.response.body.items.item;
                     if (itemArray && itemArray.length > 0) {
-                        return itemArray[0]; // 첫 번째 항목 반환
+                        return itemArray[0]; 
                     }
-                    return null; // itemArray가 비어있거나 존재하지 않는 경우
+                    return null; 
                 });
 
                 const results = await Promise.all(promises);

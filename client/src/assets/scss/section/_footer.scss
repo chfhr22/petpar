@@ -27,9 +27,11 @@
             box-sizing: border-box;
             .chating__box {
                 margin-bottom: 10px;
+                
                 .chating__author {
                     display: flex;
                     align-items: center;
+                    width: 100%;
                     
                     &.my-message {
                         justify-content: right;
@@ -63,6 +65,7 @@
                     border-radius: 0px 10px 10px 10px;
                     padding: 6px 15px 10px 15px;
                     font-size: .9rem;
+
 
                     &.my-message {
                         background-color: var(--white);
