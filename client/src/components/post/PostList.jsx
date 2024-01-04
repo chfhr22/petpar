@@ -56,6 +56,17 @@ const PostList = () => {
                 console.log(err);
             });
     }, []);
+
+    const shareFunction = (postNum) => {
+        if (navigator.clipboard) {
+            navigator.clipboard
+                .writeText(`/detail/${postNum}`)
+                .then(() => alert("링크가 클립보드에 복사되었습니다."));
+        } else {
+            alert("실패");
+        }
+    }
+
     return (
         <div className='contents_wrap_wrap'>
             <div className='contents_wrap'>
@@ -80,7 +91,7 @@ const PostList = () => {
                                         style={{ color: likes[post.postNum] ? 'red' : 'black', cursor: 'pointer' }}
                                     />
                                     <span>{likesCount[post.postNum] || 0}</span>
-                                    <IoShareSocialSharp size={20} />
+                                    <IoShareSocialSharp size={20} onClick={() => { shareFunction(post.postNum) }} />
                                     <IoBookmarkOutline size={20} />
                                 </div>
                             </div>
