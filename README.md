@@ -12,17 +12,18 @@ npm install cors
 
 ## 실시간 채팅 구현
 
+### 개요
+
+Node.js를 서버로 사용하여 Socket.io를 활용한 실시간 채팅 기능을 구현했습니다.  
+Socket.io를 선택한 주된 이유는 이 기능을 구현하기 위해 온라인에서 조사한 결과, Socket.io를 사용한 다양한 예시가 많이 나와있었고,  
+이를 참고하기에 적합했기 때문입니다.
+
+<details>
+  <summary>client</summary>
+
 ### client
 
 npm install socket.io-client
-
-### server
-
-npm install express socket.io
-
-### 개요
-
-Node.js를 서버로 사용하여 Socket.io를 활용한 실시간 채팅 기능을 구현했습니다. Socket.io를 선택한 주된 이유는 이 기능을 구현하기 위해 온라인에서 조사한 결과, Socket.io를 사용한 다양한 예시가 많이 나와있었고, 이를 참고하기에 적합했기 때문입니다.
 
 ### 구현
 
@@ -37,7 +38,8 @@ const [message, setMessage] = useState("");
 const [chat, setChat] = useState([]);
 const user = useSelector((state) => state.user); // redux를 사용하여 유저정보를 불러옴
 
-// 채팅 메세지 수신 설정 : socket.on('chat message', callback)을 사용하여 'chat message' 이벤트 리스너를 설정합니다. 받은 메세지는 setChat 함수를 통해 chat 배열 상태에 추가되며, 이것은 UI에 표시됩니다.
+// 채팅 메세지 수신 설정 : socket.on('chat message', callback)을 사용하여 'chat message'
+// 이벤트 리스너를 설정합니다. 받은 메세지는 setChat 함수를 통해 chat 배열 상태에 추가되며, 이것은 UI에 표시됩니다.
 useEffect(() => {
   socket.on("chat message", (msg) => {
     setChat((prevChat) => [...prevChat, msg]);
@@ -45,7 +47,9 @@ useEffect(() => {
   return () => socket.off("chat message");
 }, []);
 
-// 이전 채팅 불러오기 : 새로고침을 하면 기존 채팅이 사라져서 loadMessages 함수를 호출하여 서버에서 이전 채팅 메시지를 불러옵니다. loadMessages는 fetch를 사용해 서버의 /api/chat/getMessages 엔드포인트로부터 이전 채팅 메시지를 가져옵니다.
+// 이전 채팅 불러오기 : 새로고침을 하면 기존 채팅이 사라져서 loadMessages 함수를 호출하여
+// 서버에서 이전 채팅 메시지를 불러옵니다. loadMessages는 fetch를 사용해 서버의 /api/chat/getMessages
+// 엔드포인트로부터 이전 채팅 메시지를 가져옵니다.
 useEffect(() => {
   const loadMessages = async () => {
     try {
@@ -61,7 +65,9 @@ useEffect(() => {
   loadMessages();
 }, []);
 
-// 메세지 전송 : sendMessage함수를 정의하여 메세지를 전송합니다. 전송하는 데이터는 messageData로 username, message, photoURL을 포함하고 있습니다. socket.emit을 통해 데이터가 서버로 전송됩니다.
+// 메세지 전송 : sendMessage함수를 정의하여 메세지를 전송합니다.
+// 전송하는 데이터는 messageData로 username, message, photoURL을 포함하고 있습니다.
+// socket.emit을 통해 데이터가 서버로 전송됩니다.
 const sendMessage = (e) => {
   e.preventDefault();
   console.log("Current user:", user);
@@ -78,10 +84,19 @@ const sendMessage = (e) => {
 };
 ```
 
+</details>
+<details>
+<summary>server</summary>
+
+### server
+
+npm install express socket.io
+
 server > index.js
 
 ```js
-// CORS를 설정 후 서버에 Socket.IO를 연결, localhost:3000에서 실행되는 클라이언트 애플리케이션이 localhost:5051에서 호스팅되는 서버에 접근할 수 있게 합니다. 해당 과정이 없으면 CORS에러가 발생
+// CORS를 설정 후 서버에 Socket.IO를 연결, localhost:3000에서 실행되는 클라이언트 애플리케이션이
+// localhost:5051에서 호스팅되는 서버에 접근할 수 있게 합니다. 해당 과정이 없으면 CORS에러가 발생
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -98,6 +113,50 @@ const io = new Server(server, {
   },
 });
 
-// socket.io와 연결 :
+// 채팅 메세지 이벤트 처리 : client로 부터 메세지를 수신할 때마다 실행되는 소스로 msg에는 client에서 보낸 정보가 들어있습니다.
+// 데이터가 다 들어오기 전에 실행되는 것을 방지하기위해 async / await을 사용하여 비동기적으로 실행하도록 하였습니다.
+// 혹시모를 에러를 찾기위해 try와 catch를 사용하여 에러의 이유를 파악하기 쉽게 하였습니다.
+io.on("connection", (socket) => {
+  socket.on("disconnect", () => {});
+  socket.on("chat message", async (msg) => {
+    try {
+      const newMessage = new Message({
+        username: msg.username,
+        message: msg.message,
+        photoURL: msg.photoURL,
+      });
+      await newMessage.save();
+      io.emit("chat message", newMessage);
+    } catch (error) {
+      console.error("Message save error", error);
+    }
+  });
+});
 ```
 
+server > router > chat.js
+
+```js
+// 메세지 저장 : client에서 받은 req.body를 db에 저장
+router.post("/message", async (req, res) => {
+  try {
+    const newMessage = new Message(req.body);
+    await newMessage.save();
+    res.status(201).send(newMessage);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+// 메세지 불러오기 : db에 저장된 데이터를 find를 사용하여 찾고, sort를 사용하여 오름차순으로 정렬
+router.get("/getMessages", async (req, res) => {
+  try {
+    const messages = await Message.find().sort({ timestamp: 1 });
+    res.status(200).json(messages);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+```
+
+</details>
