@@ -53,7 +53,7 @@ const Chat = () => {
                 <div className='chating'>
 
                     {chat.map((msg, index) => (
-                        <div key={index} className={`chating__box `}>
+                        <div key={index} className={`chating__box ${msg.username === user.displayName ? 'my-message' : 'other-message'}`}>
                             <div className={`chating__author ${msg.username === user.displayName ? 'my-message' : 'other-message'}`}>
                                 <span className="author__photo"><img src={`${msg.photoURL}`} alt="" /></span>
                                 <span className='name'>{msg.username}</span>

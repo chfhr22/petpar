@@ -28,12 +28,18 @@
             .chating__box {
                 margin-bottom: 10px;
                 
+                &.my-message {
+                    display: flex;
+                    justify-content: flex-end;
+                    flex-wrap: wrap;
+                }
+                
                 .chating__author {
                     display: flex;
                     align-items: center;
-                    width: 100%;
                     
                     &.my-message {
+                        width: 100%;
                         justify-content: right;
                     }
 
@@ -61,10 +67,11 @@
                 .chating__cont {
                     background-color: var(--subColor);
                     color: var(--white);
-                    margin: 5px auto;
+                    margin: 5px 0;
                     border-radius: 0px 10px 10px 10px;
                     padding: 6px 15px 10px 15px;
                     font-size: .9rem;
+                    display: inline-block;
 
 
                     &.my-message {
