@@ -134,16 +134,24 @@
                         font-size: 0.8rem;
                     }
 
-                    .img {
-                        overflow: hidden;
-                        border-radius: 10px;
-                        height: 50%;
-                        display: flex;
+                    a {
+                        width: 100%;
+                        min-height: 180px;
 
-                        img {
-                            object-fit: cover;
+                        .img {
+                            overflow: hidden;
+                            border-radius: 10px;
+                            height: 50%;
+                            display: flex;
+                            height: 100%;
+
+                            img {
+                                object-fit: cover;
+                            }
                         }
                     }
+
+
 
                     .board_bar {
                         display: flex;
