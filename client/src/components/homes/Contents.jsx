@@ -6,6 +6,7 @@ import heartFilled from '../../assets/img/다운로드.png';
 import heart from '../../assets/img/heart.png';
 import profile from '../../assets/img/profile.png';
 import { IoBookmarkOutline, IoHeartOutline, IoShareSocialSharp, IoCallOutline } from "react-icons/io5";
+import DogLoader from '../contents/DogLoader';
 
 
 const Contents = () => {
@@ -102,7 +103,9 @@ const Contents = () => {
 
             <div className='contents__wrap'>
                 {loading ? (
-                    <div className="div">로딩중</div>
+                        <div className="load">
+                            <DogLoader />
+                        </div>
                 ) : (
                     <>
                         {
