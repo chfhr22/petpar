@@ -1,28 +1,40 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Chat from '../contents/Chat';
 import RepleArea from '../reple/RepleArea';
 import PostMap from '../post/PostMap';
 
 const Footer = () => {
-
     const location = useLocation();
-    let contentToRender;
 
-    if (location.pathname.startsWith("/detail")) {
-        contentToRender = <RepleArea />;
-
-    } else if (location.pathname == "/find") {
-        contentToRender = <PostMap />
-    } else {
-        contentToRender = <Chat />
-    }
+    // Determine the content to render based on the current path
+    const getContent = () => {
+        if (location.pathname.startsWith("/detail")) {
+            return (
+                <div id='footerSection' className='sec'>
+                    <RepleArea />;
+                </div>
+            );
+        } else if (location.pathname === "/find") {
+            return (
+                <div id='findFooterSection' className='sec'>
+                    <PostMap />
+                </div>
+            );
+        } else {
+            return (
+                <div id='footerSection' className='sec'>
+                    <Chat />
+                </div>
+            );
+        }
+    };
 
     return (
-        <div id='footerSection' className='sec'>
-            {contentToRender}
-        </div>
-    )
+        <>
+            {getContent()}
+        </>
+    );
 }
 
-export default Footer
+export default Footer;

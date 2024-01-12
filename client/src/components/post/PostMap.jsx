@@ -30,10 +30,9 @@ const PostMap = () => {
 
     return (
         <>
-            <Map center={position} style={{ width: '100%', height: '600px' }} level={3}>
+            <Map center={position} style={{ width: '100%', height: '100%' }} level={3}>
                 <MapMarker position={position} />
             </Map>
-            {address}
         </>
     );
 };
