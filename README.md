@@ -15,9 +15,9 @@ npm install cors
 ### 개요
 
 Node.js를 서버로 사용하여 Socket.io를 활용한 실시간 채팅 기능을 구현했습니다.  
-Socket.io를 선택한 주된 이유는 이 기능을 구현하기 위해 온라인에서 조사한 결과,  
-Socket.io를 사용한 다양한 예시가 많이 나와있어 이를 참고하기에 적합했으며,  
-client와 server 간 연결이 끊어지는 경우 자동 재연결 기능을 제공하여 문제가 발생하는 경우를 없앨 수 있었습니다.
+Socket.io를 선택한 주된 이유는 이 기능을 구현하기 위해 조사한 결과,  
+Socket.io를 사용한 다양한 예시가 많이 나와있었고, server와 client의 양방향 소통이 가능한 라이브러리라는 것을 알게 되었습니다.  
+또한 client와 server 간 연결이 끊어지는 경우 자동 재연결 기능을 제공하여 문제가 발생하는 경우를 없앨 수 있었습니다.
 
 <details>
   <summary>client</summary>
