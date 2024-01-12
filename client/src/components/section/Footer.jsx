@@ -7,7 +7,6 @@ import PostMap from '../post/PostMap';
 const Footer = () => {
     const location = useLocation();
 
-    // Determine the content to render based on the current path
     const getContent = () => {
         if (location.pathname.startsWith("/detail")) {
             return (
