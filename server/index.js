@@ -13,8 +13,8 @@ const Message = require('./model/Message');
 
 // CORS 설정: 클라이언트 주소 허용
 app.use(cors({
-    origin: 'http://localhost:3000', // 클라이언트 주소
-    methods: ['GET', 'POST'] // 허용할 HTTP 메소드
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST']
 }));
 
 const server = http.createServer(app);
@@ -22,7 +22,7 @@ const server = http.createServer(app);
 // Socket.IO 서버 및 CORS 설정
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3001",
+        origin: "http://localhost:3000",
         methods: ["GET", "POST"]
     }
 });

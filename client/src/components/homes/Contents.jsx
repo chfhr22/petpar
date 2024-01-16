@@ -9,6 +9,7 @@ import { IoBookmarkOutline, IoHeartOutline, IoShareSocialSharp, IoCallOutline } 
 import DogLoader from '../contents/DogLoader';
 
 
+
 const Contents = () => {
     const [petItems, setPetItems] = useState([]);
     const [expandedItems, setExpandedItems] = useState({});
@@ -17,15 +18,25 @@ const Contents = () => {
     const [liked, setLiked] = useState({});
     const [loading, setLoading] = useState(true);
 
+
     const handleLikeClick = (key) => {
-        setLikes(prevLikes => ({
-            ...prevLikes,
-            [key]: prevLikes[key] ? prevLikes[key] + 1 : 1, // 좋아요 수 증가
-        }));
-        setLiked(prevLiked => ({
-            ...prevLiked,
-            [key]: !prevLiked[key], // 좋아요 상태 토글
-        }));
+        setLiked(prevLiked => {
+            const isCurrentlyLiked = !prevLiked[key]; // 현재 좋아요 상태를 반대로 토글
+
+            setLikes(prevLikes => {
+                const currentLikes = prevLikes[key] || 0;
+                // 좋아요 상태가 true면 좋아요 수 증가, false면 감소 (단, 0 미만으로는 내려가지 않음)
+                return {
+                    ...prevLikes,
+                    [key]: isCurrentlyLiked ? currentLikes + 1 : Math.max(currentLikes - 1, 0),
+                };
+            });
+
+            return {
+                ...prevLiked,
+                [key]: isCurrentlyLiked,
+            };
+        });
     };
 
     const toggleExpand = (index) => {
@@ -103,9 +114,9 @@ const Contents = () => {
 
             <div className='contents__wrap'>
                 {loading ? (
-                        <div className="load">
-                            <DogLoader />
-                        </div>
+                    <div className="load">
+                        <DogLoader />
+                    </div>
                 ) : (
                     <>
                         {
@@ -135,7 +146,10 @@ const Contents = () => {
                                                 <div className="call"><IoCallOutline /></div>
                                             </div>
                                             <div className="right">
-                                                <div className="like" onClick={() => handleLikeClick(key)}><IoHeartOutline /></div>
+                                                <div className={`like ${liked[key] ? 'liked-heart' : ''}`} onClick={() => handleLikeClick(key)}>
+                                                    <IoHeartOutline />
+                                                </div>
+
                                                 <div className="share"><IoShareSocialSharp /></div>
                                                 <div className="bookmark"><IoBookmarkOutline /></div>
                                             </div>
