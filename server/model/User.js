@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema(
         displayName: String,
         uid: String,
         photoURL: String,
+        likeInfo: [Number]
     },
     { collection: "users" }
 );

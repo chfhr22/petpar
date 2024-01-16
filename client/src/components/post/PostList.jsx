@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Image from '../../assets/img/default_img.png';
 import { IoBookmarkOutline, IoHeartOutline, IoShareSocialSharp } from "react-icons/io5";
+import { useSelector } from 'react-redux'
 
-const PostList = () => {
-    const [postList, setPostList] = useState([]);
+const PostList = (props) => {
+    const { youCate, postList, getPostList } = props;
+
+    const user = useSelector((state) => state.user);
+    const navigate = useNavigate();
     const [likes, setLikes] = useState({});
     const [likesCount, setLikesCount] = useState({});
 
     const handleLikeClick = (postNum) => {
+        if (user.accessToken === "") {
+            alert("로그인 후 이용 가능합니다.");
+            return navigate("/login");
+        }
+
         const updatedLikes = {
             ...likes,
             [postNum]: !likes[postNum]
         };
         setLikes(updatedLikes);
 
-        axios.post('/api/post/like', { postNum, likeState: updatedLikes[postNum] })
+        axios.post('/api/post/like', { postNum, likeState: updatedLikes[postNum], uid: user.uid })
             .then((response) => {
                 if (response.data.success) {
                     setLikesCount(prevCount => ({
@@ -31,22 +40,19 @@ const PostList = () => {
     };
 
     useEffect(() => {
-        axios.post("/api/post/list")
-            .then((response) => {
-                if (response.data.success) {
-                    setPostList([...response.data.postList]);
+        getPostList();
+    }, [youCate]);
 
-                    const initialLikesCount = {};
-                    response.data.postList.forEach(post => {
-                        initialLikesCount[post.postNum] = post.likes || 0;
-                    });
-                    setLikesCount(initialLikesCount);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
+    const shareFunction = (postNum) => {
+        if (navigator.clipboard) {
+            navigator.clipboard
+                .writeText(`http://192.168.0.7:3000/detail/${postNum}`)
+                .then(() => alert("링크가 클립보드에 복사되었습니다."));
+        } else {
+            alert("실패");
+        }
+    }
+
     return (
         <div className='contents_wrap_wrap'>
             <div className='contents_wrap'>
@@ -71,7 +77,7 @@ const PostList = () => {
                                         style={{ color: likes[post.postNum] ? 'red' : 'black', cursor: 'pointer' }}
                                     />
                                     <span>{likesCount[post.postNum] || 0}</span>
-                                    <IoShareSocialSharp size={20} />
+                                    <IoShareSocialSharp size={20} onClick={() => { shareFunction(post.postNum) }} />
                                     <IoBookmarkOutline size={20} />
                                 </div>
                             </div>

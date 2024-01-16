@@ -13,7 +13,7 @@ const Message = require('./model/Message');
 
 // CORS 설정: 클라이언트 주소 허용
 app.use(cors({
-    origin: 'http://localhost:3001', // 클라이언트 주소
+    origin: 'http://localhost:3000', // 클라이언트 주소
     methods: ['GET', 'POST'] // 허용할 HTTP 메소드
 }));
 
@@ -29,10 +29,9 @@ const io = new Server(server, {
 
 // Socket.IO 연결 핸들러
 io.on('connection', (socket) => {
-    console.log('user 접속');
 
     socket.on('disconnect', () => {
-        console.log('user 나감');
+
     });
 
     // 메시지 이벤트 핸들러
@@ -40,7 +39,8 @@ io.on('connection', (socket) => {
         try {
             const newMessage = new Message({
                 username: msg.username,
-                message: msg.message
+                message: msg.message,
+                photoURL: msg.photoURL
             });
             await newMessage.save();
             io.emit('chat message', newMessage);
@@ -54,9 +54,10 @@ app.use(express.static(path.join(__dirname, "../client/build")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/post", require("./router/post.js"));
-app.use("/api/user", require("./router/user.js"));
-app.use("/api/reple", require("./router/reple.js"));
+app.use("/api/post", require("./router/post.js"))
+app.use("/api/user", require("./router/user.js"))
+app.use("/api/reple", require("./router/reple.js"))
+app.use("/api/geocode", require("./router/geocode.js"))
 app.use("/api/chat", require("./router/chat.js"));
 
 server.listen(port, () => {

@@ -47,11 +47,22 @@ router.post("/namecheck", (req, res) => {
 router.post("/find", (req, res) => {
     let temp = req.body
 
-    User.findOne({ displayName: temp.youName, email: temp.youEmail })
+    console.log(temp)
+
+    User.findOne({ email: temp.youId })
         .exec()
         .then((result) => {
-            const userInfo = result;
-            res.status(200).json({ success: true, userInfo })
+            if (result) {
+                const userInfo = result;
+                console.log(userInfo);
+                res.status(200).json({ success: true, userInfo })
+            } else {
+                res.status(400).json({ success: false, message: "해당 이메일로 가입된 회원을 찾을 수 없습니다." })
+            }
+        })
+        .catch((err) => {
+            res.status(400).json({ success: false, message: "죄송합니다. 서버에서 문제가 발생했습니다. 잠시 후 다시 시도해주세요." })
+            console.log(err);
         })
 })
 
@@ -64,6 +75,8 @@ router.post("/profile/update", (req, res) => {
     let temp = {
         photoURL: req.body.photoURL,
     }
+
+    console.log(req.body.uid)
 
     User.updateOne({ uid: req.body.uid }, { $set: temp })
         .exec()

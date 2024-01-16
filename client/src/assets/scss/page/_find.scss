@@ -1,45 +1,58 @@
 #findSection {
+    height: 100%;
 
     .find__container {
         margin: 0 auto;
-        width: 100%;
-        height: 78vh;
-        padding: 10px;
-        overflow: scroll;
-        background: #F3F4F5;
-        border-radius: 20px;
+        height: 100%;
+        overflow: hidden;
 
         &::-webkit-scrollbar {
             display: none;
         }
 
+        .find__boxWrap {
+            height: calc(100% - 87px);
+            overflow: auto;
+        }
+
         .find__cate {
             width: 100%;
-            border-radius: 50px;
             display: flex;
             flex-direction: row;
-            justify-content: start;
+            justify-content: flex-start;
 
             ul {
                 display: flex;
                 justify-content: center;
-                padding-top: 5px;
                 list-style: none;
                 text-align: center;
+                gap: 1rem;
+
+                li {
+                    select {
+                        min-width: 120px;
+                        padding: 0.5rem;
+                        border-radius: 20px;
+                        background-color: #f3f3f3;
+                        border: 1px solid transparent;
+                        outline: none;
+                        transition: all 0.3s;
+                        color: #333;
+                        cursor: pointer;
+                        /* Darker text color for better visibility */
+
+                        &:focus {
+                            background-color: #e4e4e4;
+                            /* White text for contrast against the main color */
+                        }
+                    }
+                }
             }
-
-
 
             .location-item {
                 display: flex;
                 text-align: center;
                 position: relative;
-                cursor: pointer;
-                background-color: #fff;
-                margin: 10px;
-                border-radius: 50px;
-                padding: 10px 50px;
-                box-shadow: 2px 2px 3px 3px rgba(128, 128, 128, 0.11);
                 white-space: nowrap;
 
                 select {
@@ -93,22 +106,14 @@
 
         }
 
-        @media(max-width: 650px) {
-            .find__cate {
-                box-shadow: none;
-            }
-        }
-
     }
 
     .find__title {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 10px;
-        margin-top: 25px;
 
         h2 {
-            padding: 0px 20px;
+            padding: 1rem;
             font-size: 1.2rem;
         }
 
@@ -123,26 +128,24 @@
         display: flex;
         padding: 15px;
         border-radius: 20px;
-        flex-wrap: wrap;
         background-color: #F3F4F5;
-    }
-
-    .find__box {
-        width: 47%;
-        background-color: #ffffff;
-        display: flex;
-        margin-bottom: 10px;
-        border-radius: 10px;
-        box-shadow: 2px 1px 1px 2px rgba(128, 128, 128, 0.11);
-        height: 250px;
-        overflow: hidden;
         flex-direction: column;
-        padding: 10px;
-        margin: 10px;
-        cursor: pointer;
+        gap: 1rem;
 
-        &:hover {
-            background-color: #f8f4f4e0;
+        .find__box {
+            width: 100%;
+            background-color: #ffffff;
+            display: flex;
+            border-radius: 10px;
+            box-shadow: 2px 1px 1px 2px rgba(128, 128, 128, 0.11);
+            overflow: hidden;
+            flex-direction: column;
+            padding: 10px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f8f4f4e0;
+            }
         }
     }
 
@@ -163,141 +166,18 @@
         flex-direction: column;
 
         .boxInfo {
-            padding: 10px 20px;
+            padding: 10px;
             display: flex;
 
             .name {
-                padding: 2px 5px;
+                min-width: 60px;
+                text-align: center;
                 border-radius: 5px;
-                background-color: #f1e4e4;
                 margin-right: 5px;
+                color: #979797;
             }
 
             .anwser {}
         }
     }
-}
-
-
-
-@media(max-width:1000) {
-    .box01 h2 {
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width:850px) {
-    .box02 .axwer {
-        font-size: 1.8vw;
-    }
-
-    .box03 .name {
-        font-size: 1.8vw;
-    }
-
-
-
-    .box02 .name {
-        font-size: 1.8vw;
-    }
-}
-
-@media (max-width:800px) {
-    .box01 .boximg {
-        height: 75%;
-        margin-top: 30px;
-    }
-
-    #findSection .find__box {
-        width: 95%;
-    }
-}
-
-@media (max-width:700px) {
-    .box01 .boximg {
-        display: none;
-    }
-
-    .find__box .box01 {
-        width: 10px;
-    }
-
-    #findSection .find__boxWrap .find__box .box03 .boxInfo {
-        display: flex;
-
-    }
-
-    #findSection .find__boxWrap .find__box {
-        display: flex;
-        flex-direction: column;
-    }
-
-    #findSection .box02 .boxInfo {
-        padding: 10px 20px;
-        display: flex;
-        flex-direction: column;
-    }
-
-    #findSection .box02 .boxInfo .name {
-        width: 57px;
-    }
-}
-
-@media (max-width:550px) {
-    #findSection .find__container .find__cate .location-item {
-        padding: 10px 15px;
-
-    }
-}
-
-@media (max-width:400px) {
-    #findSection .find__container .find__cate .location__text {
-        display: flex;
-        box-shadow: 2px 2px 3px 3px rgba(128, 128, 128, 0.11);
-        border-radius: 50px;
-        padding: 5px;
-        padding-left: 20px;
-        justify-content: center;
-        display: none;
-    }
-
-    #findSection .find__container .find__cate ul {
-        display: flex;
-        list-style: none;
-        text-align: center;
-        flex-wrap: wrap;
-        justify-content: center;
-
-    }
-
-    #findSection .find__boxWrap .find__box {
-        overflow: hidden;
-    }
-
-    .box03 .boxInfo {
-        display: none;
-        margin-top: 12px;
-    }
-
-    .find__box .box03 {
-        display: none;
-    }
-
-}
-
-@media (max-width:350px) {
-    #findSection .find__container .find__cate .location-item {
-        position: relative;
-        cursor: pointer;
-        height: 40px;
-        background-color: #fff;
-        margin: 10px 5px;
-        border-radius: 50px;
-        padding: 10px 10px;
-        box-shadow: 2px 2px 3px 3px rgba(128, 128, 128, 0.11);
-        white-space: nowrap;
-    }
-
-
-
 }

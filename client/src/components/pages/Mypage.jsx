@@ -15,8 +15,6 @@ const Mypage = () => {
     const user = useSelector((state) => state.user)
     const navigate = useNavigate();
 
-    console.log(user.email)
-
     useEffect(() => {
         if (user.isLoading && !user.accessToken) {
             navigate("/login")
@@ -52,6 +50,8 @@ const Mypage = () => {
             photoURL: currentImage,
             uid: user.uid,
         }
+
+        console.log(body)
         axios
             .post("/api/user/profile/update", body)
             .then((response) => {
@@ -73,32 +73,33 @@ const Mypage = () => {
     const SubmitHandler = async (e) => {
         e.preventDefault();
 
-        // if (!(youName && youEmail && youPass && newPass && newPassC)) {
-        //     return alert("모든 항목을 입력해주세요.")
-        // }
-
         if (newPass !== newPassC) {
             return alert("비밀번호가 일치하지 않습니다.");
         }
 
+        const credential = firebase.auth.EmailAuthProvider.credential(
+            user.email,
+            youPass
+        )
+
         try {
             const currentUser = firebase.auth().currentUser;
+            await currentUser.reauthenticateWithCredential(credential);
 
             await currentUser.updateProfile({
                 displayName: youName,
             });
 
-            await currentUser.updateProfile({
-                email: youEmail,
-            });
-
-            if (newPass) {
-                await currentUser.updatePassword(youPass)
-                    .then(() => { console.log("성공") })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-            }
+            await currentUser.updatePassword(newPass)
+                .then(() => {
+                    console.log("비밀번호가 변경됨");
+                })
+                .catch((err) => {
+                    console.log(err);
+                    alert("세션이 만료되었습니다. 다시 로그인해주세요");
+                    firebase.auth().signOut();
+                    return navigate("/")
+                })
 
 
             // mongoDB
@@ -117,6 +118,7 @@ const Mypage = () => {
                 })
         } catch (err) {
             console.log(err);
+            return alert("현재 비밀번호를 입력해주세요.")
         }
     }
 
@@ -152,7 +154,7 @@ const Mypage = () => {
                     ></input>
                 </div>
 
-                <div className="input_style">
+                {/* <div className="input_style">
                     <p>이메일</p>
                     <label htmlFor="email" className='blind'>이메일</label>
                     <input
@@ -165,7 +167,7 @@ const Mypage = () => {
                         value={youEmail}
                         onChange={(e) => { setYouEmail(e.currentTarget.value) }}
                     ></input>
-                </div>
+                </div> */}
 
                 <div className="input_style">
                     <p>비밀번호</p>

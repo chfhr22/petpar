@@ -48,15 +48,32 @@ router.post("/write", (req, res) => {
 
 // 이미지 업로드
 
-router.post("/image/upload", setUpload("react-blog1000/post"), (req, res, next) => {
+router.post("/image/upload", setUpload("petpar/post"), (req, res, next) => {
     // console.log(res.req);
     res.status(200).json({ success: true, filePath: res.req.file.location })
 })
 
 // 글목록
 router.post("/list", (req, res) => {
+    const { category, searchTerm } = req.body;
+
+    let query = {};
+
+    if (category) {
+        query = { category: category }
+    } else {
+        query = {};
+    }
+
     Post
-        .find()
+        .find({
+            ...query,
+            $or: [
+                { title: { $regex: searchTerm } },
+                { content: { $regex: searchTerm } }
+            ]
+        })
+        .sort({ _id: -1 })
         .populate("author")
         .exec()
         .then((result) => {
@@ -126,7 +143,6 @@ router.post("/like", (req, res) => {
             if (!post) {
                 return res.status(404).json({ success: false, message: "Post not found" });
             }
-
 
             const likesChange = likeState ? 1 : -1;
 

@@ -8,7 +8,7 @@ import Header from './components/section/Header'
 import Main from './components/section/Main'
 import Login from './components/pages/Login'
 import Sub from './components/section/Sub'
-import Findid from './components/pages/Findid'
+import Findemail from './components/pages/Findemail'
 import Join from './components/pages/Join'
 import Findpass from './components/pages/Findpass'
 
@@ -33,7 +33,7 @@ const App = () => {
         <Routes>
           <Route path='*' element={<Sub />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/findid' element={<Findid />} />
+          <Route path='/findemail' element={<Findemail />} />
           <Route path='/findpass' element={<Findpass />} />
           <Route path='/Join' element={<Join />} />
         </Routes>
