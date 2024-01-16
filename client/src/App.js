@@ -21,10 +21,11 @@ const App = () => {
       if (userInfo !== null) {
         dispatch(loginUser(userInfo.multiFactor.user));
       } else {
-        dispatch(clearUser()) //로그아웃
+        dispatch(clearUser())
       }
     })
   }, [dispatch]);
+
 
   return (
     <BrowserRouter>

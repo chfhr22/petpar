@@ -19,6 +19,7 @@ const Contents = () => {
     const [loading, setLoading] = useState(true);
 
 
+
     const handleLikeClick = (key) => {
         setLiked(prevLiked => {
             const isCurrentlyLiked = !prevLiked[key];
@@ -37,6 +38,27 @@ const Contents = () => {
             };
         });
     };
+
+
+    const shareOnKakao = (item) => {
+        if (window.Kakao) {
+            const kakao = window.Kakao;
+
+            kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: item.careNm,
+                    description: item.specialMark,
+                    imageUrl: item.popfile,
+                    link: {
+                        mobileWebUrl: window.location.href,
+                        webUrl: window.location.href
+                    }
+                },
+            });
+        }
+    };
+
 
     const toggleExpand = (index) => {
         setExpandedItems((prevState) => ({
@@ -71,7 +93,7 @@ const Contents = () => {
                 params: {
                     serviceKey: apiKey,
                     bgnde: "20230101",
-                    endde: "20231218",
+                    endde: "20230116",
                     pageNo: "1",
                     numOfRows: "20",
                     _type: "json",
@@ -99,6 +121,10 @@ const Contents = () => {
     useEffect(() => {
         fetchInfo('all');
     }, [])
+
+
+
+
 
     return (
         <>
@@ -149,7 +175,9 @@ const Contents = () => {
                                                     <IoHeartOutline />
                                                 </div>
 
-                                                <div className="share"><IoShareSocialSharp /></div>
+                                                <div className="share" onClick={() => shareOnKakao(item)}>
+                                                    <IoShareSocialSharp />
+                                                </div>
                                                 <div className="bookmark"><IoBookmarkOutline /></div>
                                             </div>
                                         </div>
