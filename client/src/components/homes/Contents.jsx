@@ -21,11 +21,10 @@ const Contents = () => {
 
     const handleLikeClick = (key) => {
         setLiked(prevLiked => {
-            const isCurrentlyLiked = !prevLiked[key]; // 현재 좋아요 상태를 반대로 토글
+            const isCurrentlyLiked = !prevLiked[key];
 
             setLikes(prevLikes => {
                 const currentLikes = prevLikes[key] || 0;
-                // 좋아요 상태가 true면 좋아요 수 증가, false면 감소 (단, 0 미만으로는 내려가지 않음)
                 return {
                     ...prevLikes,
                     [key]: isCurrentlyLiked ? currentLikes + 1 : Math.max(currentLikes - 1, 0),
