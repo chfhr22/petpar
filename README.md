@@ -1,3 +1,6 @@
+미리보기
+(https://teampetpar.fly.dev/)
+
 ## client
 
 npx create-react-app .
