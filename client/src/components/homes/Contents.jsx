@@ -6,6 +6,8 @@ import heartFilled from '../../assets/img/다운로드.png';
 import heart from '../../assets/img/heart.png';
 import profile from '../../assets/img/profile.png';
 import { IoBookmarkOutline, IoHeartOutline, IoShareSocialSharp, IoCallOutline } from "react-icons/io5";
+import DogLoader from '../contents/DogLoader';
+
 
 
 const Contents = () => {
@@ -16,16 +18,47 @@ const Contents = () => {
     const [liked, setLiked] = useState({});
     const [loading, setLoading] = useState(true);
 
+
+
     const handleLikeClick = (key) => {
-        setLikes(prevLikes => ({
-            ...prevLikes,
-            [key]: prevLikes[key] ? prevLikes[key] + 1 : 1, // 좋아요 수 증가
-        }));
-        setLiked(prevLiked => ({
-            ...prevLiked,
-            [key]: !prevLiked[key], // 좋아요 상태 토글
-        }));
+        setLiked(prevLiked => {
+            const isCurrentlyLiked = !prevLiked[key];
+
+            setLikes(prevLikes => {
+                const currentLikes = prevLikes[key] || 0;
+                return {
+                    ...prevLikes,
+                    [key]: isCurrentlyLiked ? currentLikes + 1 : Math.max(currentLikes - 1, 0),
+                };
+            });
+
+            return {
+                ...prevLiked,
+                [key]: isCurrentlyLiked,
+            };
+        });
     };
+
+
+    const shareOnKakao = (item) => {
+        if (window.Kakao) {
+            const kakao = window.Kakao;
+
+            kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: item.careNm,
+                    description: item.specialMark,
+                    imageUrl: item.popfile,
+                    link: {
+                        mobileWebUrl: window.location.href,
+                        webUrl: window.location.href
+                    }
+                },
+            });
+        }
+    };
+
 
     const toggleExpand = (index) => {
         setExpandedItems((prevState) => ({
@@ -60,7 +93,7 @@ const Contents = () => {
                 params: {
                     serviceKey: apiKey,
                     bgnde: "20230101",
-                    endde: "20231218",
+                    endde: "20230116",
                     pageNo: "1",
                     numOfRows: "20",
                     _type: "json",
@@ -89,6 +122,10 @@ const Contents = () => {
         fetchInfo('all');
     }, [])
 
+
+
+
+
     return (
         <>
             <div className='filter__wrap'>
@@ -102,7 +139,9 @@ const Contents = () => {
 
             <div className='contents__wrap'>
                 {loading ? (
-                    <div className="div">로딩중</div>
+                    <div className="load">
+                        <DogLoader />
+                    </div>
                 ) : (
                     <>
                         {
@@ -132,8 +171,13 @@ const Contents = () => {
                                                 <div className="call"><IoCallOutline /></div>
                                             </div>
                                             <div className="right">
-                                                <div className="like" onClick={() => handleLikeClick(key)}><IoHeartOutline /></div>
-                                                <div className="share"><IoShareSocialSharp /></div>
+                                                <div className={`like ${liked[key] ? 'liked-heart' : ''}`} onClick={() => handleLikeClick(key)}>
+                                                    <IoHeartOutline />
+                                                </div>
+
+                                                <div className="share" onClick={() => shareOnKakao(item)}>
+                                                    <IoShareSocialSharp />
+                                                </div>
                                                 <div className="bookmark"><IoBookmarkOutline /></div>
                                             </div>
                                         </div>

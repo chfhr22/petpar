@@ -5,11 +5,11 @@ import Image from '../../assets/img/default_img.png';
 import { IoBookmarkOutline, IoHeartOutline, IoShareSocialSharp } from "react-icons/io5";
 import { useSelector } from 'react-redux'
 
-const PostList = () => {
+const PostList = (props) => {
+    const { youCate, postList, getPostList } = props;
+
     const user = useSelector((state) => state.user);
     const navigate = useNavigate();
-
-    const [postList, setPostList] = useState([]);
     const [likes, setLikes] = useState({});
     const [likesCount, setLikesCount] = useState({});
 
@@ -40,22 +40,8 @@ const PostList = () => {
     };
 
     useEffect(() => {
-        axios.post("/api/post/list")
-            .then((response) => {
-                if (response.data.success) {
-                    setPostList([...response.data.postList]);
-
-                    const initialLikesCount = {};
-                    response.data.postList.forEach(post => {
-                        initialLikesCount[post.postNum] = post.likes || 0;
-                    });
-                    setLikesCount(initialLikesCount);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
+        getPostList();
+    }, [youCate]);
 
     const shareFunction = (postNum) => {
         if (navigator.clipboard) {
