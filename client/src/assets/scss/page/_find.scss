@@ -12,7 +12,6 @@
 
         .find__boxWrap {
             height: calc(100% - 87px);
-            overflow: auto;
         }
 
         .find__cate {
@@ -125,11 +124,9 @@
 
     .find__boxWrap {
         width: 100%;
-        display: flex;
         padding: 15px;
         border-radius: 20px;
         background-color: #F3F4F5;
-        flex-direction: column;
         gap: 1rem;
 
         .find__box {
@@ -142,6 +139,7 @@
             flex-direction: column;
             padding: 10px;
             cursor: pointer;
+            margin-bottom: 0.5rem;
 
             &:hover {
                 background-color: #f8f4f4e0;
@@ -164,9 +162,9 @@
     .box02 {
         display: flex;
         flex-direction: column;
+        gap: 0.5rem;
 
         .boxInfo {
-            padding: 10px;
             display: flex;
 
             .name {
