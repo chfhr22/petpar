@@ -7,6 +7,19 @@
         font-size: 1.2rem;
     }
 
+    p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .chat__login {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+    }
+
     .chating__wrap {
         width: 100%;
         max-width: 300px;
@@ -15,6 +28,7 @@
         background-color: var(--white);
         border-radius: 20px;
         overflow: auto;
+
 
         h2 {
             font-size: 1.1rem;

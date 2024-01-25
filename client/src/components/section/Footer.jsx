@@ -11,7 +11,7 @@ const Footer = () => {
         if (location.pathname.startsWith("/detail")) {
             return (
                 <div id='footerSection' className='sec'>
-                    <RepleArea />;
+                    <RepleArea />
                 </div>
             );
         } else if (location.pathname === "/find") {
