@@ -80,7 +80,6 @@ main {
         right: 10%;
         opacity: 0.8;
         bottom: 10%;
-        width: 40%;
 
         #__react-kakao-maps-sdk___Map {
             overflow: hidden !important;
@@ -124,10 +123,12 @@ main {
 .chat-container {
     width: 500px;
     height: 500px;
-    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #F3F4F5;
     border: 1px solid #ccc;
     position: fixed;
-    bottom: 20px;
+    bottom: 0;
     right: 20px;
     z-index: 999;
     display: none;
@@ -135,4 +136,134 @@ main {
 
 .chat-container.open {
     display: block;
+
+    .chating__wrap {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 20px;
+        height: calc(100% - 100px);
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .chating {
+        background-color: var(--white);
+        padding: 20px;
+        box-sizing: border-box;
+        border-radius: 20px;
+
+        .chating__box {
+            margin-bottom: 10px;
+
+            &.my-message {
+                display: flex;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+            }
+
+            .chating__author {
+                display: flex;
+                align-items: center;
+
+                &.my-message {
+                    width: 100%;
+                    justify-content: right;
+                }
+
+                &.other-message {
+                    justify-content: left;
+                }
+
+                .author__photo {
+                    img {
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 50%;
+                    }
+                }
+
+                .name {
+                    position: relative;
+                    padding: 0 5px;
+                }
+
+                .time {
+                    font-size: 13px;
+                    color: var(--black400);
+                }
+            }
+
+            .chating__cont {
+                background-color: var(--subColor);
+                color: var(--white);
+                margin: 5px 0;
+                border-radius: 0px 10px 10px 10px;
+                padding: 6px 15px 10px 15px;
+                font-size: .9rem;
+                display: inline-block;
+
+
+                &.my-message {
+                    background-color: var(--white);
+                    color: var(--black);
+                    border-radius: 10px 0px 10px 10px;
+                    box-shadow: 1px 1px 5px 0px #D9D9D9;
+                }
+
+            }
+        }
+    }
+
+    .chating__submit {
+        margin-top: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        input {
+            width: 75%;
+            height: 40px;
+            padding: 10px;
+            border: 1px solid var(--black500);
+            border-radius: 20px;
+        }
+
+        button {
+            width: 20%;
+            border: 1px solid var(--black500);
+            border-radius: 20px;
+            padding: 9px;
+            margin-left: 5px;
+            background-color: var(--white);
+
+            &:hover {
+                background-color: var(--subColor);
+            }
+        }
+    }
+}
+
+.chat__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .closeBtn {
+        display: none;
+        cursor: pointer;
+
+        &.mobile {
+            display: block;
+        }
+    }
+}
+
+.chat__login {
+    margin-top: 30px;
+    text-align: center;
 }

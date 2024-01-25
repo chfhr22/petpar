@@ -51,7 +51,6 @@ const Chat = () => {
             <h2>실시간 채팅</h2>
             <div className='chating__wrap'>
                 <div className='chating'>
-
                     {chat.map((msg, index) => (
                         <div key={index} className={`chating__box ${msg.username === user.displayName ? 'my-message' : 'other-message'}`}>
                             <div className={`chating__author ${msg.username === user.displayName ? 'my-message' : 'other-message'}`}>
@@ -78,7 +77,7 @@ const Chat = () => {
                     <button onClick={sendMessage}>send</button>
                 </div>
             ) : (
-                <p>로그인이 필요합니다.</p>
+                <div className='chat__login'>로그인 후 이용해주세요.</div>
             )}
         </>
     )

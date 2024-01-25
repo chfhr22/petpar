@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import PostImage from './PostImage';
 
@@ -13,6 +13,13 @@ const PostWrite = () => {
 
     const user = useSelector((state) => state.user);
     let navigate = useNavigate();
+
+    useEffect(() => {
+        if (user.accessToken === "") {
+            alert('로그인 후 이용 가능합니다.')
+            return navigate("/community")
+        }
+    }, [])
 
     const onSubmit = (e) => {
         e.preventDefault();

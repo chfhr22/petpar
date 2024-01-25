@@ -99,7 +99,6 @@ const Contents = () => {
                     _type: "json",
                 }
             })
-            console.log(res)
 
             let items = res.data.response.body.items.item;
 
@@ -131,7 +130,6 @@ const Contents = () => {
             <div className='filter__wrap'>
                 <ul>
                     <li><Link to="/" onClick={() => fetchInfo('all')} className={activeCategory === 'all' ? 'active' : ''}>전체</Link></li>
-                    <li><Link to="/">팔로우</Link></li>
                     <li><Link to="/" onClick={() => fetchInfo('dog')} className={activeCategory === 'dog' ? 'active' : ''}>강아지</Link></li>
                     <li><Link to="/" onClick={() => fetchInfo('cat')} className={activeCategory === 'cat' ? 'active' : ''}>고양이</Link></li>
                 </ul>
